@@ -1,0 +1,47 @@
+; KinematicEquations.TopHat
+
+; solves kinematic equations
+; one of:
+
+;  x = vt
+
+;  x = v0 t + 1/2 a t^2
+
+;  v = v0 + a t
+
+;  v^2 = v0^2 + 2 a x
+
+? KinematicEquations.htm
+
+; The first line below DOES NOT BEGIN with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+KinematicEquations
+
+; the translational kinematic equation tab -- the associated REXX program is: KinematicEquations
+
+KinematicEquations,TranslationalKinematics,            Equations:  x = vt  ..   x = v0 t + 1/2 a t^2  ..   v = v0 + a t  ..   v^2 = v0^2 + 2 a x                                              Specify ? for desired value; numbers for known values; and dashes for unused values.
+ I,&Acceleration -- m / s^2,-,Enter acceleration
+ I,&Time -- s,-,Enter time
+ I,&Initial velocity -- m / s,-,Enter initial velocity
+ I,&Final velocity -- m / s,-,Enter final velocity
+ I,&Displacement -- m,-,Enter displacement
+ O,Acceleration -- a,,Acceleration
+ O,Time -- t,,Time
+ O,Initial velocity -- v0,,Initial velocity
+ O,Final velocity -- v,,Velocity
+ O,Displacement -- x,,Displacement
+
+; the rotational kinematic equation tab -- the associated REXX program is the same: KinematicEquations !!
+
+KinematicEquations,RotationalKinematics,            Equations:  theta = w t  ..   x = v0 t + 1/2 a t^2  ..   v = v0 + a t  ..   v^2 = v0^2 + 2 a x                                              Specify ? for desired value; numbers for known values; and dashes for unused values.
+ I,Angular &Acceleration -- alpha,-,Enter angular acceleration
+ I,&Time -- s,-,Enter time
+ I,&Initial angular velocity -- w0,-,Enter initial angular velocity
+ I,&Final angular velocity -- w,-,Enter final angular velocity
+ I,Angular &Displacement -- theta,-,Enter angular displacement
+ O,Angular acceleration -- a,,Angular acceleration
+ O,Time -- t,,Time
+ O,Initial angular velocity -- w0,,Initial angular velocity
+ O,Final angular velocity -- w,,Final angular velocity
+ O,Angular displacement -- theta,,Angular displacement

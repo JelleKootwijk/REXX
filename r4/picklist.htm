@@ -1,0 +1,139 @@
+<HTML>
+<HEAD>
+<TITLE> PickList </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><b><FONT COLOR="#000080" FACE="Tahoma">PICKLIST</FONT></b></center>
+<center>A visual list selection accessory for use in batch scripts</center>
+<HR>
+<H1> 1 Categories: </H1>
+<P>visual accessory, batch script selection accessory
+<H1> 2 Usage: </H1>
+<P>&nbsp;PICKLIST Caption,Choice1,Choice2,etc.
+<P>Or:
+<P>&nbsp;PICKLIST Caption,/Cliptext
+<H1> 3 Arguments: </H1>
+<UL >
+<LI><b>Caption</b> .. the title of the selection list
+<p>
+<LI><b>Choice1,Choice2,etc.</b> .. selection choices separated by commas
+<p>
+<LI><b>/Cliptext</b> .. indicates choices are provided in the clipboard
+</UL>
+<H1> 4 Returns: </H1>
+<UL >
+<LI>0 .. the user pressed the Cancel button
+<p>
+<LI>nnn .. the index of the user's list selection
+</UL>
+<H1> 5 Description: </H1>
+<P>The PICKLIST accessory is used in batch scripts. Choices are presented
+to the user using a standard Windows list. The user's selection is returned
+for subsequent processing by batch ERRORLEVEL requests.
+<H1> 6 Buttons: </H1>
+<ul><DL >
+<DD><b>OK</b>
+<DT>Concludes PICKLIST operation, with the list selection as a return value.
+<p>
+<P>Double-clicking a list entry also concludes PICKLIST operation, with the
+list selection as a return value.
+<p>
+<DD><b>Cancel</b>
+<DT>Concludes PICKLIST operation, with a return value of 0
+</DL></ul>
+<H1> 7 Remarks: </H1>
+<P>Text can be added to the clipboard by using the <A HREF=clipargs.HTM>CLIPARGS</A> program.
+<P>File contents can be added to the clipboard by using the <A HREF=clipin.HTM>CLIPIN</A> program.  The output of another program can be piped to the CLIPIN program.
+<H1> 8 Examples: </H1>
+<OL >
+<LI>In a batch script:
+<table border=1>
+<tr>
+<td>
+<P>start /w picklist magic words,abra ca dabra,open sesame,shazam
+<P>if errorlevel 3 goto :shazam
+<P>if errorlevel 2 goto :opensesame
+<P>if errorlevel 1 goto :abracadabra
+<P>echo you pressed cancel
+<P>goto :quit
+<P>:shazam
+<P>echo you selected 'shazam'
+<P>goto :quit
+<P>:opensesame
+<P>echo you selected 'open sesame'
+<P>goto :quit
+<P>:abracadabra
+<P>echo you selected 'abra ca dabra'
+<P>:quit
+</td>
+</tr>
+</table>
+<p>
+<LI>In a batch script:
+<table border=1>
+<tr>
+<td>
+<P>clipargs abra ca dabra\nopen sesame\nshazam
+<P>start /w picklist magic words,/C
+<P>if errorlevel 3 goto :shazam
+<P>if errorlevel 2 goto :opensesame
+<P>if errorlevel 1 goto :abracadabra
+<P>echo you pressed cancel
+<P>goto :quit
+<P>:shazam
+<P>echo you selected 'shazam'
+<P>goto :quit
+<P>:opensesame
+<P>echo you selected 'open sesame'
+<P>goto :quit
+<P>:abracadabra
+<P>echo you selected 'abra ca dabra'
+<P>:quit
+</td>
+</tr>
+</table>
+<p>
+<LI>In a batch script:
+<table border=1>
+<tr>
+<td>
+<P>args "abra ca dabra" "open sesame" shazam | clipin
+<P>start /w picklist magic words,/C
+<P>if errorlevel 3 goto :shazam
+<P>if errorlevel 2 goto :opensesame
+<P>if errorlevel 1 goto :abracadabra
+<P>echo you pressed cancel
+<P>goto :quit
+<P>:shazam
+<P>echo you selected 'shazam'
+<P>goto :quit
+<P>:opensesame
+<P>echo you selected 'open sesame'
+<P>goto :quit
+<P>:abracadabra
+<P>echo you selected 'abra ca dabra'
+<P>:quit
+</td>
+</tr>
+</table>
+</OL>
+<H1> 9 See also: </H1>
+<P><A HREF=clipargs.HTM>clipargs</A>,
+<P><A HREF=clipin.HTM>clipin</A>,
+<HR>
+<center>A <FONT COLOR="#000080" FACE="Tahoma">Kilowatt Software</FONT> <FONT COLOR="#DD0000" FACE="Tahoma">AuroraWare!(TM)</FONT> Program.</center>
+<center>Version 1.0</center>
+<center>Copyright &copy; 2000-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF=http://www.kilowattsoftware.com/>http://www.kilowattsoftware.com/</A></center>
+<center><a href=mailto:support@kilowattsoftware.com>E-Mail: support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

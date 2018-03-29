@@ -1,0 +1,30 @@
+; FinCalcOut.TopHat
+
+; This defines the output fields associated with financial ratio calculations
+
+; The first line below begins with 'get' followed by a space,
+; which indicates TopHat will operate in user input acquisition mode
+
+Get Financial Calculation Ratios
+
+; the Financial ratio calculation tab -- the associated REXX program is: FinCalc
+
+FinCalcOut,FinCalcOut,Financial ratio calculations
+ I,Company,-,
+ I,WorkingCapital,-,
+ I,CurrentRatio,-,
+ I,AcidTestRatio,-,
+ I,AccountsReceivableTurnover,-,
+ I,DaysSalesInAccountsReceivable,-,
+ I,InventoryTurnover,-,
+ I,DaysSalesInInventory,-,
+ I,GrossProfitRate,-,
+ I,NetProfitToAssets,-,
+ I,NetProfitToNetWorth,-,
+ I,NetWorthToLiabilities,-,
+ I,FixedAssetsToLongTermDebt,-,
+ I,NetWorthToFixedAssets,-,
+ I,PercentOfFixedAssetsDepreciated,-,
+ I,BookValuePerShare,-,
+ I,EarningsPerShare,-,
+ I,PriceEarningsRatio,-,

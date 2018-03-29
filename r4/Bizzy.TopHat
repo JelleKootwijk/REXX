@@ -1,0 +1,47 @@
+; Bizzy.TopHat
+
+; a set of business calculation forms
+
+; The first line below DOES NOT BEGIN with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+Business calculations
+
+; the loan calculation tab -- the associated REXX program is: LoanCalc
+
+LoanCalc,LoanCalc,Loan calculator
+ I,&Down Payment,0,Enter down payment
+ I,&Principal,0,Enter amount of loan
+ I,&Annual % rate,7,Enter annual interest rate of loan
+ I,"P&eriod (Mo, Yr)",Yr,Enter loan payment period; either Mo or Yr
+ I,#Pe&riods,0,Enter number of payment periods
+ O,Monthly payment,,Computed monthly payment
+ O,Total payment,,Computed total payment over life of loan
+ O,Total interest,,Total interest payed over life of loan
+ O,Total expense,,Total expense including down payment 
+
+; the 'compound interest; calculation tab -- the associated REXX program is: CompVal
+
+CompVal,ComputeValue,Compute value of investment with interest compounded monthly
+ I,Principal,0,Enter amount of investment
+ I,Annual % rate,7,Enter annual interest rate of investment
+ I,"P&eriod (Mo, Yr)",Yr,Enter payment period; either Mo or Yr
+ I,#Periods,0,Enter number of payment periods
+ O,Present value,,Present value
+
+; the 'present value' calculation tab -- the associated REXX program is: PresVal
+
+PresVal,PresentValue,Compute present value needed to have a future amount with interest compounded monthly
+ I,Future value,0,Enter future value desired
+ I,Annual % rate,7,Enter annual interest rate of investment
+ I,"P&eriod (Mo, Yr)",Yr,Enter payment period; either Mo or Yr
+ I,#Periods,0,Enter number of payment periods
+ O,Present value,,Present value needed
+
+; the 'compounded annuity' calculation tab -- the associated REXX program is: AnnVal
+
+AnnVal,AnnuityValue,Compute final amount of an annuity with interest compounded monthly
+ I,Annual investment,0,Enter annual investment amount
+ I,Annual % rate,7,Enter annual interest rate of investment
+ I,#Years,0,Enter number of years
+ O,Annuity value,,Final annuity value

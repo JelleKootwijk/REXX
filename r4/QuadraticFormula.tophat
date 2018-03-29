@@ -1,0 +1,18 @@
+; QuadraticFormula.TopHat
+
+; calculates the roots of a quadratic equation
+; such as: 5 x^2 + 15 x + 10 = 0
+
+; The first line below DOES NOT BEGIN with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+Quadratic formula
+
+; the quadratic formula tab -- the associated REXX program is: QuadraticFormula
+
+QuadraticFormula,QuadraticFormula,Quadratic formula; such as: 5 x^2 + 15 x + 10 = 0
+ I,&A,1,Enter coefficient A -- in a x^2 + b x + c = 0
+ I,&B,-,Enter coefficient B -- in a x^2 + b x + c = 0
+ I,&C,-,Enter coefficient C -- in a x^2 + b x + c = 0
+ O,Root #1,,1st computed root
+ O,Root #2,,2nd computed root

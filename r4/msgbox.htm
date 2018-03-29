@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>
+msgbox</TITLE>
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="genieLamp.gif" align=left>
+<IMG SRC="leftGenieLamp.gif" align=right>
+<B><DIV align=center>MSGBOX </DIV></B>
+<DIV align=center>shows a standard message window</DIV><HR>
+<P><B> Categories: </B>
+<PRE> command prompt program, batch script aid
+</PRE>
+<P><B> Usage: </B>
+<PRE> MSGBOX [/Time] [/Ccaption_text] [/S#style] message_text
+</PRE>
+<P><B> Arguments: </B>
+<PRE> <b>message_text</b> .. one or more words to display in the message window.
+ The following escape sequences are supported within the message text.
+  \\ -- a single backslash
+  \n -- line feed
+  \r -- carriage return
+  \t -- tab
+ Usually lines are terminated by a \r\n sequence.
+ Lines are double-spaced by using a \r\n\r\n sequence.
+</PRE>
+<P><B> Optional arguments: </B>
+<PRE> <b>/Ccaption_text</b> .. sets the text that appears in the message window's caption.
+  Notice the caption text immediately follows the 'C'. If spaces appear in the
+  caption text, then the entire argument must be enclosed in double-quotes.
+
+ <b>/S#style</b> .. the message window's style .. a numeric sum of up to four of the following
+  numeric style values
+
+  1. type of button(s) to use
+
+   0 - OK
+   1 - OK(1) Cancel(2)
+   2 - Abort(3) Retry(4) Ignore(5)
+   3 - Yes(6) No(7) Cancel(2)
+   4 - Yes(6) No(7)
+   5 - Retry(4) Cancel(2)
+
+  2. optional, type of icon to display within the message
+
+   16 - stop image
+   32 - question mark
+   48 - exclamation mark
+   64 - information bubble
+
+  3. optional, default button selector
+
+   256 - the second button receives the initial focus
+   512 - the third button receives the initial focus
+   768 - the fourth button receives the initial focus
+
+  4. optional, final style
+
+   262144 - indicates message window will float above all other windows
+
+  Thus, a style value of 292 (4 + 32 + 256) is interpreted as:
+
+   show 'Yes' and 'No' buttons                     4
+   the 'question mark' icon is displayed       +  32
+   the 'No' button initially has the focus     + 256
+                                               =====
+                                          total: 292
+
+ <b>/Time</b> .. shows the current time in front of the message
+</PRE>
+<P><B> Redirected input file: </B>
+<PRE> N/A
+</PRE>
+<P><B> Redirected output file: </B>
+<PRE> N/A
+</PRE>
+<P><B> Returns: </B>
+<PRE> 0 .. processing completed successfully
+ 1 .. the OK button was pressed
+ 2 .. the Cancel button was pressed
+ 3 .. the Abort button was pressed
+ 4 .. the Retry button was pressed
+ 5 .. the Ignore button was pressed
+ 6 .. the Yes button was pressed
+ 7 .. the No button was pressed
+</PRE>
+<P><B> Description: </B>
+<PRE> The MSGBOX program is very useful for showing message windows in batch
+ scripts. The buttons that are pressed in the message window can alter
+ subsequent script processing. An example shows how the MSGBOX program
+ can be used in a batch script to conditionally erase a file.
+</PRE>
+<P><B> Remarks: </B>
+<PRE> The <A HREF=query.HTM>QUERY</A> program provides a simpler way of showing
+ a 'Yes' or 'No' message window within a batch script.
+
+ The <A HREF=picklist.HTM>PICKLIST</A> program provides a better way of
+ selecting an action from a list of choices.
+</PRE>
+<P><B> Examples: </B>
+<PRE>  MSGBOX "/CMagic words" abra\r\nca\r\ndabra
+
+ In a batch script:
+
+  MsgBox "/CCareful !" /S292 Do you want to erase file %1 ?
+  if errorlevel 7 goto :skip
+  erase %1
+  goto :quit
+  :skip
+  echo File %1 was NOT erased.
+  :quit
+</PRE>
+<P><B> See also: </B>
+<PRE> <A HREF=query.HTM>query</A>,
+ <A HREF=picklist.HTM>picklist</A>,
+</PRE>
+<DIV align=center>A <FONT COLOR="#000080" FACE="Tahoma">Kilowatt Software L.L.C.</FONT> <FONT COLOR="#DD0000" FACE="Tahoma">Poof!(TM)</FONT> Program.</DIV>
+<DIV align=center>Version 1.0</DIV>
+<DIV align=center>Copyright &copy; 2001-2014</DIV>
+<DIV align=center>All Rights Reserved.</DIV>
+<DIV align=center>Web: http://www.kilowattsoftware.com/</DIV>
+<DIV align=center>E-Mail: support@kilowattsoftware.com</DIV>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+</BODY>
+</HTML>

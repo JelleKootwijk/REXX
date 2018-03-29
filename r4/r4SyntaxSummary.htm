@@ -1,0 +1,766 @@
+<HTML>
+<HEAD>
+<TITLE> r4(TM) syntax summary </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<P>&nbsp;
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><span class=point14sem>r4&#153; syntax summary</span></center>
+<UL >
+<H1> 1 Command line usage: </H1>
+<P>The <b>r4&#153;</b> program operates as a Windows 32 console application. The following is
+the syntax of a <b>r4&#153;</b> program request, that is entered as a DOS command prompt. There
+are four variations. In the first variation, <b>r4&#153;</b> is the only program that is executed.
+The remaining variations are command pipelines. The vertical bars separate pipeline command segments.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;&nbsp;r4 programName [argumentText] [ &lt; inFile ] [ [&gt;]&gt; outFile ]
+<p>
+<hr width=20% align=left>
+&nbsp;&nbsp;r4 programName [argumentText] [ &lt; inFile ] <span class=special>|</span> programB
+<p>
+<hr width=20% align=left>
+<BR>&nbsp;&nbsp;programA <span class=special>|</span> r4 programName [argumentText] [ [&gt;]&gt; outFile ]
+<p>
+<hr width=20% align=left>
+<BR>&nbsp;&nbsp;programA <span class=special>|</span> r4 programName [argumentText] <span class=special>|</span> programB
+</TD></TR></TABLE></ul>
+<H1> 2 Instructions: </H1>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Assignment.htm target=_blank>Assignment</a><p><ul>
+variable = expression
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/functionCalls.htm target=_blank>Function calls</a><p><ul>
+result = functionName( [ <i>argumentExpression</i> [ , <i>argumentExpression</i> [ , ...etc ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Address.htm target=_blank>Address</a><p><ul>
+<OL >
+<LI><b>address</b> <i>environmentName</i>
+<LI><b>address</b> [ <b>VALUE</b> ] <i>environmentExpression</i>
+<LI><b>address</b>
+<LI><b>address</b> <i>environmentName</i> <i>commandExpression</i>
+</OL>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/arg.htm target=_blank>Arg</a><p><ul>
+<b>arg</b> [ <i>template</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Call.htm target=_blank>Call</a><p><ul>
+<b>call</b> <i>procedureName</i> [ <i>argumentExpression</i> [ , <i>argumentExpression</i> [ , ...etc ] ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Call.htm target=_blank>Call</a><p><ul>
+<b>call ON</b> <i>conditionName</i> [ NAME <i>trapLabel</i> ]
+<BR>&nbsp;&nbsp;<hr width=20 align=left>
+<BR><b>call OFF</b> <i>conditionName</i>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Command.htm target=_blank>Command</a><p><ul>
+commandExpression
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Do.htm target=_blank>Do</a><p><ul>
+<b>do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Do.htm target=_blank>Do</a><p><ul>
+<b>do</b> [ <i>repetitorClause</i> ] [ <i>conditionalClause</i> ]
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b> [ name ]
+<BR>&nbsp;&nbsp;<hr width=20 align=left>
+the <i>repetitorClause</i> can be one of the following:
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top><b>controlVariable</b> = initialValue [ <b>to</b> limitValue ] [ <b>by</b> stepValue ] [ <b>for</b> repetitionValue ]</TD>
+</TR>
+<TR>
+<TD valign=top>repetitionValueExpression</TD>
+</TR>
+<TR>
+<TD valign=top><b>forever</b></TD>
+</TR>
+</TABLE></ul>
+&nbsp;&nbsp;<hr width=20 align=left>
+the <i>conditionalClause</i> can be one of the following:
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top><b>while</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a></TD>
+</TR>
+<TR>
+<TD valign=top><b>until</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a></TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Drop.htm target=_blank>Drop</a><p><ul>
+<b>drop</b> <i>variableList</i>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/end.htm target=_blank>end</a><p><ul>
+<b>end</b> [ <i>loopControlVariableName</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/ExitReturn.htm#exit target=_blank>Exit</a><p><ul>
+<b>exit</b> [ <i>valueExpression</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/If.htm target=_blank>If</a><p><ul>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b> ... <b>else</b> ...
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/If.htm target=_blank>If</a><p><ul>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b>
+<BR>&nbsp;&nbsp;instruction
+<hr>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b>
+<BR>&nbsp;&nbsp;instruction
+<BR><b>else</b>
+<BR>&nbsp;&nbsp;instruction
+<hr>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+<hr>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b>
+<BR>&nbsp;&nbsp;instruction
+<BR><b>else do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+<hr>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+<BR><b>else do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+<hr>
+<b>if</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then do</b>
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;instruction
+<BR>&nbsp;&nbsp;...etc
+<BR>&nbsp;&nbsp;<b>end</b>
+<BR><b>else</b>
+<BR>&nbsp;&nbsp;instruction
+</TD></TR></TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Interpret.htm target=_blank>Interpret</a><p><ul>
+<b>interpret</b> <i>sourceExpression</i>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/AdvancedIteration.htm#iterate target=_blank>Iterate</a><p><ul>
+<b>iterate</b> [ <i>loopControlVariableName</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/AdvancedIteration.htm#leave target=_blank>Leave</a><p><ul>
+<b>leave</b> [ <i>loopControlVariableName</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Nop.htm target=_blank>Nop</a><p><ul>
+&nbsp;&nbsp;<b>nop</b>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Numeric.htm target=_blank>Numeric</a><p><ul>
+<b>numeric</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/numeric.htm#digits target=_blank>DIGITS</a> [ <i>digitsExpression</i> ]
+<hr align=left width=20>
+<b>numeric</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/numeric.htm#formScientific target=_blank>SCIENTIFIC</a>
+<hr align=left width=20>
+<b>numeric</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/numeric.htm#formEngineering target=_blank>ENGINEERING</a>
+<hr align=left width=20>
+<b>numeric</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/numeric.htm#formValue target=_blank>FORM</a> [ VALUE ] <i>formValueExpression</i>
+<hr align=left width=20>
+<b>numeric</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/numeric.htm#fuzz target=_blank>FUZZ</a> [ <i>fuzzExpression</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Options.htm target=_blank>Options</a><p><ul>
+<b>options</b> <i>optionSetting(s)</i>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm target=_blank>Parse</a><p><ul>
+<b>parse</b> [ <b>upper</b> ] <i>valueToParse</i> [ <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#template target=_blank><i>template</i></a> ]
+<BR>&nbsp;&nbsp;<hr width=20 align=left>
+Where, <i>valueToParse</i> is one of the following:
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#arg target=_blank><b>arg</b></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#linein target=_blank><b>linein</b></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#pull target=_blank><b>pull</b></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#source target=_blank><b>source</b></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#valueWith target=_blank><b>value</b> [ <i>expression</i> ] <b>with</b></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#var target=_blank><b>var</b> <i>variableName</i></a>
+<P>&nbsp;&nbsp;<a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Parse.htm#version target=_blank><b>version</b></a>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Procedure.htm target=_blank>Procedure</a><p><ul>
+procedureNameLabel : [ <b>procedure</b> [ expose <i>variableList</i> ] ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/pull.htm target=_blank>Pull</a><p><ul>
+<b>pull</b> [ <i>template</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/PushQueue.htm#push target=_blank>Push</a><p><ul>
+<b>push</b> [ <i>valueExpression</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/PushQueue.htm#queue target=_blank>Queue</a><p><ul>
+<b>queue</b> [ <i>valueExpression</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/ExitReturn.htm#return target=_blank>Return</a><p><ul>
+<b>return</b> [ <i>valueExpression</i> ]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Say.htm target=_blank>Say</a><p><ul>
+SAY [expression]
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Select.htm target=_blank>Select</a><p><ul>
+<b>select</b>
+<BR><b>when</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b> instruction(s)
+<BR><b>when</b> <a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#booleanExpression target=_blank><i>booleanExpression</i></a> <b>then</b> instruction(s)
+<BR>...etc.
+<BR>[ <b>otherwise</b> [ <i>instructions</i> ] ]
+<BR><b>end</b>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Signal.htm target=_blank>Signal</a><p><ul>
+<b>signal</b> <i>labelName</i>
+<BR>&nbsp;&nbsp;<hr width=20 align=left>
+<b>signal</b> [ <b>VALUE</b> ] <i>labelExpression</i>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Signal.htm target=_blank>Signal</a><p><ul>
+<b>signal ON</b> <i>conditionName</i> [ NAME <i>trapLabel</i> ]
+<BR>&nbsp;&nbsp;<hr width=20 align=left>
+<BR><b>signal OFF</b> <i>conditionName</i>
+<p>
+<P>The <i>conditionName</i> in the <b>signal ON</b> or <b>OFF</b> is one of the following:
+<p>
+<UL >
+<LI><b>ERROR</b>
+<p>
+<LI><b>FAILURE</b>
+<p>
+<LI><b>HALT</b>
+<p>
+<LI><b>NOTREADY</b>
+<p>
+<LI><b>NOVALUE</b>
+<p>
+<LI><b>SYNTAX</b>
+</UL>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/Trace.htm target=_blank>Trace</a><p><ul>
+<OL >
+<LI><b>trace</b> <i>setting</i>
+<LI><b>trace</b> [ <b>VALUE</b> ] <i>settingExpression</i>
+<LI><b>trace</b>
+</OL>
+</ul>
+<H1> 3 Built-in functions </H1>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biabbrev.htm target=_blank>abbrev</a><ul>
+&nbsp;&nbsp;result = <b>Abbrev</b>( <i>information</i>, <i>info</i> [, <i>length</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biabs.htm target=_blank>abs</a><ul>
+&nbsp;&nbsp;result = <b>Abs</b>( <i>number</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biaddress.htm target=_blank>address</a><ul>
+&nbsp;&nbsp;result = <b>Address</b>()
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biarg.htm target=_blank>arg</a><ul>
+&nbsp;&nbsp;result = <b>Arg</b>( [ <i>n</i> [, <i>option</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bib2x.htm target=_blank>b2x</a><ul>
+&nbsp;&nbsp;result = <b>B2X</b>( <i>binary-string</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bibitand.htm target=_blank>bitand</a><ul>
+&nbsp;&nbsp;result = <b>BitAnd</b>( [ <i>string1</i> [, [<i>string2</i>] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bibitor.htm target=_blank>bitor</a><ul>
+&nbsp;&nbsp;result = <b>BitOr</b>( [ <i>string1</i> [, [<i>string2</i>] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bibitxor.htm target=_blank>bitxor</a><ul>
+&nbsp;&nbsp;result = <b>BitXor</b>( [ <i>string1</i> [, [<i>string2</i>] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bic2d.htm target=_blank>c2d</a><ul>
+&nbsp;&nbsp;result = <b>C2D</b>( <i>string</i> [, <i>n</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bic2x.htm target=_blank>c2x</a><ul>
+&nbsp;&nbsp;result = <b>C2X</b>( <i>string</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicenter.htm target=_blank>center</a><ul>
+&nbsp;&nbsp;result = <b>Centre</b>( <i>string</i>, <i>length</i> [, <i>pad</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicenter.htm target=_blank>center</a><ul>
+&nbsp;&nbsp;result = <b>Center</b>( <i>string</i>, <i>length</i> [, <i>pad</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicharin.htm target=_blank>charin</a><ul>
+&nbsp;&nbsp;result = <b>Charin</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] [, [ <i>start</i> ] [, <i>length</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicharout.htm target=_blank>charout</a><ul>
+&nbsp;&nbsp;result = <b>Charout</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] [, [ <i>string</i> ] [, <i>start</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bichars.htm target=_blank>chars</a><ul>
+&nbsp;&nbsp;result = <b>Chars</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicompare.htm target=_blank>compare</a><ul>
+&nbsp;&nbsp;result = <b>Compare</b>( <i>string1</i>, <i>string2</i> [, <i>pad</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicondition.htm target=_blank>condition</a><ul>
+&nbsp;&nbsp;result = <b>Condition</b>( [ <i>option</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bicopies.htm target=_blank>copies</a><ul>
+&nbsp;&nbsp;result = <b>Copies</b>( <i>string</i>, <i>n</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bid2c.htm target=_blank>d2c</a><ul>
+&nbsp;&nbsp;result = <b>D2C</b>( <i>number</i> [, <i>length</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bid2x.htm target=_blank>d2x</a><ul>
+&nbsp;&nbsp;result = <b>D2X</b>( <i>number</i> [, <i>length</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bidatatype.htm target=_blank>datatype</a><ul>
+&nbsp;&nbsp;result = <b>Datatype</b>( <i>string</i> [, <i>type</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bidate.htm target=_blank>date</a><ul>
+&nbsp;&nbsp;result = <b>Date</b>( [ <i>format</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bidelstr.htm target=_blank>delstr</a><ul>
+&nbsp;&nbsp;result = <b>Delstr</b>( <i>string</i>, <i>offset</i> [, <i>length</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bidelword.htm target=_blank>delword</a><ul>
+&nbsp;&nbsp;result = <b>Delword</b>( <i>string</i>, <i>offset</i> [, <i>length</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bidigits.htm target=_blank>digits</a><ul>
+&nbsp;&nbsp;result = <b>Digits</b>()
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bierrortext.htm target=_blank>errortext</a><ul>
+&nbsp;&nbsp;result = <b>Errortext</b>( <i>number</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biform.htm target=_blank>form</a><ul>
+&nbsp;&nbsp;result = <b>Form</b>()
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biformat.htm target=_blank>format</a><ul>
+&nbsp;&nbsp;result = <b>Format</b>( <i>number</i> [, [ <i>before</i> ] [, [ <i>after</i> ] [, [ <i>expp</i> ] [, [ <i>expt</i> ] ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bifuzz.htm target=_blank>fuzz</a><ul>
+&nbsp;&nbsp;result = <b>Fuzz</b>()
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biinsert.htm target=_blank>insert</a><ul>
+&nbsp;&nbsp;result = <b>Insert</b>( <i>new</i>, <i>target</i> [, [ <i>offset</i> ] [, [ <i>length</i> ] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bilastpos.htm target=_blank>lastpos</a><ul>
+&nbsp;&nbsp;result = <b>Lastpos</b>( <i>needle</i>, <i>haystack</i> [, <i>offset</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bileft.htm target=_blank>left</a><ul>
+&nbsp;&nbsp;result = <b>Left</b>( <i>string</i>, <i>length</i> [, <i>pad</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bilength.htm target=_blank>length</a><ul>
+&nbsp;&nbsp;result = <b>Length</b>( <i>string</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bilinein.htm target=_blank>linein</a><ul>
+&nbsp;&nbsp;result = <b>Linein</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] [, [ <i>line#</i> ] [, <i>count</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bilineout.htm target=_blank>lineout</a><ul>
+&nbsp;&nbsp;result = <b>Lineout</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] [, [ <i>string</i> ] [, <i>line#</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bilines.htm target=_blank>lines</a><ul>
+&nbsp;&nbsp;result = <b>Lines</b>( [ <i>stream</i> <a href=#streamName><sup>1</sup></a> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bimax.htm target=_blank>max</a><ul>
+&nbsp;&nbsp;result = <b>Max</b>( <i>n1</i> [, <i>n2</i> ] [, ... ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bimin.htm target=_blank>min</a><ul>
+&nbsp;&nbsp;result = <b>Min</b>( <i>n1</i> [, <i>n2</i> ] [, ... ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bioverlay.htm target=_blank>overlay</a><ul>
+&nbsp;&nbsp;result = <b>Overlay</b>( <i>new</i>, <i>target</i> [, [ <i>offset</i> ] [, [ <i>length</i> ] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bipos.htm target=_blank>pos</a><ul>
+&nbsp;&nbsp;result = <b>Pos</b>( <i>needle</i>, <i>haystack</i> [, <i>offset</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biqueued.htm target=_blank>queued</a><ul>
+&nbsp;&nbsp;result = <b>Queued</b>()
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/birandom.htm target=_blank>random</a><ul>
+&nbsp;&nbsp;result = <b>Random</b>( [ <i>minOrMax</i> ] [, [ <i>max</i> ] ] [, <i>seed</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bireverse.htm target=_blank>reverse</a><ul>
+&nbsp;&nbsp;result = <b>Reverse</b>( <i>string</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biright.htm target=_blank>right</a><ul>
+&nbsp;&nbsp;result = <b>Right</b>( <i>string</i>, <i>length</i> [, <i>pad</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bisign.htm target=_blank>sign</a><ul>
+&nbsp;&nbsp;result = <b>Sign</b>( <i>number</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bisourceline.htm target=_blank>sourceline</a><ul>
+&nbsp;&nbsp;result = <b>Sourceline</b>( [ <i>line#</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bispace.htm target=_blank>space</a><ul>
+&nbsp;&nbsp;result = <b>Space</b>( <i>string</i> [, [ <i>n</i> ] [, <i>pad</i> ] ] )
+</ul>
+<p><hr width=20% align=left>Squareroot<p><ul>
+&nbsp;&nbsp;result = <b>Squareroot</b>( <i>nonNegativeNumber</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bistream.htm target=_blank>stream</a><ul>
+&nbsp;&nbsp;result = <b>Stream</b>( <i>name</i> <a href=#streamName><sup>1</sup></a>, [, <i>operation</i> [, <i>command</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bistrip.htm target=_blank>strip</a><ul>
+&nbsp;&nbsp;result = <b>Strip</b>( <i>string</i> [,  [ <i>option</i> ] [, <i>character</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bisubstr.htm target=_blank>substr</a><ul>
+&nbsp;&nbsp;result = <b>Substr</b>( <i>string</i>, <i>n</i> [, [ <i>length</i> ] [, <i>pad</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bisubword.htm target=_blank>subword</a><ul>
+&nbsp;&nbsp;result = <b>Subword</b>( <i>string</i>, <i>n</i> [, [ <i>length</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bisymbol.htm target=_blank>symbol</a><ul>
+&nbsp;&nbsp;result = <b>Symbol</b>( <i>name</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bitime.htm target=_blank>time</a><ul>
+&nbsp;&nbsp;result = <b>Time</b>( [ <i>format</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bitrace.htm target=_blank>trace</a><ul>
+&nbsp;&nbsp;result = <b>Trace</b>( [ <i>setting</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bitranslate.htm target=_blank>translate</a><ul>
+&nbsp;&nbsp;result = <b>Translate</b>( <i>string</i> [, [<i>after</i>] [, [<i>before</i>] [, <i>pad</i> ] ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bitrunc.htm target=_blank>trunc</a><ul>
+&nbsp;&nbsp;result = <b>Trunc</b>( <i>number</i> [, <i>n</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bivalue.htm target=_blank>value</a><ul>
+&nbsp;&nbsp;result = <b>Value</b>( <i>symbol</i> [, [ <i>newvalue</i> ] [, <i>selectorPool</i> <a href=#selectorPool><sup>2</sup></a> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biverify.htm target=_blank>verify</a><ul>
+&nbsp;&nbsp;result = <b>Verify</b>( <i>string</i>, <i>charSet</i> [, [ <i>option</i> ] [, <i>start</i> ] ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biword.htm target=_blank>word</a><ul>
+&nbsp;&nbsp;result = <b>Word</b>( <i>string</i>, <i>n</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biwordindex.htm target=_blank>wordindex</a><ul>
+&nbsp;&nbsp;result = <b>Wordindex</b>( <i>string</i>, <i>n</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biwordlength.htm target=_blank>wordlength</a><ul>
+&nbsp;&nbsp;result = <b>Wordlength</b>( <i>string</i>, <i>n</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biwordpos.htm target=_blank>wordpos</a><ul>
+&nbsp;&nbsp;result = <b>Wordpos</b>( <i>phrase</i>, <i>string</i> [, <istart</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/biwords.htm target=_blank>words</a><ul>
+&nbsp;&nbsp;result = <b>Words</b>( <i>string</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bix2b.htm target=_blank>x2b</a><ul>
+&nbsp;&nbsp;result = <b>X2B</b>( <i>hexadecimalString</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bix2c.htm target=_blank>x2c</a><ul>
+&nbsp;&nbsp;result = <b>X2C</b>( <i>hexadecimalString</i> )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bix2d.htm target=_blank>x2d</a><ul>
+&nbsp;&nbsp;result = <b>X2D</b>( <i>hexadecimalString</i> [, <i>n</i> ] )
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/bixrange.htm target=_blank>xrange</a><ul>
+&nbsp;&nbsp;result = <b>Xrange</b>( [ <i>start</i> ] [, <i>end</i> ] )
+</ul>
+<H1> 4 Expression operators: </H1>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#Operators target=_blank>Concatenation expression</a><p><ul>
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top>(space)</TD>
+<TD valign=top>date() time()</TD>
+<TD valign=top>the space between the functions is a space concatenation operator</TD>
+</TR>
+<TR>
+<TD valign=top>||</TD>
+<TD valign=top>date() || time()</TD>
+<TD valign=top>the '||' operator is an explicit concatenation operator</TD>
+</TR>
+<TR>
+<TD valign=top>(abuttal)</TD>
+<TD valign=top>date()' at 'time()</TD>
+<TD valign=top>the quoted string is implicitly concatenated to the adjacent terms</TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#arithmeticOperators target=_blank>Arithmetic expression</a><p><ul>
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top>+</TD>
+<TD valign=top>Add</TD>
+<TD valign=top>21 + 21</TD>
+</TR>
+<TR>
+<TD valign=top>-</TD>
+<TD valign=top>Subtract</TD>
+<TD valign=top>44 - 2</TD>
+</TR>
+<TR>
+<TD valign=top>*</TD>
+<TD valign=top>Multiply</TD>
+<TD valign=top>6 * 7</TD>
+</TR>
+<TR>
+<TD valign=top>/</TD>
+<TD valign=top>Divide</TD>
+<TD valign=top>84 / 2</TD>
+</TR>
+<TR>
+<TD valign=top>%</TD>
+<TD valign=top>Integer divide</TD>
+<TD valign=top>85 % 2</TD>
+</TR>
+<TR>
+<TD valign=top>//</TD>
+<TD valign=top>Remainder</TD>
+<TD valign=top>42 // 50</TD>
+<TD valign=top>similar to modulo<br>but the result can be negative</TD>
+</TR>
+<TR>
+<TD valign=top>**</TD>
+<TD valign=top>Power (exponent)</TD>
+<TD valign=top>2 ** 4</TD>
+</TR>
+<TR>
+<TD valign=top>Prefix +</TD>
+<TD valign=top>(0 + number)</TD>
+<TD valign=top>+ 42</TD>
+</TR>
+<TR>
+<TD valign=top>Prefix -</TD>
+<TD valign=top>(0 - number)</TD>
+<TD valign=top>- 42</TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#comparisonOperators target=_blank>Comparison expression</a><p><ul>
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top>=</TD>
+<TD valign=top>equal</TD>
+</TR>
+<TR>
+<TD valign=top>&#172;=, \=, &gt;&lt;, &lt;&gt;</TD>
+<TD valign=top>not equal</TD>
+</TR>
+<TR>
+<TD valign=top>&gt;</TD>
+<TD valign=top>greater than</TD>
+</TR>
+<TR>
+<TD valign=top>&lt;</TD>
+<TD valign=top>less than</TD>
+</TR>
+<TR>
+<TD valign=top>&gt;=, &#172;&lt;, \&lt;</TD>
+<TD valign=top>greater than or equal; not less than</TD>
+</TR>
+<TR>
+<TD valign=top>&lt;=, &#172;&gt;, \&gt;</TD>
+<TD valign=top>less than or equal; not greater than</TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#strictComparisonOperators target=_blank>Strict comparison expression</a><p><ul>
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top>==</TD>
+<TD valign=top>strictly equal</TD>
+</TR>
+<TR>
+<TD valign=top>&#172;==, \==</TD>
+<TD valign=top>strictly not equal</TD>
+</TR>
+<TR>
+<TD valign=top>&gt;&gt;</TD>
+<TD valign=top>strictly greater than</TD>
+</TR>
+<TR>
+<TD valign=top>&lt;&lt;</TD>
+<TD valign=top>strictly less than</TD>
+</TR>
+<TR>
+<TD valign=top>&gt;&gt;=, &#172;&lt;&lt;, \&lt;&lt;</TD>
+<TD valign=top>strictly greater than or equal; strictly not less than</TD>
+</TR>
+<TR>
+<TD valign=top>&lt;&lt;=, &#172;&gt;&gt;, \&gt;&gt;</TD>
+<TD valign=top>strictly less than or equal; strictly not greater than</TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p><hr width=20% align=left><a HREF=http://www.kilowattsoftware.com/tutorial/rexx/expression.htm#logicalOperators target=_blank>Logical expression</a><p><ul>
+<ul><TABLE cellspacing=20 border=1>
+<TR>
+<TD valign=top>&amp;</TD>
+<TD valign=top>And</TD>
+<TD valign=top> returns '1' when both terms are true, and '0' otherwise</TD>
+</TR>
+<TR>
+<TD valign=top>|</TD>
+<TD valign=top>Or</TD>
+<TD valign=top> returns '1' when either term is true, and '0' otherwise</TD>
+</TR>
+<TR>
+<TD valign=top>&amp;&amp;</TD>
+<TD valign=top>Exclusive or</TD>
+<TD valign=top> returns '1' when one of the terms is true (but not both), and '0' otherwise</TD>
+</TR>
+<TR>
+<TD valign=top>Prefix &#172;, Prefix \</TD>
+<TD valign=top>Logical not</TD>
+<TD valign=top>returns '1' when the term is '0', and '0' when the term is '1'.</TD>
+</TR>
+</TABLE></ul>
+</ul>
+<p>
+<A NAME="streamName">  </A>
+<H1> 5 Stream names <small>-- CHARIN, CHAROUT, CHARS, LINEIN, LINEOUT, LINES, or STREAM built-in function</small> </H1>
+<table bgcolor=azure><tr><td>
+<sup>1</sup> The name of a <b>stream</b> is one of:
+<OL >
+<LI><b>'console'</b> is a special stream name. Stream builtin functions that access the <b>'console'</b> stream
+interact with the Windows 32 command console. A single exclamation point ('!') is an abbreviated
+alias for the <b>'console'</b> stream.
+<p>
+<LI>the empty string ('') is a special stream name which denotes either the default input stream (stdin)
+or the default output stream (stdout). When a stream name is not specified in a CHARIN, CHAROUT, CHARS,
+LINEIN, LINEOUT, LINES, or STREAM built-in function request, either the default input stream or the default
+output stream is used.
+<p>
+<LI>a file name, such as: statisticsFile.dat
+<P>The file name can be qualified with a leading folder (directory) path: c:\MyDocuments\statisticsFile.dat
+<P>The file name can be a relative folder (directory) path: ..\documents\statisticsFile.dat
+</OL>
+</table>
+<p>
+<H1> 6 Selector pool names <small>-- VALUE built-in function</small> </H1>
+<A NAME="selectorPool">  </A>
+<table bgcolor=azure><tr><td>
+<sup>2</sup> When the <b>selectorPool</b> option of the <b>VALUE</b> function is specified, it is interpreted as follows:
+<p>
+<OL >
+<LI>If the <b>selector</b> option is 'system', then values are associated with environment variables
+of the R4 program scope. Revisions to environment variables will be seen by commands started by
+R4. These revisions are lost when the R4 program concludes. Thus, R4 programs can not permanently
+alter environment variables.
+<p>
+<P>The <a href="#EnvironmentVariableAccess">environment variable access</a> section below shows how to set and reference environment variable values.
+<p>
+<LI>The 'registry' <b>selector</b> option is used to access and revise system registry values.
+Revisions to registry values are permanently altered.
+<p>
+<P>The <a href="#RegistryValueAccess">registry value access</a> section below shows how to access and revise system registry values.
+<p>
+<LI>Any other <b>selector</b> option is considered to be the name of a file. If the file name
+does not have a backslash, then the file is stored in the same directory as R4.EXE. Values are
+stored when the R4 program terminates.
+</OL>
+</table>
+<p>
+<A NAME="EnvironmentVariableAccess">  </A>
+<H1> 7 Environment variable access </H1>
+<P>The following shows how the <b>VALUE</b> function is used to set and reference environment variable values.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DOENV.REX */
+<BR>&nbsp;call value 'magic', 'abracadabra', 'system' /* set magic environment variable */
+<BR>
+<BR>&nbsp;say value( 'magic', , 'system' ) /* get magic environment variable */
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="RegistryValueAccess">  </A>
+<H1> 8 Registry value access </H1>
+<P>Access to system registry information allows <b>r4&#153;</b> to prepare and reference information
+that is used by other system software. This is a powerful capability. However, since system registry
+information is critical to correct system operation, <b>r4&#153;</b> can only perform some
+registry operations. You should be particularly careful when revising
+registry values. Erroneous revisions can have <strong>serious consequences</strong>. These
+changes cannot be undone.
+<p>
+<P>Due to the sensitivity of system registry information, <b>r4&#153;</b> can only be used to access
+and revise registry <em>values</em>. The product does not provide capabilities for accessing
+registry keys directly, and registry keys and values can not be removed. All registry values that
+are accessed by <b>r4&#153;</b> must be strings. No other registry value format is supported.
+<p>
+<P>As an extra precaution, registry <em>revisions</em> are only permitted when the <b>R4REGISTRYWRITE</b>
+environment variable has value: 'Y'. You can locally alter this value, as shown in the example
+below. No error occurs if this environment variable has not been set.
+<p>
+<P>You are strongly advised to <strong>B-A-C-K-U-P</strong> the system registry before attempting
+to revise it with an R4 program.
+<p>
+<P>If you are unfamiliar with the detailed characteristics of the system registry, you should
+discuss what you plan to do with a business colleague or friend, BEFORE attempting to
+revise registry information.
+<p>
+<P>Registry values are accessed using a three part name, that has the following structure:
+<BR>&nbsp;&nbsp;<b>root\keyPath[valueName]</b>
+<p>
+<P>The <b>keyPath</b> consists of a hierarchy of keys separated by backslashes.
+<p>
+<P>The <b>valueName</b> must be enclosed in square brackets.
+<p>
+<P>The <b>root</b> must be one of the following:
+<BR>&nbsp;&nbsp;'HKEY_CLASSES_ROOT'
+<BR>&nbsp;&nbsp;'HKEY_CURRENT_USER'
+<BR>&nbsp;&nbsp;'HKEY_LOCAL_MACHINE'
+<BR>&nbsp;&nbsp;'HKEY_USERS'
+<BR>&nbsp;&nbsp;'HKEY_CURRENT_CONFIG'
+<BR>&nbsp;&nbsp;'HKEY_DYN_DATA'
+<p>
+<P>The following root aliases are supported:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;'HKCU'&nbsp;</TD>
+<TD valign=top>HKEY_CURRENT_USER</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKLM'&nbsp;</TD>
+<TD valign=top>HKEY_LOCAL_MACHINE</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKCR'&nbsp;</TD>
+<TD valign=top>HKEY_CLASSES_ROOT</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKU'&nbsp;</TD>
+<TD valign=top>HKEY_USERS</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKCC'&nbsp;</TD>
+<TD valign=top> HKEY_CURRENT_CONFIG</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKDD'&nbsp;</TD>
+<TD valign=top>HKEY_DYN_DATA</TD>
+</TR>
+</TABLE></ul>
+<P>The following shows how the <b>VALUE</b> function is used to access and revise system registry values.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DOREG.REX */
+<BR>
+<BR>&nbsp;root = 'HKEY_CURRENT_USER'
+<BR>&nbsp;keypath = 'Software\Kilowatt Software\DoReg'
+<BR>&nbsp;regvalue = 'Magic'
+<BR>
+<BR>&nbsp;/* enable registry revision */
+<BR>&nbsp;call value 'R4REGISTRYWRITE', 'Y', 'system' /* set R4REGISTRYWRITE=Y */
+<BR>
+<BR>&nbsp;/* revise registry value */
+<BR>&nbsp;call value root'\'keypath'['regvalue']', 'abracadabra', 'registry'
+<BR>
+<BR>&nbsp;/* disable registry revision */
+<BR>&nbsp;call value 'R4REGISTRYWRITE', 'N', 'system' /* set R4REGISTRYWRITE=N */
+<BR>
+<BR>&nbsp;/* registry values can still be retrieved */
+<BR>
+<BR>&nbsp;/* get registry value */
+<BR>&nbsp;say value( root'\'keypath'['regvalue']', , 'registry' )
+</TD></TR></TABLE></ul>
+</UL>
+<p>
+<hr width=40% align=center>
+<p>
+<center><img src=r4tmark.gif></center>
+<center>Copyright &copy; 2001-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF="http://www.kilowattsoftware.com/">http://www.kilowattsoftware.com/</A></center>
+<center><a href="mailto:r4support@kilowattsoftware.com">E-Mail: r4support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

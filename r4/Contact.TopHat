@@ -1,0 +1,23 @@
+; Contact.TopHat
+
+; This defines the input fields associated with acquiring contact information
+
+; The first line below begins with 'get' followed by a space,
+; which indicates TopHat will operate in user input acquisition mode
+
+Get Contact Information
+
+; the contact information tab -- the associated REXX program is: Contact
+
+Contact,Contact,Get Contact Information
+ I,&Name,,Enter contact name
+ I,&Address 1,,Enter 1st line of contact's address
+ I,A&ddress 2,-,Enter 2nd line of contact's address
+ I,&City,,Enter contact's city
+ I,&State/Prov.,,Enter contact's state or province
+ I,Co&untry,,Enter contact's country
+ I,&Mail code,,Enter contact's zip code or mail code
+ I,&Phone,,Enter contact's telephone number
+ I,&E-mail,,Enter contact's e-mail address
+ I,Alt. E-&mail,,Enter contact's alternate e-mail address
+ I,&Date,,Enter date of last contact

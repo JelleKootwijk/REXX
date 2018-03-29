@@ -1,0 +1,44 @@
+; CsvDef.TopHat
+
+; This defines the fields associated with a new comma-separated value (CSV) file
+
+; The first line below does not begin with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+Define CSV file fields
+
+; the CSV file definition tab -- the associated REXX program is: CsvDef
+
+CsvDef,CsvDef,Enter new comma-separated value (CSV) file fields
+ I,Field1,-,
+ I,Field2,-,
+ I,Field3,-,
+ I,Field4,-,
+ I,Field5,-,
+ I,Field6,-,
+ I,Field7,-,
+ I,Field8,-,
+ I,Field9,-,
+ I,Field10,-,
+ I,Field11,-,
+ I,Field12,-,
+ I,Field13,-,
+ I,Field14,-,
+ I,Field15,-,
+ I,Field16,-,
+ I,Field17,-,
+ I,Field18,-,
+ I,Field19,-,
+ I,Field20,-,
+ I,Field21,-,
+ I,Field22,-,
+ I,Field23,-,
+ I,Field24,-,
+ I,Field25,-,
+ I,Field26,-,
+ I,Field27,-,
+ I,Field28,-,
+ I,Field29,-,
+ I,Field20,-,
+ I,Field31,-,
+ I,Field32,-,

@@ -1,0 +1,36 @@
+; FinCalc.TopHat
+
+; This defines the input fields associated with financial ratio calculations
+
+; The first line below does NOT begin with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+Financial Calculations
+
+; the Financial ratio calculation tab -- the associated REXX program is: FinCalc
+
+FinCalc,FinCalc,Financial ratio calculations
+ I,Company,,Enter company name or trading symbol
+ I,Sales,,Enter sales
+ I,Cost of goods,,Enter cost of goods sold
+ I,Net income,,Enter net income
+ I,Cash,,Enter cash on hand
+ I,Accounts receivable,,Enter accounts receivable current year end
+ I,A/R (prior year),,Enter accounts receivable prior year end
+ I,Inventory,,Enter inventory current year end
+ I,Inventory (prior),,Enter inventory prior year end
+ I,Other current assets,,Enter other current assets
+ I,Property/equipment,,Enter land, buildings, and equipment worth
+ I,Acc. deprec.,,Enter accumulated depreciation
+ I,Other assets,,Enter other assets
+ I,Total assets (prior),,Enter Total assets prior year end
+ I,Current liabilities,,Enter current liabilities
+ I,Long term debt,,Enter Long term debt
+ I,Other liabilities,,Enter Other liabilities
+ I,Preferred stock,,Enter preferred stock
+ I,Common stock,,Enter common stock
+ I,Earnings,,Enter retained earnings
+ I,Equity,,Enter stockholders equity prior year end
+ I,Stock value,,Enter market value common stock
+ I,Shares outstanding,,Enter shares of common stock outstanding
+ I,Preferred dividends,,Enter preferred stock dividends

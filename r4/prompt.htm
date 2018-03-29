@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<TITLE> Prompt </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><b><FONT COLOR="#000080" FACE="Tahoma">PROMPT</FONT></b></center>
+<center>A user query accessory for use with r4&trade;</center>
+<HR>
+<H1> 1 Categories: </H1>
+<P>visual accessory, user query accessory
+<H1> 2 Description: </H1>
+<P>The PROMPT accessory is used by r4&trade; programs to acquire a response
+to a question. The response value is returned in the system registry.
+<p>
+<P>Since multiple r4&trade; programs can be active at the same time, the name of the system registry
+is passed as a value in the command line. This allows each r4&trade; program to receive an
+independent response value. The r4&trade; program also passes the prompt text, and an optional
+caption.
+<p>
+<P>The following is a PROMPT example.
+<p>
+<center><img src=prompter.gif></center>
+<H1> 3 Usage: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;&nbsp;<strong>PROMPT tabDelimitedArguments</strong>
+</TD></TR></TABLE></ul>
+<H1> 4 Arguments: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;<b>tabDelimitedArguments</b> .. 2 or 3 text strings separated by tabs
+<ul><DL >
+<DD><b>1. Response registry value name</b>
+<DT>The name of a system registry value where the response is returned.
+<p>
+The system registry key is: <b>HKEY_LOCAL_MACHINE\\Software\\Kilowatt Software\\Prompt</b>
+<p>
+If the value exists, when the PROMPT program is started, it is shown in the response area.
+<p>
+<DD><b>2. Note text</b>
+<DT>The text that appears in the note area, which is above the response input field.
+<p>
+<DD><b>+3. <em>Caption</em> (optional)</b>
+<DT>Optional text that is displayed as the caption of the PROMPT program.
+<P>Note: a caption should be provided if you expect multiple prompts to be simultaneously displayed.
+</DL></ul>
+</TD></TR></TABLE></ul>
+<H1> 5 Returns: </H1>
+<UL >
+<LI>0 .. the user pressed the OK button
+<p>
+<LI>2 .. the user pressed the CANCEL button.
+<p>
+<LI>-1 .. less than 2 tab delimited arguments were provided -- a message was displayed.
+</UL>
+<H1> 6 Buttons: </H1>
+<ul><DL >
+<DD><b>OK</b>
+<DT>Concludes PROMPT operation. The prompt value is stored in the system registry.
+<p>
+<DD><b>Cancel</b>
+<DT>Concludes PROMPT operation, without revising the system registry value.
+</DL></ul>
+<H1> 7 Example: </H1>
+<P>The following is the r4&trade; program that displayed the prompt that was shown above
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* prompter.rex
+<BR>&nbsp;&nbsp;&nbsp;demonstration program that uses PROMPT.EXE
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;usage:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r4 prompter [color]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;examples:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. r4 prompter		[ input field is initially empty ]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. r4 prompter Blue	[ shows color in input field ]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;refer to PROMPT.HTM for a description of the usage of PROMPT.EXE
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;'set R4REGISTRYWRITE=Y'   /* enable registry writing */
+<BR>&nbsp;
+<BR>&nbsp;if arg(1) <> '' then
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\Prompt[Response]', arg(1), 'Registry'
+<BR>&nbsp;
+<BR>&nbsp;registryValue = 'Response'
+<BR>&nbsp;
+<BR>&nbsp;noteText = 'What is your favorite color ?'
+<BR>&nbsp;
+<BR>&nbsp;caption = 'Prompt -- enter your favorite color'
+<BR>&nbsp;
+<BR>&nbsp;tab = d2c( 9 )
+<BR>&nbsp;
+<BR>&nbsp;trace off /* ignore Cancel button error */
+<BR>&nbsp;
+<BR>&nbsp;prompt registryValue || tab || noteText || tab || caption
+<BR>&nbsp;
+<BR>&nbsp;if rc = 0 then
+<BR>&nbsp;&nbsp;&nbsp;say value( 'HKLM\Software\Kilowatt Software\Prompt[Response]', , 'Registry' )
+</TD></TR></TABLE></ul>
+<p>
+<center>PROMPT</center>
+<center>An <FONT COLOR="#000080" FACE="Tahoma">r4&trade;</FONT> auxiliary rogram.</center>
+<center>Version 1.0</center>
+<center>Copyright &copy; 2001-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF=http://www.kilowattsoftware.com/>http://www.kilowattsoftware.com/</A></center>
+<center><a href=mailto:support@kilowattsoftware.com>E-Mail: support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

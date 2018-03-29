@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE> DatePick </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><b><FONT COLOR="#000080" FACE="Tahoma">DatePick</FONT></b></center>
+<center>A date and time selection accessory for use with r4&trade;</center>
+<HR>
+<H1> Categories: </H1>
+<P>visual accessory, date and time selection accessory
+<H1> Description: </H1>
+<P>The DATEPICK accessory is used by r4&trade; programs to acquire a selected
+date and time. The response value is returned in the system registry.
+<p>
+<P>Since multiple r4&trade; programs can be active at the same time, the name of a system registry
+subkey can optionally be passed as a value in the command line. This allows each r4&trade; program
+to receive an independent response value. The r4&trade; program can also pass the initial date
+to display. The default initial date is today's date.
+<H1> Usage: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;&nbsp;<strong>PROMPT [initialDate[-initialTime] [subkey]]</strong>
+</TD></TR></TABLE></ul>
+<H1> Arguments: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;<b>initialDate</b> .. initial date, format: YYYYMMDD.
+<BR>&nbsp;&nbsp;&nbsp;The default initial date is today's date.
+<BR>&nbsp;&nbsp;&nbsp;If the initial date value is '-', today's date is shown.
+<BR>&nbsp;
+<BR>&nbsp;<b>initialTime</b> .. initial time, format: HHMM.
+<BR>&nbsp;&nbsp;&nbsp;The default initial time is 00:00 (midnight).
+<BR>&nbsp;
+<BR>&nbsp;<b>subkey</b> .. a response subkey.
+</TD></TR></TABLE></ul>
+<H1> Returns: </H1>
+<UL >
+<LI>0 .. the user pressed the OK button
+<p>
+<LI>2 .. the user pressed the CANCEL button.
+</UL>
+<H1> Buttons: </H1>
+<ul><DL >
+<DD><b>OK</b>
+<DT>Concludes DATEPICK operation. The selected date and time values are stored in the system registry.
+<p>
+<DD><b>Cancel</b>
+<DT>Concludes DATEPICK operation, without revising the system registry value.
+</DL></ul>
+<H1> Example: </H1>
+<P>The following is the r4&trade; program that displayed the prompt that was shown above
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* DatePick.rex
+<BR>&nbsp;&nbsp;&nbsp;demonstration program that uses DATEPICK.EXE
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;usage:
+<BR>&nbsp;&nbsp;&nbsp;r4 DatePick [yyyymmdd[-hhmm] [subkey]]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;examples:
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. r4 DatePick		[ default date is TODAY ]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. r4 DatePick 20010707	[ use date 20010707 ]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. r4 DatePick 20010707-1315 [ use date 20010707 time 13:15 (1:15pm) ]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;refer to DATEPICK.HTM for a description of the usage of DATEPICK.EXE
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;trace off /* ignore Cancel button error */
+<BR>&nbsp;
+<BR>&nbsp;showDate = '-' /* => default date is TODAY */
+<BR>&nbsp;
+<BR>&nbsp;showTime = '' /* => default time is 00:00 (midnight) */
+<BR>&nbsp;
+<BR>&nbsp;subkey = ''
+<BR>&nbsp;
+<BR>&nbsp;if arg(1) <> '' then do
+<BR>&nbsp;&nbsp;&nbsp;showDate = word( arg(1), 1 )
+<BR>&nbsp;&nbsp;&nbsp;if pos( '-', showDate ) > 0 then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parse var showDate showDate '-' showTime
+<BR>&nbsp;&nbsp;&nbsp;subkey = '\'word( arg(1), 2 )
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;
+<BR>&nbsp;'DatePick' showDate || copies( '-'showTime, showTime <> '' ) subkey
+<BR>&nbsp;
+<BR>&nbsp;if rc = 0 then do
+<BR>&nbsp;&nbsp;&nbsp;response = value( 'HKLM\Software\Kilowatt Software\DatePick' || subkey || '[Response]', , 'Registry' )
+<BR>&nbsp;&nbsp;&nbsp;parse var response year +4 month +2 day '-' hour +2 minute
+<BR>&nbsp;&nbsp;&nbsp;say 'You selected:' hour':'minute 'on' month'/'day'/'year
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<center>DATEPICK</center>
+<center>An <FONT COLOR="#000080" FACE="Tahoma">r4&trade;</FONT> auxiliary rogram.</center>
+<center>Version 1.0</center>
+<center>Copyright &copy; 2001-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF=http://www.kilowattsoftware.com/>http://www.kilowattsoftware.com/</A></center>
+<center><a href=mailto:support@kilowattsoftware.com>E-Mail: support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

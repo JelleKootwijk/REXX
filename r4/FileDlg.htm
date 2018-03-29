@@ -1,0 +1,188 @@
+<HTML>
+<HEAD>
+<TITLE> FileDlg </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><b><FONT COLOR="#000080" FACE="Tahoma">FILEDLG</FONT></b></center>
+<center>A user file selection accessory for use with r4&trade;</center>
+<HR>
+<H1> 1 Categories: </H1>
+<P>visual accessory, user file selection accessory
+<H1> 2 Description: </H1>
+<P>The FILEDLG accessory is used by r4&trade; programs to acquire a system file name.
+Since multiple r4&trade; programs can be active at the same time, the name of a system registry subkey
+is passed as a value in the command line. This allows each r4&trade; program to receive an
+independent file name response value.
+<H1> 3 Usage: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;&nbsp;<strong>FILEDLG registrySubkey</strong>
+</TD></TR></TABLE></ul>
+<H1> 4 Arguments: </H1>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;<b>registrySubkey</b> .. a system registry subkey
+</TD></TR></TABLE></ul>
+<P>The FILEDLG program's main system registry key is:
+<BR>&nbsp;&nbsp;<b>HKEY_LOCAL_MACHINE\Software\Kilowatt Software\FileDlg</b>
+<P>The following registry values are initially passed by the r4&trade; program to FILEDLG. See the
+registry extract below to better understand the format of these values.
+<ul><DL >
+<DD><b>1. Title</b>
+<DT>The caption of the file selection window
+<p>
+<DD><b>+2. <em>Filter</em> (optional)</b>
+<DT>A set of pairs of file patterns separated by vertical bars. The first value within the
+pair is displayed to the user in a drop-down list. The second value of the pair identifies
+a file pattern that selects available files within the current directory.
+The filter value must be concluded with two vertical bar characters. If
+this value is not set the following default filter string is used:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;Text Files (*.txt)|*.txt|All Files (*.*)|*.*||
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>+3. <em>InitialPath</em> (optional)</b>
+<DT>The initial file name path. If this value is not set the following default path is used:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;*.txt
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>+4. <em>Write</em> (optional)</b>
+<DT>Is a value of 'Yes' or 'No', only the leading character is required, case is insignificant.
+When the value is 'Yes', a prompt is displayed if an existing file will be replaced. A
+similar prompt is produced if a new file will be created.
+<p>
+<DD><b>+5. <em>Select</em> (optional)</b>
+<DT>Is a value of 'Yes' or 'No', only the leading character is required, case is insignificant.
+When the value is 'Yes', a prompt is displayed if the file does not exist. When selecting
+a file it must exist beforehand.
+<p>
+<DD><b>+6. <em>InitialDirectory</em> (optional)</b>
+<DT>Identifies the initial directory for file selection. This value is automatically
+revised when the user presses the OK button. The directory is derived from the selected file.
+</DL></ul>
+<p>
+<P>The following registry values are revised when the FILEDLG program returns.
+<ul><DL >
+<DD><b>1. File</b>
+<DT>The name of the selected file. This will be empty if the user pressed the Cancel button.
+<p>
+<DD><b>2. InitialDirectory</b>
+<DT>The name of the directory that contains the selected file.
+</DL></ul>
+<H1> 5 Returns: </H1>
+<UL >
+<LI>1 .. the user pressed the OK button
+<p>
+<LI>2 .. the user pressed the CANCEL button.
+<p>
+<LI>99 .. incorrect usage -- a message was displayed.
+</UL>
+<H1> 6 Buttons: </H1>
+<ul><DL >
+<DD><b>OK</b>
+<DT>Concludes FILEDLG operation. The file name value is stored in the system registry.
+<p>
+<DD><b>Cancel</b>
+<DT>Concludes FILEDLG operation, without revising the system registry value.
+</DL></ul>
+<H1> 7 Example registry values </H1>
+<P>Here is a registry extract associated with an invocation by the FileDlg.rex example
+program.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;[HKEY_LOCAL_MACHINE\SOFTWARE\Kilowatt Software\FileDlg\Test]
+<BR>&nbsp;Title=Select output file
+<BR>&nbsp;Filter=CSV Files (*.csv)|*.csv|All Files (*.*)|*.*||
+<BR>&nbsp;InitialPath=*.csv
+<BR>&nbsp;Select=No
+<BR>&nbsp;Write=Yes
+<BR>&nbsp;<b>InitialDirectory=G:\\r4</b>
+<BR>&nbsp;<b>File=G:\\r4\\bb.CSV</b>
+</TD></TR></TABLE></ul>
+<p>
+<P>The <b>plain</b> values are passed to the FILEDLG program.
+<P>The <b>BOLD</b> values are returned.
+<H1> 8 Example: </H1>
+<P>The following is the r4&trade; program that interacted with the FILEDLG program
+with the registry values shown above.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* FileDlg.rex
+<BR>&nbsp;&nbsp;&nbsp;this program is an example
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;this program communicates with FileDlg.EXE via the registry
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;trace off /* ignore nonzero return codes */
+<BR>&nbsp;
+<BR>&nbsp;tab = d2c( 9 )
+<BR>&nbsp;
+<BR>&nbsp;/* prepare FileDlg request entries -- using the 'Test' subkey */
+<BR>&nbsp;
+<BR>&nbsp;'set R4REGISTRYWRITE=Y'   /* enable registry writing */
+<BR>&nbsp;
+<BR>&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Filter]', 'CSV Files (*.csv)|*.csv|All Files (*.*)|*.*||', 'Registry'
+<BR>&nbsp;
+<BR>&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[InitialPath]', '*.csv', 'Registry'
+<BR>&nbsp;
+<BR>&nbsp;/* existing file selection */
+<BR>&nbsp;
+<BR>&nbsp;if translate( left( arg(1)'S', 1 ) ) = 'S' then do
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Title]', 'Select a file to read', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Select]', 'Yes', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Write]', 'No', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;
+<BR>&nbsp;/* file creation or replacement */
+<BR>&nbsp;
+<BR>&nbsp;else do
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Title]', 'Select output file', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Select]', 'No', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;call value 'HKLM\Software\Kilowatt Software\FileDlg\Test[Write]', 'Yes', 'Registry'
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;
+<BR>&nbsp;'FileDlg Test'	/* show FileDlg -- using the 'Test' subkey */
+<BR>&nbsp;
+<BR>&nbsp;say rc
+<BR>&nbsp;
+<BR>&nbsp;/* get FileDlg response */
+<BR>&nbsp;
+<BR>&nbsp;if rc = 1 then do
+<BR>&nbsp;&nbsp;&nbsp;fileName = value( 'HKLM\Software\Kilowatt Software\FileDlg\Test[File]', , 'Registry' )
+<BR>&nbsp;&nbsp;&nbsp;'MsgBox' 'You selected file' DoubleSlash( fileName )
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;
+<BR>&nbsp;exit 0
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;/* procedure DoubleSlash
+<BR>&nbsp;&nbsp;&nbsp;* converts single backward slash characters to double backward slash characters
+<BR>&nbsp;&nbsp;&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;DoubleSlash : procedure
+<BR>&nbsp;&nbsp;&nbsp;r = ''
+<BR>&nbsp;&nbsp;&nbsp;s = arg( 1 )
+<BR>&nbsp;&nbsp;&nbsp;do while s <> ''
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parse var s front '\' s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = r || front
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if s <> '' then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = r'\\'
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;&nbsp;&nbsp;return r
+</TD></TR></TABLE></ul>
+<p>
+<center>FILEDLG</center>
+<center>An <FONT COLOR="#000080" FACE="Tahoma">r4&trade;</FONT> auxiliary rogram.</center>
+<center>Version 1.0</center>
+<center>Copyright &copy; 2001-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF=http://www.kilowattsoftware.com/>http://www.kilowattsoftware.com/</A></center>
+<center><a href=mailto:support@kilowattsoftware.com>E-Mail: support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

@@ -1,0 +1,1105 @@
+<HTML>
+<HEAD>
+<TITLE> TopHat </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><img src=TopHat.gif></center>
+<center>Kilowatt Software L.L.C.'s</center>
+<center><b>TopHat!&#153;</b></center>
+<center>A generic fill-in-the-blank form accessory for use with <b>r4&#153;</b> programs</center>
+<HR>
+<H1> 1 Index </H1>
+<P>This guide contains the following sections:
+<UL >
+<LI><A HREF="#Description">Description</A>
+<LI><A HREF="#Usage">Usage</A>
+<LI><A HREF="#FormDefinitionFileFormat">Form definition file format</A>
+<LI><A HREF="#UserInputAcquisitionModeForm">User input acquisition mode form definition file example</A>
+<LI><A HREF="#ComputationModeForm">Computation mode form definition file example</A>
+<LI><A HREF="#ComputationModeForm2">Another computation mode form definition file example, metric conversions</A>
+<LI><A HREF="#rooForm">A form that uses roo!&#153; as the supporting executable module</A>
+<LI><A HREF="#Buttons">Buttons</A>
+<LI><A HREF="#TopHatStartupForm">Adding a TopHat!&#153; form to your startup menu</A>
+<LI><A HREF="#TOPHAT_PROGRAM_TO_EXECUTE">TOPHAT_PROGRAM_TO_EXECUTE environment variable</A>
+<LI><A HREF="#ChangingCaptions">Changing button captions and tips</A> -- for languages other than English
+<LI><A HREF="#Remarks">Other remarks</A>
+</UL>
+<p>
+<H2> 1.1 Categories: </H2>
+<P>visual accessory, generic fill-in-the-blank form, user input acquisition, computation user interface
+<A NAME="Description">  </A>
+<H2> 1.2 Description: </H2>
+<P>The TopHat!&#153; program is used in conjunction with <b>r4&#153;</b> and <nobr class=roo>roo!&#153;</nobr> programs.
+There are two modes of operation: <b>user input acquisition mode</b> and <b>computation mode</b>.
+In <b>user input acquisition mode</b>, a REXX program is acquiring a series of input values from
+the user; such as, information for contacting other individuals. In <b>computation mode</b>, the user
+prepares a set of input values, and then performs a REXX program which prepares a set
+of output values. The computation of loan payment information is an example of a
+<b>computation mode</b> form.
+<p>
+<P>In <b>user input acquisition mode</b>, TopHat!&#153; is started by a REXX program, and returns information
+to the program in the system registry.
+<p>
+<P>In <b>computation mode</b>, TopHat!&#153; is started as an application as described
+in the <a href="#Usage">usage</a> section below. In this mode, T!opHat&#153; starts the
+associated REXX program when the <b>perform</b> button is pressed. Information is passed to
+the REXX program in the system registry, and the associated response is returned in the
+system registry.
+<p>
+<P>TopHat!&#153; determines the mode of operation by analyzing the form definition's title line.
+<A NAME="Usage">  </A>
+<H2> 1.3 Usage: </H2>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;<b>TopHat</b> [/S] [formDefinitionFile]
+</TD></TR></TABLE></ul>
+<H2> 1.4 Optional Arguments: </H2>
+<UL >
+<LI><b>/S</b> .. enable scrollable window
+<P>The /S option enables scrolling of the TopHat!&#153; window. This option is useful
+for small displays.
+<p>
+<LI><b>formDefinitionFile</b> .. a text file containing lines which define one or more forms. When
+the <i>formDefinitionFile</i> does not have a file extension, an
+implicit <b>.TopHat</b> is added.
+<P>The contents of the form definition file are defined below.
+</UL>
+<A NAME="FormDefinitionFileFormat">  </A>
+<H3> 1.4.1 Form definition file format </H3>
+<P>There are <b>six</b> different types of lines within the form definition file. Empty lines are ignored.
+<ul><DL >
+<DD><b>Remark</b>
+<DT>When the first non-space character on the line is a semicolon, the line is ignored.
+<p>
+<DD><b>Title</b>
+<DT>The title line is the first line of the form definition file, that does not begin with a semicolon,
+and is not empty. It is displayed as the caption of the TopHat!&#153; application.
+If the title begins with the word 'get' followed by a space, then TopHat!&#153; operates
+in <b>user input acquisition mode</b>. Otherwise, TopHat!&#153; operates in computation mode.
+<p>
+<DD><b>Supporting executable module</b>
+<DT>When the first character on the line is an exclamation point (!), the remainder of the line
+identifies the executable module to invoke. For example:
+<p>
+<ul><TABLE border=1 cellspacing=5><TR><TD>
+<b>! roo.exe</b>
+<P>The above line executes roo!&#153;
+<P>The default module is: <b>r4.exe</b>
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>Associated registry key base</b>
+<DT>When the first character on the line is a colon (:), the remainder of the line
+identifies the associated registry key base that is used to communicate with the executable module.
+For example:
+<p>
+<ul><TABLE border=1 cellspacing=5><TR><TD>
+<b>: Software\Kilowatt Software\roo</b>
+<P>The above line indicates the registry key base is: HKEY_LOCAL_MACHINE\Software\Kilowatt Software\roo
+<P>The default registry key base is: <b>HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4</b>
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>Associated help file</b>
+<DT>When the first character on the line is a question mark (?), the remainder of the line
+identifies the help file associated with the TopHat!&#153; application.
+For example:
+<p>
+<ul><TABLE border=1 cellspacing=5><TR><TD>
+<b>? KinematicEquations.htm</b>
+<P>The above line indicates the help file associated with the TopHat!&#153; application is:
+<P>&nbsp;&nbsp;<b>KinematicEquations.htm</b>
+</TD></TR></TABLE></ul>
+<P><i>Note:</i> if a complete file name is not specified, the HTML file should be in the same
+directory as the TopHat!&#153; program. You can specify a full directory path of the HTML file,
+if it is in another directory, or on a different disk. You can also specify an internet URL
+for the HTML file.
+<p>
+<DD><b>Form definition line</b>
+<DT>A line that does not have any leading spaces defines a form tab section. The form definition line
+is followed by one or more 'field definition' lines.
+<p>
+<P>Note: there is only one form tab section when operating in <b>user input acquisition mode</b>.
+<p>
+<P>The form definition line has three components, which are separated by <b>commas</b>. These are:
+<p>
+<OL >
+<LI>The name of the associated REXX program. Usually this will be unqualified, such as: <b>LoanCalc</b>.
+<BR>The program name is the last segment of the registry key, that is used to communicate with the
+REXX program.
+<p>
+<LI>The folder tab caption associated with this form definition.
+<p>
+<LI>A note to display at the top of the TopHat!&#153; application window, when the folder tab
+is activated.
+</OL>
+<p>
+<P>The following is an example of a form definition line:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;LoanCalc,LoanCalc,Loan calculator
+</TD></TR></TABLE></ul>
+<P>In the above line, <b>LoanCalc</b> is the name of the associated REXX program and the folder
+tab caption. <b>Loan calculator</b> is the note that is displayed when the folder tab
+is activated.
+<p>
+<DD><b>Field definition line</b>
+<DT>Lines with one or more leading spaces are field definition lines. Up to 32 fields can be defined
+per form.
+<p>
+<P>The field definition line has four components, which are separated by <b>commas</b>. These are:
+<p>
+<OL >
+<LI>The field type, 'I' indicates an input field, 'O' indicates an output field.
+<p>
+<LI>The caption that appears to the left of the input or output field. The caption can include an
+ampersand ('&amp;') before one of the characters. The associated character is displayed with
+an underline. The user can cause the cursor to jump to the associated input field by pressing
+the character while the <b>Alt</b> key is held down.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;Note: an empty caption is used to provide spacing, as used in the
+<a href="#MetricExamples">metric examples</a> below.
+When the caption is empty, neither the caption field nor the associated text field are not displayed.
+Furthermore, the value of a skipped text field is not passed in request parameters. Likewise,
+the REXX program does not return a response for skipped output text fields. This simplifies
+the implementation of the REXX programs that interact with forms having skipped fields.
+</TD></TR></TABLE></ul>
+<p>
+<LI>The default value associated with input fields. Optional values should use a single dash ('-').
+<p>
+<LI>A helpful tip that is displayed when the mouse passes over the field.
+</OL>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;Note: If a component of a field definition line, or a form definition includes a <b>comma</b>,
+<BR>&nbsp;then the entire component should be enclosed in double-quotes. If it also includes a <b>double-quote</b>
+<BR>&nbsp;then the double-quote within the component value is specified twice. See the 'payment period'
+<BR>&nbsp;field definitions in the examples below.
+</TD></TR></TABLE></ul>
+<p>
+<P>The following is an example of a field definition line:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;I,&amp;Annual % rate,7,Enter annual interest rate of loan
+</TD></TR></TABLE></ul>
+<P>In the above line, <b>I</b> indicates that this is an input field.
+The field's caption is '&amp;Annual % rate'. The cursor will jump to the field when 'A' is typed
+while the <b>Alt</b> key is held down. <b>7</b> is the default value for the input field.
+<b>Enter annual interest rate of loan</b> is the tip that is displayed when the mouse passes
+over the input field.
+</DL></ul>
+<A NAME="UserInputAcquisitionModeForm">  </A>
+<H4> 1.4.1.1 User input acquisition mode form definition file example </H4>
+<P>The following is a complete example of a <b>user input acquisition mode</b> form definition file.
+<p>
+<P>The form appears as follows:
+<center><img src=topHatContact.gif></center>
+<p>
+<P>The associated form definition file is:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;; Contact.TopHat
+<BR>&nbsp;
+<BR>&nbsp;; This defines the input fields associated with acquiring contact information
+<BR>&nbsp;
+<BR>&nbsp;; The first line below begins with 'get' followed by a space,
+<BR>&nbsp;; which indicates TopHat will operate in user input acquisition mode
+<BR>&nbsp;
+<BR>&nbsp;Get Contact Information
+<BR>&nbsp;
+<BR>&nbsp;; the contact information tab -- the associated REXX program is: Contact
+<BR>&nbsp;
+<BR>&nbsp;Contact,Contact,Get Contact Information
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Name,,Enter contact name
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Address 1,,Enter 1st line of contact's address
+<BR>&nbsp;&nbsp;&nbsp;I,A&amp;ddress 2,-,Enter 2nd line of contact's address
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;City,,Enter contact's city
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;State/Prov.,,Enter contact's state or province
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Mail code,,Enter contact's zip code or mail code
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Phone,,Enter contact's telephone number
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;E-mail,,Enter contact's e-mail address
+<BR>&nbsp;&nbsp;&nbsp;I,Alt. E-&amp;mail,,Enter contact's alternate e-mail address
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Date,,Enter date of last contact
+</TD></TR></TABLE></ul>
+<p>
+<P>When TopHat!&#153; is started to acquire contact information, initial values are received from the REXX program as registry values
+within the following registry key:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4\Contact[Request]
+</TD></TR></TABLE></ul>
+<p>
+<P>When the <b>OK</b> button is pressed input values are returned to the REXX program as registry values
+within the following registry key:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4\Contact[Request]
+</TD></TR></TABLE></ul>
+<p>
+<P>Note: you may have observed that the same registry value is used to receive information
+from the REXX program, and return it to the REXX program. This is correct for user
+input acquisition.
+<p>
+<P>The following is the example REXX program that starts the contact information acquisition form.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* GetContact.rex
+<BR>&nbsp;&nbsp;&nbsp;this program obtains contact information via TopHat
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;this program communicates with TopHat.EXE via the registry
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;a tab delimited input value is acquired from registry value:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HKLM\Software\Kilowatt Software\R4\Contact[Request]
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;tab = d2c( 9 )
+<BR>&nbsp;
+<BR>&nbsp;/* invoke TopHat with input file: Contact.TopHat */
+<BR>&nbsp;
+<BR>&nbsp;revise = 1 /* 1 => revise provided input values */
+<BR>&nbsp;
+<BR>&nbsp;request = '' /* => reset existing input values */
+<BR>&nbsp;
+<BR>&nbsp;if revise then do /* provide input values */
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;name = 'John Doe'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;address1 = '11 Oak Street'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;address2 = '-'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;city = 'Pleasantville'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;state = 'ZW'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;country = 'USA'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;mailCode = '55555'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;phone = '999-555-1212'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;email = 'jdoe@bitbucket.com'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;emailAlt = 'johndoe@elsewhere.com'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;dateOfContact = '23 May 2001'
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;/* prepare tab delimited TopHat input values request */
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;request = ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name     || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| address1 || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| address2 || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| city     || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| state    || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| country  || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| mailCode || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| phone    || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| email    || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| emailAlt || tab ,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| dateOfContact
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;
+<BR>&nbsp;'set R4REGISTRYWRITE=Y'   /* enable registry writing */
+<BR>&nbsp;
+<BR>&nbsp;call value "HKLM\Software\Kilowatt Software\R4\Contact[Request]", request, "Registry"
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;trace off /* ignore error code when cancel is pressed */
+<BR>&nbsp;
+<BR>&nbsp;'TopHat Contact.TopHat'
+<BR>&nbsp;
+<BR>&nbsp;if rc <> 0 then /* cancel button was pressed */
+<BR>&nbsp;&nbsp;&nbsp;exit 1
+<BR>&nbsp;
+<BR>&nbsp;/* get TopHat input field values */
+<BR>&nbsp;
+<BR>&nbsp;input = value( "HKLM\Software\Kilowatt Software\R4\Contact[Request]", , "Registry" )
+<BR>&nbsp;
+<BR>&nbsp;/* parse tab delimited input field values */
+<BR>&nbsp;
+<BR>&nbsp;parse var input ,
+<BR>&nbsp;&nbsp;&nbsp;name (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;address1 (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;address2 (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;city (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;state (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;country (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;mailCode (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;phone (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;email (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;emailAlt (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;dateOfContact (tab)
+<BR>&nbsp;
+<BR>&nbsp;say 'Contact information:'
+<BR>&nbsp;say
+<BR>&nbsp;say left( 'Name', 20 ) name
+<BR>&nbsp;say left( 'Address1', 20 ) address1
+<BR>&nbsp;say left( 'Address2', 20 ) copies( address2, address2 <> '-' )
+<BR>&nbsp;say left( 'City', 20 ) city
+<BR>&nbsp;say left( 'State', 20 ) state
+<BR>&nbsp;say left( 'Country', 20 ) country
+<BR>&nbsp;say left( 'Zip/Mail code', 20 ) mailCode
+<BR>&nbsp;say left( 'Phone', 20 ) phone
+<BR>&nbsp;say left( 'E-mail', 20 ) email
+<BR>&nbsp;say left( 'Alternate e-mail', 20 ) emailAlt
+<BR>&nbsp;say left( 'Date of contact', 20 ) dateOfContact
+<BR>&nbsp;
+<BR>&nbsp;exit 0
+</TD></TR></TABLE></ul>
+<A NAME="ComputationModeForm">  </A>
+<H4> 1.4.1.2 Computation mode form definition file example </H4>
+<P>The following is a complete example of a <b>computation mode</b> form definition file. Four tabs
+are defined. Each tab performs a business calculation.
+<p>
+<P>The form appears as follows:
+<center><img src=topHatForm.gif></center>
+<p>
+<P>The associated form definition file is:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;; Bizzy.TopHat
+<BR>&nbsp;
+<BR>&nbsp;; a set of business calculation forms
+<BR>&nbsp;
+<BR>&nbsp;; The first line below DOES NOT BEGIN with 'get' followed by a space,
+<BR>&nbsp;; which indicates TopHat will operate in computation mode
+<BR>&nbsp;
+<BR>&nbsp;Business calculations
+<BR>&nbsp;
+<BR>&nbsp;; the loan calculation tab -- the associated REXX program is: LoanCalc
+<BR>&nbsp;
+<BR>&nbsp;LoanCalc,LoanCalc,Loan calculator
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Down Payment,0,Enter down payment
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Principal,0,Enter amount of loan
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Annual % rate,7,Enter annual interest rate of loan
+<BR>&nbsp;&nbsp;&nbsp;I,"P&amp;eriod (Mo, Yr)",Yr,Enter loan payment period; either Mo or Yr
+<BR>&nbsp;&nbsp;&nbsp;I,#Pe&amp;riods,0,Enter number of payment periods
+<BR>&nbsp;&nbsp;&nbsp;O,Monthly payment,,Computed monthly payment
+<BR>&nbsp;&nbsp;&nbsp;O,Total payment,,Computed total payment over life of loan
+<BR>&nbsp;&nbsp;&nbsp;O,Total interest,,Total interest payed over life of loan
+<BR>&nbsp;&nbsp;&nbsp;O,Total expense,,Total expense including down payment
+<BR>&nbsp;
+<BR>&nbsp;; the 'compound interest; calculation tab -- the associated REXX program is: CompVal
+<BR>&nbsp;
+<BR>&nbsp;CompVal,ComputeValue,Compute value of investment with interest compounded monthly
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Principal,0,Enter amount of investment
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Annual % rate,7,Enter annual interest rate of investment
+<BR>&nbsp;&nbsp;&nbsp;I,"P&amp;eriod (Mo, Yr)",Yr,Enter payment period; either Mo or Yr
+<BR>&nbsp;&nbsp;&nbsp;I,#Pe&amp;riods,0,Enter number of payment periods
+<BR>&nbsp;&nbsp;&nbsp;O,Present value,,Present value
+<BR>&nbsp;
+<BR>&nbsp;; the 'present value' calculation tab -- the associated REXX program is: PresVal
+<BR>&nbsp;
+<BR>&nbsp;PresVal,PresentValue,Compute present value needed to have a future amount with interest compounded monthly
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Future value,0,Enter future value desired
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Annual % rate,7,Enter annual interest rate of investment
+<BR>&nbsp;&nbsp;&nbsp;I,"P&amp;eriod (Mo, Yr)",Yr,Enter payment period; either Mo or Yr
+<BR>&nbsp;&nbsp;&nbsp;I,#Pe&amp;riods,0,Enter number of payment periods
+<BR>&nbsp;&nbsp;&nbsp;O,Present value,,Present value needed
+<BR>&nbsp;
+<BR>&nbsp;; the 'compounded annuity' calculation tab -- the associated REXX program is: AnnVal
+<BR>&nbsp;
+<BR>&nbsp;AnnVal,AnnuityValue,Compute final amount of an annuity with interest compounded monthly
+<BR>&nbsp;&nbsp;&nbsp;I,&amp;Annual investment,0,Enter annual investment amount
+<BR>&nbsp;&nbsp;&nbsp;I,Annual % &amp;rate,7,Enter annual interest rate of investment
+<BR>&nbsp;&nbsp;&nbsp;I,#&amp;Years,0,Enter number of years
+<BR>&nbsp;&nbsp;&nbsp;O,Annuity value,,Final annuity value
+</TD></TR></TABLE></ul>
+<p>
+<P>When the <b>perform</b> button is pressed while the <b>LoanCalc</b> folder tab is activated,
+TopHat!&#153; communicates with the <b>LoanCalc</b> REXX program as follows:
+<p>
+<P>Requests are passed to the REXX program as registry values within the following registry key:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4\LoanCalc[Request]
+</TD></TR></TABLE></ul>
+<p>
+<P>Responses are received from the REXX program as registry values within the following registry key:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4\LoanCalc[Response]
+</TD></TR></TABLE></ul>
+<p>
+<P>Note: you may have observed that different values are used to send information to the REXX program,
+and receive information from the REXX program. This is correct for computation mode.
+<p>
+<P>The following is the example REXX program that performs the loan computations associated
+with the first form tab above.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* LoanCalc.rex
+<BR>&nbsp;&nbsp;&nbsp;this program computes loan payment values
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;this program communicates with TopHat.EXE via the registry
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;a tab delimited request is received from registry value:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HKLM\Software\Kilowatt Software\R4\LoanCalc[Request]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;a tab delimited response is returned in registry value:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HKLM\Software\Kilowatt Software\R4\LoanCalc[Response]
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;tab = d2c( 9 )
+<BR>&nbsp;
+<BR>&nbsp;/* get TopHat request */
+<BR>&nbsp;
+<BR>&nbsp;request = value( 'HKLM\Software\Kilowatt Software\R4\LoanCalc[Request]', , 'Registry' )
+<BR>&nbsp;
+<BR>&nbsp;/* parse tab delimited request fields */
+<BR>&nbsp;
+<BR>&nbsp;parse var request downPayment (tab) principal (tab) pctRate (tab) periodType (tab) nperiods
+<BR>&nbsp;
+<BR>&nbsp;/* compute loan payment values */
+<BR>&nbsp;
+<BR>&nbsp;workingPrincipal = principal - downPayment
+<BR>&nbsp;
+<BR>&nbsp;interest = ( pctRate / 100 ) / 12      /* convert annual interest rate to monthly rate */
+<BR>&nbsp;
+<BR>&nbsp;if translate( left( periodType, 1 ) ) = 'Y' then
+<BR>&nbsp;&nbsp;&nbsp;nperiods = nperiods * 12                 /* #payments in a year */
+<BR>&nbsp;
+<BR>&nbsp;x = ( 1 + interest ) ** nperiods
+<BR>&nbsp;
+<BR>&nbsp;monthly = ( workingPrincipal * x * interest ) / ( x - 1 )
+<BR>&nbsp;
+<BR>&nbsp;monthlyPayment = trunc( monthly, 2 )
+<BR>&nbsp;
+<BR>&nbsp;total = monthly * nperiods
+<BR>&nbsp;
+<BR>&nbsp;totalPayment = trunc( total, 2 )
+<BR>&nbsp;
+<BR>&nbsp;totalInterest = trunc( total - principal, 2 )
+<BR>&nbsp;
+<BR>&nbsp;totalExpense = trunc( total + downPayment, 2 )
+<BR>&nbsp;
+<BR>&nbsp;/* prepare tab delimited TopHat response */
+<BR>&nbsp;
+<BR>&nbsp;response = monthlyPayment || tab || totalPayment || tab || totalInterest || tab || totalExpense
+<BR>&nbsp;
+<BR>&nbsp;'set R4REGISTRYWRITE=Y'   /* enable registry writing */
+<BR>&nbsp;
+<BR>&nbsp;call value 'HKLM\Software\Kilowatt Software\R4\LoanCalc[Response]', response, 'Registry'
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="MetricExamples">  </A>
+<A NAME="ComputationModeForm2">  </A>
+<H4> 1.4.1.3 Another computation mode form definition file example, metric conversions </H4>
+<P>The following is another example of a <b>computation mode</b> form definition file. The tabs
+provide a collection of metric to english measurement conversions.
+<p>
+<P>This example shows two helpful concepts. First, some fields do not have captions. This introduces
+spacing between fields, which helps the user distinguish groups of conversions. Second,
+the output values are presented on the right side of the form area. This is accomplished
+by providing the appropriate number of empty input field captions after the last visible field.
+The total number of input fields in the left column is 16. For consistency, empty output fields
+are also defined, so the total number of output fields in the right column is also 16.
+<p>
+<P>The example REXX programs that perform metric conversions have comment lines at the hidden
+input and output fields positions. You may find that this technique is helpful in your programs
+also.
+<p>
+<P>The form appears as follows:
+<center><img src=topHatMetricForm.gif></center>
+<p>
+<P>The associated form definition file is:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;; Conversions.TopHat
+<BR>&nbsp;
+<BR>&nbsp;; a collection of conversion calculation forms
+<BR>&nbsp;
+<BR>&nbsp;; The first line below DOES NOT BEGIN with 'get' followed by a space,
+<BR>&nbsp;; which indicates TopHat will operate in computation mode
+<BR>&nbsp;
+<BR>&nbsp;Conversions
+<BR>&nbsp;
+<BR>&nbsp;; the metric distance tab -- the associated REXX program is: MetricDistance
+<BR>&nbsp;
+<BR>&nbsp;MetricDistance,Distance,Distance metric conversions
+<BR>&nbsp;&nbsp;&nbsp;I,Inches,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Feet,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Yards,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Miles,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Kilometers,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;O,Centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Kilometers,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Inches,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Feet,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Yards,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Miles,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;
+<BR>&nbsp;; the metric area tab -- the associated REXX program is: MetricArea
+<BR>&nbsp;
+<BR>&nbsp;MetricArea,Area,Area metric conversions
+<BR>&nbsp;&nbsp;&nbsp;I,Square inches,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Square feet,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Square yards,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Square centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Square meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Square meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;O,Square centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Square meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Square meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Square inches,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Square feet,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Square yards,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;
+<BR>&nbsp;; the metric volume tab -- the associated REXX program is: MetricVolumne
+<BR>&nbsp;
+<BR>&nbsp;MetricVolume,Volume,Volume metric conversions
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic inches,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic feet,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic yards,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Fluid ounces,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Quarts,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Gallons,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Cubic meters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Milliliters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Liters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Liters,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic centimeters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic meters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Milliliters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Liters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Liters,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic inches,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic feet,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Cubic yards,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Fluid ounces,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Quarts,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Gallons,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;
+<BR>&nbsp;; the metric weight tab -- the associated REXX program is: MetricWeight
+<BR>&nbsp;
+<BR>&nbsp;MetricWeight,Weight,Weight metric conversions
+<BR>&nbsp;&nbsp;&nbsp;I,Ounces,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Pounds,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Grams,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Kilograms,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;O,Grams,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Kilograms,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Ounces,-,
+<BR>&nbsp;&nbsp;&nbsp;O,Pounds,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;
+<BR>&nbsp;; the metric temperature tab -- the associated REXX program is: MetricTemperature
+<BR>&nbsp;
+<BR>&nbsp;MetricTemperature,Temperature,Temperature metric conversions
+<BR>&nbsp;&nbsp;&nbsp;I,Fahrenheit,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,Centigrade,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;I,,-,
+<BR>&nbsp;&nbsp;&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;O,Centigrade,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,Fahrenheit,-,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+<BR>&nbsp;&nbsp;&nbsp;O,,,
+</TD></TR></TABLE></ul>
+<p>
+<P>The following is the example REXX program that performs the MetricDistance computations associated
+with the first form tab above.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* MetricDistance.rex
+<BR>&nbsp;&nbsp;&nbsp;this program converts metric distances -- CRC Handbook, p3
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;this program communicates with TopHat.EXE via the registry
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;the corresponding TopHat form definition is: Metric.TopHat
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;a tab delimited request is received from registry value:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HKLM\Software\Kilowatt Software\R4\MetricDistance[Request]
+<BR>&nbsp;
+<BR>&nbsp;&nbsp;&nbsp;a tab delimited response is returned in registry value:
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HKLM\Software\Kilowatt Software\R4\MetricDistance[Response]
+<BR>&nbsp;*/
+<BR>&nbsp;
+<BR>&nbsp;tab = d2c( 9 )
+<BR>&nbsp;
+<BR>&nbsp;/* get TopHat request */
+<BR>&nbsp;
+<BR>&nbsp;request = value( 'HKLM\Software\Kilowatt Software\R4\MetricDistance[Request]', , 'Registry' )
+<BR>&nbsp;
+<BR>&nbsp;/* parse tab delimited request fields */
+<BR>&nbsp;
+<BR>&nbsp;parse var request ,
+<BR>&nbsp;&nbsp;&nbsp;inches        (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;feet          (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;yards         (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;miles         (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;/*  . (tab) , */ ,
+<BR>&nbsp;&nbsp;&nbsp;centimeters   (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;metersToFeet  (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;metersToYards (tab) ,
+<BR>&nbsp;&nbsp;&nbsp;kilometers    (tab)
+<BR>&nbsp;
+<BR>&nbsp;/* initialize all output values to empty strings */
+<BR>&nbsp;
+<BR>&nbsp;parse value '' with ,
+<BR>&nbsp;&nbsp;&nbsp;o_centimeters     ,
+<BR>&nbsp;&nbsp;&nbsp;o_metersFromFeet  ,
+<BR>&nbsp;&nbsp;&nbsp;o_metersFromYards ,
+<BR>&nbsp;&nbsp;&nbsp;o_kilometers      ,
+<BR>&nbsp;&nbsp;&nbsp;o_inches          ,
+<BR>&nbsp;&nbsp;&nbsp;o_feet            ,
+<BR>&nbsp;&nbsp;&nbsp;o_yards           ,
+<BR>&nbsp;&nbsp;&nbsp;o_miles
+<BR>&nbsp;
+<BR>&nbsp;/* compute values */
+<BR>&nbsp;
+<BR>&nbsp;if inches <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_centimeters = Trim( inches * 2.54 )
+<BR>&nbsp;
+<BR>&nbsp;if feet <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_metersFromFeet = Trim( feet * .3048 )
+<BR>&nbsp;
+<BR>&nbsp;if yards <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_metersFromYards = Trim( yards * .9144 )
+<BR>&nbsp;
+<BR>&nbsp;if miles <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_kilometers = Trim( miles * 1.609344 )
+<BR>&nbsp;
+<BR>&nbsp;if centimeters <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_inches = Trim( centimeters * .3937007874 )
+<BR>&nbsp;
+<BR>&nbsp;if metersToFeet <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_feet = Trim( metersToFeet * 3.280839895 )
+<BR>&nbsp;
+<BR>&nbsp;if metersToYards <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_yards = Trim( metersToYards * 1.093613298 )
+<BR>&nbsp;
+<BR>&nbsp;if kilometers <> '-' then
+<BR>&nbsp;&nbsp;&nbsp;o_miles = Trim( kilometers * .6213711922 )
+<BR>&nbsp;
+<BR>&nbsp;/* prepare tab delimited TopHat response */
+<BR>&nbsp;
+<BR>&nbsp;response = ,
+<BR>&nbsp;&nbsp;&nbsp;o_centimeters     || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_metersFromFeet  || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_metersFromYards || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_kilometers      || tab ,
+<BR>&nbsp;&nbsp;&nbsp;/*  || '' || tab , */ ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_inches          || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_feet            || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_yards           || tab ,
+<BR>&nbsp;&nbsp;&nbsp;|| o_miles           || tab
+<BR>&nbsp;
+<BR>&nbsp;'set R4REGISTRYWRITE=Y'   /* enable registry writing */
+<BR>&nbsp;
+<BR>&nbsp;call value 'HKLM\Software\Kilowatt Software\R4\MetricDistance[Response]', response, 'Registry'
+<BR>&nbsp;
+<BR>&nbsp;exit 0
+<BR>&nbsp;
+<BR>&nbsp;Trim : procedure
+<BR>&nbsp;&nbsp;&nbsp;parse arg before '.' after
+<BR>&nbsp;&nbsp;&nbsp;if after = '' | after = '0' then
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return before
+<BR>&nbsp;&nbsp;&nbsp;return arg( 1 )
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="rooForm">  </A>
+<H3> 1.4.2 A TopHat form that uses roo!&#153; as the supporting executable module </H3>
+<p>
+<hr width=20 align=left>
+<a name=QuadraticFormulaRoo.tophat>
+<H2> 1.4.2.1 QuadraticFormulaRoo.tophat</H2>
+<ul>
+<pre>
+; QuadraticFormulaRoo.TopHat
+
+; calculates the roots of a quadratic equation
+; such as: 5 x^2 + 15 x + 10 = 0
+
+; The first line below DOES NOT BEGIN with 'get' followed by a space,
+; which indicates TopHat will operate in computation mode
+
+Quadratic formula
+
+; the supporting executable module is 'roo.exe'
+
+<b><span style="color: mediumblue">!</span></b> roo.exe
+
+; the associated registry key base is: Software\Kilowatt Software\roo (in HKEY_LOCAL_MACHINE)
+
+: Software\Kilowatt Software\roo
+
+; the quadratic formula tab -- the associated roo program is: QuadraticFormula.rooProgram
+
+QuadraticFormula,QuadraticFormula,Quadratic formula; such as: 5 x^2 + 15 x + 10 = 0
+ I,&amp;A,1,Enter coefficient A -- in a x^2 + b x + c = 0
+ I,&amp;B,-,Enter coefficient B -- in a x^2 + b x + c = 0
+ I,&amp;C,-,Enter coefficient C -- in a x^2 + b x + c = 0
+ O,Root #1,,1st computed root
+ O,Root #2,,2nd computed root
+</pre>
+</ul>
+<p>
+<hr width=20 align=left>
+<a name=QuadraticFormula.rooProgram>
+<H2> 1.4.2.2 QuadraticFormula.rooProgram</H2>
+<ul>
+<pre>
+/* QuadraticFormula.rooProgram
+ this program computes roots of a quadratic equation
+
+ this program communicates with TopHat.EXE via the registry
+
+ <b><span style="color: mediumblue">a</span></b> tab delimited request is received from registry value:
+  HKLM\Software\Kilowatt Software\roo\QuadraticFormula[Request]
+
+ <b><span style="color: mediumblue">a</span></b> tab delimited response is returned in registry value:
+  HKLM\Software\Kilowatt Software\roo\QuadraticFormula[Response]
+*/
+
+tab = d2c( 9 )
+
+-- get TopHat request
+
+request = value( "HKLM\Software\Kilowatt Software\roo\QuadraticFormula[Request]", , "Registry" )
+
+response = '?' || tab || '?'
+
+'set ROOREGISTRYWRITE=Y'   /* enable registry writing */
+
+<b><span style="color: mediumblue">call</span></b> value "HKLM\Software\Kilowatt Software\roo\QuadraticFormula[Response]", response, "Registry"
+
+-- parse tab delimited request fields
+
+<b><span style="color: mediumblue">parse</span></b> var request a (tab) b (tab) c
+
+<b><span style="color: mediumblue">if</span></b> \ datatype( a, 'Number' ) then
+  <b><span style="color: mediumblue">call</span></b> usage1 'a' a
+
+<b><span style="color: mediumblue">if</span></b> \ datatype( a, 'Number' ) then
+  <b><span style="color: mediumblue">call</span></b> usage2 'b' b
+
+<b><span style="color: mediumblue">if</span></b> \ datatype( a, 'Number' ) then
+  <b><span style="color: mediumblue">call</span></b> usage3 'c' c
+
+<b><span style="color: mediumblue">call</span></b> quadraticRoots a b c
+
+-- prepare tab delimited TopHat response
+
+response = root1 || tab || root2
+
+<b><span style="color: mediumblue">call</span></b> value "HKLM\Software\Kilowatt Software\roo\QuadraticFormula[Response]", response, "Registry"
+
+<b><span style="color: mediumblue">return</span></b> 0
+
+-- 'quadraticRoots' procedure
+-- find the roots of a quadratic equation
+
+<b><span style="color: green">quadraticRoots </span> :</b>  procedure expose root1 root2
+  <b><span style="color: mediumblue">parse</span></b> arg a b c
+
+  <b><span style="color: mediumblue">if</span></b> a = 0 then
+    <b><span style="color: mediumblue">call</span></b> usage2 'The first coefficient of a quadratic equation is 0 (invalid).'
+
+  twoA = a * 2
+
+  subterm = ( b * b ) - ( 4 * a * c )
+
+  subtermSign = sign( subterm )
+
+  subterm = abs( subterm )
+
+  subroot = squareroot( subterm )
+
+  <b><span style="color: mediumblue">if</span></b> subtermSign &lt;&gt; -1 then
+    root1 = ( subroot - b ) / twoA
+  <b><span style="color: mediumblue">else</span></b> 
+    root1 = ( 0 - b ) / twoA '+' ( subroot / twoA ) 'i'
+
+  <b><span style="color: mediumblue">if</span></b> subtermSign &lt;&gt; -1 then
+    root2 = ( 0 - ( subroot + b ) ) / twoA
+  <b><span style="color: mediumblue">else</span></b> 
+    root2 = ( 0 - b ) / twoA '-' ( subroot / twoA ) 'i'
+  
+  <b><span style="color: mediumblue">return</span></b> 
+
+<b><span style="color: green">usage1 </span> :</b>  procedure
+  <b><span style="color: mediumblue">parse</span></b> arg which v
+  'msgbox' 'Value' which 'is non-numeric. It''s' v
+  <b><span style="color: mediumblue">exit</span></b> 99
+
+<b><span style="color: green">usage2 </span> :</b>  procedure
+  'msgbox' arg(1)
+  <b><span style="color: mediumblue">exit</span></b> 99
+</pre>
+</ul>
+<A NAME="Buttons">  </A>
+<H2> 1.5 Buttons </H2>
+<P>The buttons that appear differ based on the operating mode.
+<H3> 1.5.1 Buttons, user input acquisition mode: </H3>
+<ul><DL >
+<DD><b>OK</b>
+<DT>Conclude and return input field values to the REXX program.
+<p>
+<DD><b>Print</b>
+<DT>Prints item values.
+<p>
+<DD><b>Reset</b>
+<DT>Resets all input fields to default values.
+<p>
+<DD><b>Close</b>
+<DT>Concludes program operation, without returning input field values to the REXX program
+</DL></ul>
+<H3> 1.5.2 Buttons, computation mode: </H3>
+<ul><DL >
+<DD><b>Perform</b>
+<DT>Performs a REXX computation, and optionally displays results in the corresponding output fields.
+When the form contains input fields, the Perform button is disabled until all fields have a value.
+The Perform button is always enabled when there are no input fields.
+<p>
+<DD><b>Print</b>
+<DT>Prints item values.
+<p>
+<DD><b>Reset</b>
+<DT>Resets all input fields to default values.
+<p>
+<DD><b>Close</b>
+<DT>Concludes program operation.
+<p>
+<DD><b>Interactive (option check box)</b>
+<DT>When checked, the REXX program can interact with the user. When unchecked, the REXX
+program is executed <b>invisibly</b>, and user interactions are not supported.
+<P>Normally the computations performed by the REXX program are based on the input field values
+only, and no user interaction is necessary. When developing a REXX program you may need to
+activate the interactive trace facility, in which case the 'Interactive' option must be
+checked.
+<p>
+<DD><b>Stay on top (option check box)</b>
+<DT>When checked, the TopHat form will remain visible when other applications are activated.
+</DL></ul>
+<p>
+<A NAME="TopHatStartupForm">  </A>
+<H2> 1.6 Adding a TopHat form to your startup menu </H2>
+<P>If you use the same forms every day, you can have TopHat forms automatically
+displayed when you start your computer as follows:
+<OL >
+<LI>Select `Settings` under the Microsoft `Start` button options.
+<p>
+<LI>Select `Taskbar & Start menu...`
+<p>
+<LI>Click the `Start menu` tab.
+<p>
+<LI>Click the `Advanced...` button.
+<p>
+<LI>Click `+` character in front of the `Programs` folder.
+<p>
+<LI>Click the `Startup` folder.
+<p>
+<LI>Right click in an empty area of the startup folder, and select `New`, move the
+mouse to select `Shortcut`.
+<p>
+<LI>Click the browse button.
+<p>
+<LI>Locate the TopHat.EXE program in your Kilowatt Software L.L.C. folder, then click the
+`Next` and `Finish` buttons.
+<p>
+<LI>Right click the new shortcut, and select `Rename`. Then, give the shortcut
+the name of your list.
+<p>
+<LI>Right click the new shortcut, and select `Properties`.
+<p>
+<LI>Alter the `Start in:` value to be the folder that contains your form definition file.
+<p>
+<LI>Edit the `Target:` line.
+<p>
+<LI>Add the name of your form definition file after TopHat.EXE with an intervening space too.
+</OL>
+<p>
+<P>Now the forms will automatically be displayed when your computer starts!
+<H2> 1.7 Examples: </H2>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;<b>TopHat Bizzy.TopHat</b> [opens the business calculation example]
+<p>
+<BR>&nbsp;<b>TopHat Metric.TopHat</b> [opens the metric conversion example]
+<p>
+<BR>&nbsp;<b>TopHat</b> [uses a file search dialog to find the form definition file]
+<p>
+<BR>&nbsp;<b>r4 GetContact</b> [performs contact information acquisition with Contact.TopHat form]
+</TD></TR></TABLE></ul>
+<A NAME="TOPHAT_PROGRAM_TO_EXECUTE">  </A>
+<H2> 1.8 TOPHAT_PROGRAM_TO_EXECUTE environment variable </H2>
+<P>TopHat!&#153; can be used with both <b>r4&#153;</b> and <nobr class=roo>roo!&#153;</nobr>. Normally, the associated REXX program of a TopHat form
+is processed by <b>r4&#153;</b>. The <b>TOPHAT_PROGRAM_TO_EXECUTE</b> environment variable can be assigned an alternate
+program to use. For example:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  set <b>TOPHAT_PROGRAM_TO_EXECUTE</b>=roo
+</pre>
+</TD></TR></TABLE></ul>
+The above environment variable setting will use <nobr class=roo>roo!&#153;</nobr> to execute the program, instead
+of <b>r4&#153;</b>.
+<P><i>Observe:</i> even though <nobr class=roo>roo!&#153;</nobr> is used to execute the program, TopHat!&#153; will use
+registry keys that begin with:
+<UL >
+&nbsp;&nbsp;HKEY_LOCAL_MACHINE\Software\Kilowatt Software\R4
+</UL>
+<p>
+<A NAME="ChangingCaptions">  </A>
+<H2> 1.9 Changing button captions and tips -- for languages other than English </H2>
+<P>Alternative TopHat!&#153; button captions can be specified. At the bottom of the form
+definition file, you can can provide a series of lines similar to the following:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<BR>buttonCaption,ok,Done
+<p>
+<BR>buttonCaption,perform,Do it!,Press this button to prepare output values.
+<p>
+<BR>buttonCaption,print,List
+<p>
+<BR>buttonCaption,reset,Clear
+<p>
+<BR>buttonCaption,close,Adios
+<p>
+<BR>buttonCaption,interactive,Dynamic
+<p>
+<BR>buttonCaption,stayontop,&amp;Stay
+<p>
+<BR>buttonCaption,help,Help?
+</TD></TR></TABLE></ul>
+<P>Button caption definitions start in column 1. The word <b>buttonCaption</b> must be
+completely spelled that way, but character case is not significant. Each line must
+have at least two commas. The character case of the button name (i.e. <b>perform</b>) is
+not significant. The third value is shown on the button in the character case specified.
+<p>
+The new captions can have ampersands (&amp;) to establish hot-key characters that
+are used with the <b>Alt</b> key.
+<p>
+To have a real ampersand appear put two in a row -- &amp;&amp;
+<p>
+<P>Alternative button tips can also be specified. See the <b>perform</b> button definition above.
+The <b>tip text</b> follows the last comma on the line. For the perform button the tip text is:
+<UL >
+&nbsp;&nbsp;Press this button to prepare output values.
+</UL>
+<BR>Commas are not allowed in the tip text. If these are present the tip text is truncated where
+the comma appears.
+<p>
+<A NAME="Remarks">  </A>
+<H2> 1.10 Other remarks: </H2>
+<P>In <b>computation mode</b> you can add a little excitement to a form if it is used
+repeeatedly. After the <b>perform</b> button is pressed, the note at the top of the
+form can be updated with a random <em>quip</em>. The quip is displayed if a file named
+<b>quips.dat</b> is in the same directory as TOPHAT.EXE. An example quips file is
+distributed with the product. You can replace this with a file containing other
+quips. If the quips file is absent, the form tab's note remains displayed.
+<p>
+<HR>
+<center><img src=kilowattsoftware.gif></center>
+<p>
+<center><img src=TopHat.gif></center>
+<center><b>TopHat!&#153;</b></center>
+<center>Version 1.1</center>
+<center>Copyright &copy; 2001-2014</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF=http://www.kilowattsoftware.com/>http://www.kilowattsoftware.com/</A></center>
+<center><a href=mailto:support@kilowattsoftware.com>E-Mail: support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 4 Mar 2011</center><p>
+</BODY>
+</HTML>

@@ -1,0 +1,289 @@
+<HTML>
+<HEAD>
+<TITLE>GraphIt</TITLE>
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<center><A HREF="http://www.kilowattsoftware.com"><strong><font size=4><i>Kilowatt Software L.L.C.</i></font></strong></a></center>
+<IMG SRC="genieLamp.gif" align=left>
+<IMG SRC="leftGenieLamp.gif" align=right>
+<B><DIV align=center>GraphIt </DIV></B>
+<DIV align=center>presents a line graph, with 1 or 4 quadrants</DIV><HR>
+<P><B> Categories: </B>
+<PRE> line graph</pre>
+<p>
+<P><B> Usage: </B>
+<PRE> GRAPHIT GraphPropertyFileName
+</PRE>
+<P><B> Arguments: </B>
+<p>If the file name argument contains spaces it must be surrounded by double-quotes.
+<PRE> GraphPropertyFileName -- file that contains graph properties
+</PRE>
+<P><B> Redirected input file: </B>
+<PRE> N/A
+</PRE>
+<P><B> Redirected output file: </B>
+<PRE> N/A
+</PRE>
+<P><B> Returns: </B>
+<PRE>  0 when graph was presented successfully
+ 99 incorrect usage
+</PRE>
+<P><B> Description: </B>
+<P> The GraphIt program presents a line graph, with 1 or 4 quadrants. The graph automatically adjusts when
+you resize the window with the mouse (i.e. by dragging the lower right corner). The program is controlled
+by a series of properties that are specified in the <b>GraphPropertyFileName</b>. Each property line
+has a property name followed by an equal sign and then the corresponding property value.
+A pound sign character at the beginning of a line causes the line to be ignored.
+
+<P><B> quadrants property </B>
+<p>The <b>quadrants</b> property defines the number of quadrants to prepare: 1 or 4. (The default is 1 quadrant)
+
+<P><B> X and Y axes properties: </B>
+<p>The following properties affect the preparation of the X and Y axes.
+<DL>
+<DD><b>xOrigin</b>
+<DT>Defines the base X value
+<UL>
+<p>For example if the X origin is 1990, and a point's X value is 1999, then the point is drawn at X position 9.
+</UL>
+<p>
+<DD><b>yOrigin</b>
+<DT>Defines the base Y value (default: 100)
+<UL>
+<p>For example if the Y origin is 20, and a point's Y value is 47, then the point is drawn at Y position 27.
+</UL>
+<p>
+<DD><b>xLimit</b>
+<DT>Defines the highest X value (default: 100)
+<p>
+<DD><b>yLimit</b>
+<DT>Defines the highest Y value (default: 100)
+<p>
+<DD><b>xTicks</b>
+<DT>Defines the position of X tick marks
+<p>
+<DD><b>yTicks</b>
+<DT>Defines the position of Y tick marks
+<p>
+<DD><b>xTickCaptions</b>
+<DT>Defines the captions to display under the X tick marks
+</DL>
+
+<P><B> Color properties: </B>
+<P>The link below describes
+how color parameters are specified. A table of supported color names is also displayed.
+<P>&nbsp;<a href=ColorTable.htm>Color table</a>
+<P>The GRAPHIT program supports the following color properties:
+<DL>
+<DD><b>bgColor</b>
+<DT>Defines the color of the area outside of the graph.
+<p>
+<DD><b>fgColor</b>
+<DT>Defines the color of the graphed line, when a single line is presented.	 When multiple lines are displayed, the
+<b>colorSet</b> property defines the colors of each line.
+<p>
+<DD><b>gridColor</b>
+<DT>Defines the color of graph grid lines. 
+<p>
+<DD><b>insideColor</b>
+<DT>Defines the color that appears inside the graph. 
+<p>
+<DD><b>textColor</b>
+<DT>Defines the color for captions, etc.. 
+</DL>
+
+<P><B> Multiple line properties: </B>
+<p>The following properties affect the display of multiple lines.
+<DL>
+<DD><b>lineCount</b>
+<DT>Defines the number of lines that are graphed
+<p>
+<DD><b>colorSet</b>
+<DT>Defines the color for each line 
+<p>
+<DD><b>imageSet</b>
+<DT>Defines the image(s) to display at each line vertex
+<p>
+<DD><b>pointSet1, pointSet2, etc</b>
+<DT>Defines the points associated with each line
+</DL>
+
+<P><B> Text font properties: </B>
+<p>The following properties affect the display of captions.
+<DL>
+<DD><b>fontName</b>
+<DT>The name of the text font. The default font is SansSerif. Supported font names are:
+<p>
+<UL>
+<LI>Dialog
+<LI>DialogInput
+<LI>Monospaced
+<LI>SansSerif
+<LI>Serif
+</UL>
+<p>
+<DD><b>fontSize</b>
+<DT>This is the point size of the text font; i.e. 12.
+<p>
+<DD><b>fontStyle</b>
+<DT>This is the style of text presentation. Supported styles are:
+<p>
+<UL>
+<LI>Dialog
+<LI>DialogInput
+<LI>Monospaced
+<LI>SansSerif
+<LI>Serif
+</UL>
+</DL>
+
+<P><B> Other properties, 4-quadrant graphs: </B>
+<p>The following additional properties are supported for graphs with 4 quadrants.
+<DL>
+<DD><b>xCaption</b>
+<DT>Defines the caption that appears under the X axis.
+<p>
+<DD><b>yCaption</b>
+<DT>Defines the caption that appears vertically to the left of the Y axis.
+</DL>
+
+<P><B> Example 1: single line graph, with image at each vertex</B>
+<PRE> GraphIt "Graph1.props"
+
+# Graph1.props
+quadrants=1
+bgColor=gainsboro
+fgColor=#ffff00
+gridColor=gainsboro
+insideColor=#ff0000
+imageSet=person.gif
+pointSet=0,1;10,5;20,14;30,22;40,35;50,50;60,70;
+xOrigin=0
+yOrigin=0
+xLimit=70
+yLimit=80
+xTicks=0;10;20;30;40;50;60
+xTickCaptions=1999;2000;2001;2002;2003;2004;2006
+yTicks=10;20;30;40;50;60;70
+</PRE>
+<p>
+<img src=graph1.gif>
+<p>
+<P><B> Example 2: multiple line graph, with image per line</B>
+<PRE> GraphIt "Graph2.props"
+
+# Graph2.props
+imageSet=blue-ball.gif;red-ball.gif
+lineCount=2
+colorSet=blue;red
+pointSet1=0,10;5,55;10,10;15,25;20,20;25,35;30,60;40,70;45,35;50,100;60,30;65,45;70,25;75,45;80,35;85,65;90,70;95,50;100,65
+pointSet2=0,30;5,65;10,30;15,45;20,35;25,65;30,70;40,50;45,65;50,40;55,35;60,10;65,25;70,45;85,25;90,20;95,35;100,60
+lineWidth=3
+gridColor=gainsboro
+bgColor=gainsboro
+insideColor=lightyellow
+</PRE>
+<p>
+<img src=graph2.gif>
+<p>
+<P><B> Example 3: 4 quadrant graph</B>
+<PRE> GraphIt "Graph3.props"
+
+# Graph3.props
+quadrants=4
+bgColor=gainsboro
+# fgColor=blue
+textColor=blue
+lineWidth=3
+insideColor=lightskyblue
+gridColor=lightgoldenrodyellow
+xLimit=100
+yLimit=100
+lineCount=2
+pointSet1=-60,70;-50,50;-40,35;-30,22;-20,14;-10,5;0,1;10,5;20,14;30,22;40,35;50,50;60,70;
+pointSet2=-60,-70;-50,-50;-40,-35;-30,-22;-20,-14;-10,-5;0,-1;10,-5;20,-14;30,-22;40,-35;50,-50;60,-70;
+colorSet=mediumblue;dodgerblue
+fontName=sansserif
+# fontStyle=bold
+fontSize=12
+xCaption=Energy
+yCaption=Intensity
+</PRE>
+<p>
+<img src=graph3.gif>
+<p>Note: the polar coordinates and cartesian coordinates appear on the bottom of the graph, as a consequence
+of clicking the point -30,19 in the second quadrant.
+<p>
+
+<p>
+<P><B> Example 4: parabola graph</B>
+<p>The following graph was produced by the <b>parabolaGraph.rex</b> program.
+
+<PRE> GraphIt "parabolaGraph.props"
+
+# parabolaGraph.props -- created by program: parabolaGraph.rex
+quadrants=4
+bgColor=gainsboro
+fgColor=mediumblue
+textColor=blue
+lineWidth=3
+insideColor=lightskyblue
+gridColor=lightgoldenrodyellow
+xLimit=100
+yLimit=100
+fontName=sansserif
+# fontStyle=bold
+fontSize=12
+xCaption=X : -100 .. 100
+yCaption=Y limit : 100
+pointSet=-10,100;-9.9,98.01;-9.8,96.04;-9.7,94.09;-9.6,92.16;-9.5,90.25;-9.4,88.36;-9.3,86.49;-9.2,84.64;-9.1,82.81;-9.0,81.00;-8.9,79.21;-8.8,77.44;-8.7,75.69;-8.6,73.96;-8.5,72.25;-8.4,70.56;-8.3,68.89;-8.2,67.24;-8.1,65.61;-8.0,64.00;-7.9,62.41;-7.8,60.84;-7.7,59.29;-7.6,57.76;-7.5,56.25;-7.4,54.76;-7.3,53.29;-7.2,51.84;-7.1,50.41;-7.0,49.00;-6.9,47.61;-6.8,46.24;-6.7,44.89;-6.6,43.56;-6.5,42.25;-6.4,40.96;-6.3,39.69;-6.2,38.44;-6.1,37.21;-6.0,36.00;-5.9,34.81;-5.8,33.64;-5.7,32.49;-5.6,31.36;-5.5,30.25;-5.4,29.16;-5.3,28.09;-5.2,27.04;-5.1,26.01;-5.0,25.00;-4.9,24.01;-4.8,23.04;-4.7,22.09;-4.6,21.16;-4.5,20.25;-4.4,19.36;-4.3,18.49;-4.2,17.64;-4.1,16.81;-4.0,16.00;-3.9,15.21;-3.8,14.44;-3.7,13.69;-3.6,12.96;-3.5,12.25;-3.4,11.56;-3.3,10.89;-3.2,10.24;-3.1,9.61;-3.0,9.00;-2.9,8.41;-2.8,7.84;-2.7,7.29;-2.6,6.76;-2.5,6.25;-2.4,5.76;-2.3,5.29;-2.2,4.84;-2.1,4.41;-2.0,4.00;-1.9,3.61;-1.8,3.24;-1.7,2.89;-1.6,2.56;-1.5,2.25;-1.4,1.96;-1.3,1.69;-1.2,1.44;-1.1,1.21;-1.0,1.00;-0.9,0.81;-0.8,0.64;-0.7,0.49;-0.6,0.36;-0.5,0.25;-0.4,0.16;-0.3,0.09;-0.2,0.04;-0.1,0.01;0,0;0.1,0.01;0.2,0.04;0.3,0.09;0.4,0.16;0.5,0.25;0.6,0.36;0.7,0.49;0.8,0.64;0.9,0.81;1.0,1.00;1.1,1.21;1.2,1.44;1.3,1.69;1.4,1.96;1.5,2.25;1.6,2.56;1.7,2.89;1.8,3.24;1.9,3.61;2.0,4.00;2.1,4.41;2.2,4.84;2.3,5.29;2.4,5.76;2.5,6.25;2.6,6.76;2.7,7.29;2.8,7.84;2.9,8.41;3.0,9.00;3.1,9.61;3.2,10.24;3.3,10.89;3.4,11.56;3.5,12.25;3.6,12.96;3.7,13.69;3.8,14.44;3.9,15.21;4.0,16.00;4.1,16.81;4.2,17.64;4.3,18.49;4.4,19.36;4.5,20.25;4.6,21.16;4.7,22.09;4.8,23.04;4.9,24.01;5.0,25.00;5.1,26.01;5.2,27.04;5.3,28.09;5.4,29.16;5.5,30.25;5.6,31.36;5.7,32.49;5.8,33.64;5.9,34.81;6.0,36.00;6.1,37.21;6.2,38.44;6.3,39.69;6.4,40.96;6.5,42.25;6.6,43.56;6.7,44.89;6.8,46.24;6.9,47.61;7.0,49.00;7.1,50.41;7.2,51.84;7.3,53.29;7.4,54.76;7.5,56.25;7.6,57.76;7.7,59.29;7.8,60.84;7.9,62.41;8.0,64.00;8.1,65.61;8.2,67.24;8.3,68.89;8.4,70.56;8.5,72.25;8.6,73.96;8.7,75.69;8.8,77.44;8.9,79.21;9.0,81.00;9.1,82.81;9.2,84.64;9.3,86.49;9.4,88.36;9.5,90.25;9.6,92.16;9.7,94.09;9.8,96.04;9.9,98.01;10.0,100.00;
+</PRE>
+<p>
+<img src=parabolaGraph.gif>
+
+
+<p>
+<P><B> Example 4: Descartes' folie graph</B>
+<p>The following graph was produced by: <b>folieGraph.rooProgram</b>.
+
+<PRE> GraphIt "folieGraph.props"
+
+# folieGraph.props -- created by program: folie.rooProgram
+quadrants=4
+bgColor=gainsboro
+fgColor=mediumblue
+textColor=blue
+lineWidth=3
+insideColor=lightskyblue
+gridColor=lightgoldenrodyellow
+xLimit=5
+yLimit=5
+fontName=sansserif
+# fontStyle=bold
+fontSize=12
+xCaption=X : -5 .. 5
+yCaption=Y limit : 5
+pointSet=-4.98406660,4.0;-4.88335708,3.9;-4.78259954,3.8;-4.68178956,3.7;-4.58092225,3.6;-4.47999212,3.5;-4.37899299,3.4;-4.27791794,3.3;-4.17675916,3.2;-4.07550781,3.1;-3.97415387,3.0;-3.87268593,2.9;-3.77109097,2.8;-3.66935407,2.7;-3.56745809,2.6;-3.46538321,2.5;-3.36310650,2.4;-3.26060123,2.3;-3.15783616,2.2;-3.05477456,2.1;-2.95137304,2.0;-2.84758002,1.9;-2.74333384,1.8;-2.63856027,1.7;-2.53316931,1.6;-2.42705098,1.5;-2.32006964,1.4;-2.21205639,1.3;-2.10279861,1.2;-1.99202516,1.1;-1.87938525,1.0;-1.76441708,0.9;-1.64650012,0.8;-1.52477889,0.7;-1.39803525,0.6;-1.26445898,0.5;-1.12119663,0.4;-0.963341805,0.3;-0.78117919,0.2;-0.54938168,0.1;0,0;0.54604822,0.10;0.7678419,0.20;0.933311715,0.30;1.06773597,0.40;1.18073438,0.50;1.27705144,0.60;1.35928727,0.70;1.42887208,0.80;1.48646369,0.90;1.5320889,1.00;1.56511435,1.10;1.58401409,1.20;1.5857207,1.30;1.56371496,1.40;1.53931601,1.45;1.50000002,1.50;1.43095247,1.55;0.927050965,1.50;0.83436184,1.45;0.756354685,1.40;0.62633569,1.30;0.51878452,1.20;0.426910815,1.10;0.347296355,1.00;0.277953385,0.90;0.217628035,0.80;0.165491615,0.70;0.120983805,0.60;0.0837245954,0.50;0.0534606607,0.40;0.0300300903,0.30;0.0133372875,0.20;0.00333345680,0.10;0.00333320989,-0.1;0.0133293862,-0.2;0.0299700897,-0.3;0.0532078042,-0.4;0.0829527918,-0.5;0.119062329,-0.6;0.161333675,-0.7;0.209501972,-0.8;0.263243682,-0.9;0.322185355,-1.0;0.385916608,-1.1;0.454005532,-1.2;0.526014465,-1.3;0.601514370,-1.4;0.680096477,-1.5;0.761380672,-1.6;0.845020557,-1.7;0.930705669,-1.8;1.01816144,-1.9;1.10714756,-2.0;1.19745543,-2.1;1.28890499,-2.2;1.38134150,-2.3;1.47463229,-2.4;1.56866386,-2.5;1.66333909,-2.6;1.75857489,-2.7;1.85430011,-2.8;1.95045375,-2.9;2.04698341,-3.0;2.14384400,-3.1;2.24099661,-3.2;2.33840764,-3.3;2.43604793,-3.4;2.53389217,-3.5;2.63191831,-3.6;2.73010708,-3.7;2.82844164,-3.8;2.92690717,-3.9;3.02549065,-4.0;3.12418060,-4.1;3.22296685,-4.2;3.32184041,-4.3;3.42079325,-4.4;3.51981827,-4.5;3.61890911,-4.6;3.71806006,-4.7;3.81726605,-4.8;3.91652249,-4.9;4.01582525,-5.0;</PRE>
+<p>
+<img src=folieGraph.gif>
+<p>
+
+
+
+<p>
+<P><B> Remarks: </B>
+<P> You can click a point in a graph, and the corresponding x,y components will be displayed.
+ For graphs with 4 quadrants, when you click a point the corresponding polar coordinates are also displayed.
+
+<p>
+
+<DIV align=center>A <FONT COLOR="#000080" FACE="Tahoma">Kilowatt Software L.L.C.</FONT> <FONT COLOR="#DD0000" FACE="Tahoma">Poof!(TM)</FONT> Program.</DIV>
+<DIV align=center>Version 1.1</DIV>
+<DIV align=center>Copyright &copy; 2001-2014</DIV>
+<DIV align=center>All Rights Reserved.</DIV>
+<DIV align=center>Web: http://www.kilowattsoftware.com/</DIV>
+<DIV align=center>E-Mail: support@kilowattsoftware.com</DIV>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+</BODY>
+</HTML>

@@ -1,0 +1,60 @@
+.note { color:darkgreen }
+.noteB { color:black }
+.columnCaption { font-weight:900; background-color:navy;color:yellow }
+.point10 { FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point12 { FONT-SIZE:12pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point14 { FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point18 { FONT-SIZE:18pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point10s { font-weight:900; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point12s { font-weight:900; FONT-SIZE:12pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point14s { font-weight:900; FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point18s { font-weight:900; FONT-SIZE:18pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point9sem { font-style:italic; font-weight:900; FONT-SIZE:9pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point10sem { font-style:italic; font-weight:900; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point12sem { font-style:italic; font-weight:900; FONT-SIZE:12pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point14sem { font-style:italic; font-weight:900; FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point16sem { font-style:italic; font-weight:900; FONT-SIZE:16pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point18sem { font-style:italic; font-weight:900; FONT-SIZE:18pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point24sem { font-style:italic; font-weight:900; FONT-SIZE:24pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point36sem { font-style:italic; font-weight:900;  FONT-SIZE:36pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point9em { font-style:italic; FONT-SIZE:9pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point10em { font-style:italic; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point12em { font-style:italic; FONT-SIZE:12pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point14em { font-style:italic; FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point16em { font-style:italic; FONT-SIZE:16pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point18em { font-style:italic; FONT-SIZE:18pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+.point24em { font-style:italic; FONT-SIZE:24pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+.darkred { color:darkred; font-style:italic; font-weight:900; FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+.special { color:firebrick; font-weight:900; FONT-SIZE:14pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+.roo { font-style:italic; font-weight:600; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" color: mediumblue }
+
+TH { font-weight:900; background-color:navy; color:yellow; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+TD { FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+DD { FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+DT { FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+BR { text-indent: 2em; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+P { text-indent: 2em; FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+LI { FONT-SIZE:10pt; FONT-FAMILY: "Helvetica","Arial","Sanserif;" }
+
+BODY
+{
+	margin-left:0;
+	margin-top:0;
+	margin-right:0;
+	margin-bottom:0;
+}
+#FULL {TEXT-ALIGN:JUSTIFY}
+#a321 {FONT-SIZE:9pt; FONT-FAMILY: "Helvetica","Arial","Sanserif";}
+#a322 {LINE-HEIGHT:16pt; }
+.tooltext1 {color:navy;text-decoration:none;font:xx-small verdana,arial,sans-serif;font-weight:bold;}
+A.tooltext1 {color:white;text-decoration:none;font:xx-small verdana,arial,sans-serif;font-weight:bold;}
+A.tooltext1:hover {color:yellow;text-decoration:none;font:xx-small verdana,arial,sans-serif;font-weight:bold;}

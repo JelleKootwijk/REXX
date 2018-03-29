@@ -1,0 +1,2442 @@
+<HTML>
+<HEAD>
+<TITLE> r4 </TITLE>
+<link rel=stylesheet type="text/css" HREF="kwsw.css">
+</HEAD>
+<BODY background=backgrnd.gif bgcolor=LIGHTSTEELBLUE>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<center><A HREF="http://www.kilowattsoftware.com"><strong><font size=4><i>Kilowatt Software L.L.C.</i></font></strong></a></center>
+<center><img src=r4tmark.gif></center>
+<center><u>R</u>EXX Language Level <u>4</u>.00 (TRL-2)</center>
+<center><strong>User's Guide</strong></center>
+<HR>
+<H1> Index </H1>
+<P>This guide contains the following sections:
+<UL >
+<LI><A HREF="#Introduction">Introduction</A>
+<LI><A HREF="#Usage">Usage</A>
+<LI><A HREF="#ProgramSearch">Program search</A>
+<LI><A HREF="#FirstProgram">Writing your first <b>r4&#153;</b> program</A>
+<LI><A HREF="#Examples">Program examples</A>
+<LI><A HREF="#EnvironmentVariables">Environment variables</A>
+<LI><A HREF="#EnvironmentSetup">How to add or revise environment variables</A>
+<LI><A HREF="#ImplementationLimits">Implementation limits</A>
+<LI><A HREF="#PortabilityConsiderations">Portability considerations</A>
+<LI><A HREF="#SpecialCommandRedirections">Special command redirections -- (stack, &lt;queue, and &gt;queue</A>
+<LI><A HREF="#AsciiTable ">Ascii character code table</A>
+<LI><A HREF="#TabsAndSpaces">Tabs and spaces</A>
+<LI><A HREF="#SpecialNotSignCharacter">Special not-sign (&#172;) character</A>
+<LI><A HREF="#R4_PLUS"><b>R4_PLUS</b> -- inter-system extensions</A>
+<LI><A HREF="#StreamBuiltin">Stream builtin function</A>
+<LI><A HREF="#StreamExamples">Stream builtin function examples</A>
+<LI><A HREF="#PreparingBinaryPrograms">Preparing binary programs</A>, with CHILL.REX
+<LI><A HREF="#Remarks">Remarks</A>
+<LI><A HREF="#R4XFORM">R4 to EXE transform program (<b>R4XFORM&#153;</b>)</A>
+<LI><A HREF="TopHat.htm">TopHat form application (<b>TopHat&#153;</b>)</A>
+<LI><A HREF="#Revu">Text file viewing program (<b>Revu&#153;</b>)</A>
+<LI><A HREF="#ProductUpdates">Product updates</A>
+<LI><A HREF="#Support">Support</A>
+</UL>
+<A NAME="Introduction">  </A>
+<H1> Introduction: </H1>
+<P><b>r4&#153;</b> is a <i>Classic Rexx</i> language interpreter. This product implements
+features of the REXX language
+as documented in <a href="http://www2.hursley.ibm.com/rexx/trl.html">Michael Cowlishaw's famous book</a>:
+<PRE>
+    The Rexx Language : A Practical Approach to Programming [SECOND EDITION]
+
+    Author: Michael Cowlishaw
+
+    Published in 1990 by Prentice-Hall, Inc.
+
+    ISBN 0-13-780651-5
+</PRE>
+
+<p>
+<P>The book identified above is commonly referenced as <b>TRL-2</b>. <b>r4&#153;</b> implements all REXX
+language features described in TRL-2.
+<P>The TRL-2 book can be obtained at one of the following internet sites:
+<p>
+<ul><TABLE cellspacing=10 border=1>
+<TR>
+<TD valign=top>Amazon</TD>
+<TD><a href="http://www.amazon.com/">http://www.amazon.com/</a></TD>
+</TR>
+<TR>
+<TD valign=top>Barnes &amp; Noble</TD>
+<TD><a href="https://www.bn.com/">https://www.bn.com/</a></TD>
+</TR>
+<TR>
+<TD valign=top>Fat Brain</TD>
+<TD><a href="http://www.fatbrain.com/">https://www.fatbrain.com/</a></TD>
+</TR>
+<TR>
+<TD valign=top>SoftPro</TD>
+<TD><a href="http://www.softpro.com/">https://www.softpro.com/</a></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>A new 500 page Rexx book, written by Howard Fosdick, has been published by Wiley (ISBN: <b>0764579967</b>).
+The book describes how to make the best use of Rexx tools
+and interfaces, with examples for both Linux and Microsoft&#174; Windows&#174;. A tutorial is
+provided with lots of examples to help you get up and running with Rexx.
+The book is available at the following online bookstores
+<a href=http://www.amazon.com/exec/obidos/tg/detail/-/0764579967/qid=1108145468/sr=8-1/ref=sr_8_xs_ap_i1_xgl14/102-6587779-3816167?v=glance&s=books&n=507846>Amazon</a>
+and <a href=http://search.barnesandnoble.com/booksearch/isbnInquiry.asp?userid=qq1JJTvAiI&isbn=0764579967&itm=1>Barnes and Noble</a>.
+<p>
+<P>Some other helpful REXX language internet sites are:
+<p>
+<ul><TABLE cellspacing=10 border=1>
+<TR>
+<TD valign=top>Kilowatt Software L.L.C.'s Classic Rexx Tutorial</TD>
+<TD><a href="http://www.kilowattsoftware.com/tutorial/rexx/" target=_blank>http://www.kilowattsoftware.com/tutorial/rexx/</a></TD>
+</TR>
+<TR>
+<TD valign=top>Rexx Language page at IBM Hursley</TD>
+<TD><a href="http://www2.hursley.ibm.com/rexx/">http://www2.hursley.ibm.com/rexx/</a></TD>
+</TR>
+<TR>
+<TD valign=top>An online Rexx tutorial</TD>
+<TD><a href="http://www.kyla.co.uk/other/rexx1.htm">http://www.kyla.co.uk/other/rexx1.htm</a></TD>
+</TR>
+<TR>
+<TD valign=top>An online Rexx tutorial</TD>
+<TD><a href="http://www.ilook.fsnet.co.uk/index/rexx_idx.htm">http://www.ilook.fsnet.co.uk/index/rexx_idx.htm</a></TD>
+</TR>
+<TR>
+<TD valign=top>A good source for other Rexx information</TD>
+<TD><a href="http://www.rexx.org.uk">http://www.rexx.org.uk</a></TD>
+</TR>
+<TR>
+<TD valign=top>A good source for other Rexx information</TD>
+<TD><a href="http://www.rexxfiles.com">http://www.rexxfiles.com</a></TD>
+</TR>
+</TABLE></ul>
+<P>TRL-2 defines language capabilities for multiple system environments. The guide your are now viewing
+describes features that are specific to the <b>r4&#153;</b> implementation
+of <i>Classic Rexx</i>. Some features are adaptations associated with the
+Microsoft&#174; Windows&#174; system environments. If you have written Rexx programs in IBM
+mainframe environments you should be aware that Microsoft&#174; Windows&#174; environments use
+<a href=#AsciiTable><b>Ascii</b></a> character encodings, instead of EBCDIC.
+<P>Kilowatt Software L.L.C. provides an extensive online
+<a href="http://www.kilowattsoftware.com/tutorial/rexx/"><i>Classic Rexx</i> Tutorial</a>.
+This tutorial describes all Rexx instructions and built-in functions. There are numerous
+example programs. If you are learning how to write Rexx programs you should spend some
+time reading the online tutorial. You should also obtain the TRL-2 book.
+<A NAME="Usage">  </A>
+<H1> Usage: </H1>
+<P>The <b>r4&#153;</b> program operates as a Microsoft&#174; Windows&#174; 32 console application. The following is
+the syntax of a <b>r4&#153;</b> program request, that is entered as a DOS command prompt. There
+are four variations. In the first variation, <b>r4&#153;</b> is the only program that is executed.
+The remaining variations are command pipelines. The vertical bars separate pipeline command segments.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;&nbsp;r4 programName [argumentText] [ &lt; inFile ] [ [&gt;]&gt; outFile ]
+<p>
+<hr width=20% align=left>
+&nbsp;&nbsp;r4 programName [argumentText] [ &lt; inFile ] <span class=special>|</span> programB
+<p>
+<hr width=20% align=left>
+<BR>&nbsp;&nbsp;programA <span class=special>|</span> r4 programName [argumentText] [ [&gt;]&gt; outFile ]
+<p>
+<hr width=20% align=left>
+<BR>&nbsp;&nbsp;programA <span class=special>|</span> r4 programName [argumentText] <span class=special>|</span> programB
+</TD></TR></TABLE></ul>
+<p>
+<P>Within this line, <strong>r4</strong> is a request to execute the <b>r4&#153;</b> program,
+which has a file name R4.EXE. You should add the directory that contains R4.EXE to your
+system PATH environment variable. See the <a href=#EnvironmentSetup>environment</a> setup
+section to determine how to revise the PATH environment variable.
+<p>
+<P>The <b>r4&#153;</b> program can also process
+<a href=#FileRedirection>redirected files</a>.
+The <b>r4&#153;</b> program
+can also participate in
+<a href=#CommandPipeline>command pipelines</a>.
+<H1> Required program name argument: </H1>
+<UL >
+<LI><b>programName</b> .. the name of the REXX program to perform. This can be a partially or fully
+qualified Microsoft&#174; Windows&#174; file name. An optional default extension is assumed.
+The default extension can be defined by setting
+the <b>R4_DEFAULT_PROGRAM_EXT</b> <A HREF="#R4_DEFAULT_PROGRAM_EXT">environment variable</A>.
+If this environment variable is not defined the default extension is: <b>.REX</b>
+<p>
+<OL >
+<LI>The following is an example of a fully qualified program name.
+<BR>&nbsp;&nbsp;<strong>c:\r4\copyfile.rex</strong>
+<p>
+<LI>The following is an example of a fully qualified program that lacks a file extension.
+<BR>&nbsp;&nbsp;<strong>c:\r4\copyfile</strong>
+<p>
+<LI>The following is an example of a partially qualified program name.
+<BR>&nbsp;&nbsp;<strong>copyfile.rex</strong>
+<p>
+<LI>The following is an example of a partially qualified program name that lacks a file extension.
+<BR>&nbsp;&nbsp;<strong>copyfile</strong>
+<p>
+<LI>The following is an example of a partially qualified program name that has an empty file extension.
+<BR>&nbsp;&nbsp;<strong>copyfile.</strong>
+</OL>
+</UL>
+<p>
+<A NAME="ProgramSearch">  </A>
+<H2> Program search: </H2>
+<P>When a fully qualified program name is specified, that program is executed if it exists.
+<p>
+<P>When a partially qualified program name is specified, a search is conducted for the program. This
+search begins in the current directory, and then proceeds through directories that are defined in
+the <A HREF="#R4PATH">R4PATH<A> environment variable. If a file is found, then that program is executed.
+Otherwise, an additional search is performed for a program with a default program extension.
+<P><b>Suggestion:</b> always name your REXX program with the default program extension extension, and never create a
+file that has the same name without the extension. If both files exist, you will
+have to specify an explicit program extension with the <b>programName</b> argument of the <b>r4</b>
+command.
+<p>
+<P>In the first example above, only the fully qualified file name is tried.
+<p>
+<P>In the second example above, an attempt is made to perform the named file, and then an implicit default
+extension is tried.
+<p>
+<P>In the third example above, a search is performed for the named file in the current directory, and
+in the directories defined by the R4PATH environment variable.
+<p>
+<P>In the fourth example above, if an extension-less file named 'copyfile' exists in the current
+directory, or the directories defined by the R4PATH environment variable, then that file will be
+executed. Often this will cause an error message to appear, because the file is not a REXX program.
+<p>
+<P>In the fifth example above, a search for an implicit default' extension will not be conducted.
+<H1> Optional additional text arguments: </H1>
+<UL >
+<LI><b>argumentText</b> .. argument text that is passed to the top level REXX procedure. This text
+includes all spaces and quotes that were present in the command request.
+<p>
+<P>Argument text is accessed in the REXX procedure by using either the ARG( 1 )
+builtin function, the ARG keyword instruction, or the PARSE ARG keyword instruction.
+</UL>
+<A NAME="FirstProgram">  </A>
+<H1> Writing your first <b>r4&#153;</b> program </H1>
+<OL >
+<LI>Start the Notepad accessory
+<p>
+<LI>Enter the following text:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;/* HELLO.REX */
+<BR>&nbsp;call charout , "Please enter your name: "
+<BR>&nbsp;say 'Hello' linein( ! ) '!'
+</TD></TR></TABLE></ul>
+<p>
+<LI>Save the file as <b>HELLO.REX</b> in the same directory that contains R4.EXE (i.e. c:\r4).
+<p>
+<LI>Start a DOS command prompt
+<p>
+<UL >
+<LI>In Microsoft&#174; Windows&#174; NT/2000/XP, select 'Run...' from the 'Start' menu, enter 'CMD' in the input field,
+then press the OK button.
+<p>
+<LI>In Microsoft&#174; Windows&#174; 98 and ME, select 'Run...' from the 'Start' menu, enter 'command' in the input field,
+then press the OK button.
+</UL>
+<p>
+<LI>At the command prompt enter the two lines shown below:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;cd c:\r4
+<BR>&nbsp;r4 hello
+</TD></TR></TABLE></ul>
+<p>
+<LI>Type your name at the prompt, then press the Enter key.
+<p>
+<LI>The greeting should appear.
+<p>
+<LI>You have successfully edited and performed your first <b>r4&#153;</b> program.
+</OL>
+<A NAME="Examples">  </A>
+<H1> Program examples </H1>
+<P>An assortment of REXX programs are provided for your reference. A summary of these follows:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>AnnVal.rex</TD>
+<TD>Compute compounded value of an annuity (used with Bizzy.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>Anova.rex</TD>
+<TD>Analysis of means, standard deviations, and variances</TD>
+</TR>
+<TR>
+<TD valign=top>Anova2.rex</TD>
+<TD>Analysis of means, standard deviations, and variances -- detailed</TD>
+</TR>
+<TR>
+<TD valign=top>Asc2html.rex</TD>
+<TD>Converts a marked up Ascii text file to HTML</TD>
+</TR>
+<TR>
+<TD valign=top>Ascii.rex</TD>
+<TD>Dislays the Ascii character code table</TD>
+</TR>
+<TR>
+<TD valign=top>Box.rex</TD>
+<TD>Encloses input within box characters</TD>
+</TR>
+<TR>
+<TD valign=top>Caldisp.rex</TD>
+<TD>A calendar preparation program</TD>
+</TR>
+<TR>
+<TD valign=top>Caldisp2.rex</TD>
+<TD>A faster calendar preparation program</TD>
+</TR>
+<TR>
+<TD valign=top>ChgAll.rex</TD>
+<TD>replace all occurrences of one string, by another</TD>
+</TR>
+<TR>
+<TD valign=top>ChangeStr.rex</TD>
+<TD>an external procedure that emulates the 'changestr' builtin function -- DEPRECATED.</TD>
+</TR>
+<TR>
+<TD valign=top>CompVal.rex</TD>
+<TD>Perform compound interest computation (used with Bizzy.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>CsvDef.rex</TD>
+<TD>Creates a new comma-separated value (CSV) file (used with CsvDef.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>CsvMaker.rex</TD>
+<TD>Generates a TopHat form, and a REXX program, that adds lines to a CSV file</TD>
+</TR>
+<TR>
+<TD valign=top>Csv2xml.rex</TD>
+<TD>Converts comma-separated value (CSV) files to XML files</TD>
+</TR>
+<TR>
+<TD valign=top>DatePick.rex</TD>
+<TD>Demonstration of program that uses DATEPICK.EXE</TD>
+</TR>
+<TR>
+<TD valign=top>Deal.rex</TD>
+<TD>Deals a hand of cards in Bridge format</TD>
+</TR>
+<TR>
+<TD valign=top>Difference.rex</TD>
+<TD>Computes difference of two sets</TD>
+</TR>
+<TR>
+<TD valign=top>Easter.rex</TD>
+<TD>Calculates Easter</TD>
+</TR>
+<TR>
+<TD valign=top>Factorial.rex</TD>
+<TD>Calculates factorial</TD>
+</TR>
+<TR>
+<TD valign=top>FileDlg.rex</TD>
+<TD>File selection dialog program that uses FILEDLG.EXE</TD>
+</TR>
+<TR>
+<TD valign=top>FinCalc.rex</TD>
+<TD>Financial ratio computations (used with FinCalc.TopHat and FinCalcOut.TopHat forms)</TD>
+</TR>
+<TR>
+<TD valign=top>Gcd.rex</TD>
+<TD>Computes greatest common divisor of two numbers</TD>
+</TR>
+<TR>
+<TD valign=top>GetContact.rex</TD>
+<TD>Get contact information (used with Contact.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>Hanoi1.rex</TD>
+<TD>A 'towers of hanoi' program</TD>
+</TR>
+<TR>
+<TD valign=top>Hanoi2.rex</TD>
+<TD>Animated 'towers of hanoi' program</TD>
+</TR>
+<TR>
+<TD valign=top>HtmlMiner.rex</TD>
+<TD>Extracts text within an HTML file that is not part of a tag</TD>
+</TR>
+<TR>
+<TD valign=top>Intersection.rex</TD>
+<TD>Computes intersection of two sets</TD>
+</TR>
+<TR>
+<TD valign=top>Lcm.rex</TD>
+<TD>Computes least common multiple of two numbers</TD>
+</TR>
+<TR>
+<TD valign=top>LoanCalc.rex</TD>
+<TD>Perform loan computations (used with Bizzy.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>Lottery.rex</TD>
+<TD>Picks 6 lottery numbers</TD>
+</TR>
+<TR>
+<TD valign=top>Matrix.rex</TD>
+<TD>Displays input as a matrix with M rows and N columns</TD>
+</TR>
+<TR>
+<TD valign=top>Messager.rex</TD>
+<TD>Demonstration of program that uses MSGBOX.EXE</TD>
+</TR>
+<TR>
+<TD valign=top>MetricArea.rex</TD>
+<TD>Metric area conversions (used with Metric.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>MetricDistance.rex</TD>
+<TD>Metric distance conversions (used with Metric.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>MetricVolume.rex</TD>
+<TD>Metric volume conversions (used with Metric.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>MetricWeight.rex</TD>
+<TD>Metric weight conversions (used with Metric.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>MetricTemperature.rex</TD>
+<TD>Metric temperature conversions (used with Metric.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>Picker.rex</TD>
+<TD>Demonstration of program that uses PICKLIST.EXE</TD>
+</TR>
+<TR>
+<TD valign=top>Powers2.rex</TD>
+<TD>Shows 'powers of 2' table</TD>
+</TR>
+<TR>
+<TD valign=top>PresVal.rex</TD>
+<TD>Perform present value computation (used with Bizzy.TopHat form)</TD>
+</TR>
+<TR>
+<TD valign=top>Prompter.rex</TD>
+<TD>Demonstration of program that uses PROMPT.EXE</TD>
+</TR>
+<TR>
+<TD valign=top>Qt.rex</TD>
+<TD>Shows the present time in English</TD>
+</TR>
+<TR>
+<TD valign=top>Rexxtry.rex</TD>
+<TD>An interactive REXX shell</TD>
+</TR>
+<TR>
+<TD valign=top>Roman.rex</TD>
+<TD>Converts a number to roman numerals</TD>
+</TR>
+<TR>
+<TD valign=top>Sayit.rex</TD>
+<TD>A tiny full function calculator</TD>
+</TR>
+<TR>
+<TD valign=top>Sieve.rex</TD>
+<TD>Prime number algorithm -- the 'sieve of Eratosthenes' algorithm</TD>
+</TR>
+<TR>
+<TD valign=top>Sqrt.rex</TD>
+<TD>Computes square root using Newton's algorithm -- an external procedure</TD>
+</TR>
+<TR>
+<TD valign=top>Sumdisk.rex</TD>
+<TD>The <b>best</b> example -- summarizes disk space usage</TD>
+</TR>
+<TR>
+<TD valign=top>TopoSort.rex</TD>
+<TD>Topological sort -- dependency analyzer</TD>
+</TR>
+<TR>
+<TD valign=top>Union.rex</TD>
+<TD>Computes union of two sets</TD>
+</TR>
+</TABLE></ul>
+<A NAME="EnvironmentVariables">  </A>
+<H1> Environment variables: </H1>
+<p>
+<P>The following environment variables can be specified to customize the execution of <nobr class=roo>r4&#153;</nobr> programs.
+For normal program execution you will not need to define any of these environment variables.
+<UL >
+<BR><a href=#LOCALE><b>LOCALE</b></a>
+<BR><a href=#R4_ALLOW_UNQUALIFIED_SOURCE><b>R4_ALLOW_UNQUALIFIED_SOURCE</b></a>
+<BR><a href=#R4_ANSI><b>R4_ANSI</b> -- ANSI-compatibility option</a>
+<BR><a href=#R4_DEFAULT_PROGRAM_EXT><b>R4_DEFAULT_PROGRAM_EXT</b></a>
+<BR><a href=#R4_EXECTRAC><b>R4_EXECTRAC</b></a>
+<BR><a href=#R4_TRACE_procedureName><b>R4_TRACE_procedureName</b></a>
+<BR><a href=#R4COMMANDWAIT><b>R4COMMANDWAIT</b></a>
+<BR><a href=#R4LINEBREAK><b>R4LINEBREAK</b></a>
+<BR><a href=#R4PATH><b>R4PATH</b></a>
+<BR><a href=#R4_PLUS><b>R4_PLUS</b> -- inter-system extensions</a>
+<BR><a href=#R4_TRACE_LOCAL><b>R4_TRACE_LOCAL</b> -- confine tracing to current procedure level</a>
+</UL>
+<ul><DL >
+<hr align=left width=40>
+<p>
+<A NAME="LOCALE">  </A>
+<DD><b>LOCALE</b>
+<p>
+<DT>If the LOCALE environment variable is set, then that locale is used for collation
+and character handling. The default locale that is used is "English_United States.1252".
+Description of the LOCALE environment variable settings can be found on the internet.
+<p>
+<A NAME="R4_ALLOW_UNQUALIFIED_SOURCE">  </A>
+<DD><b>R4_ALLOW_UNQUALIFIED_SOURCE</b>
+<p>
+<DT><b>r4&#153;</b> optionally requires REXX source programs to begin with a source comment --
+i.e. the first two characters of the first line must be '/*'. This avoids a nuisance,
+when files that do not have an extension, are accidently considered to be REXX programs.
+For example, if you are trying to run program XX.REX, but a data file named XX also exists,
+the data file could be mistakenly processed as the source program. By assuring that
+the file begins with a source comment, the data file will be ignored, and the XX.REX
+program will be properly located instead.
+<P>The optional <b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable controls whether
+checking that REXX programs begin with a source comment is made. When the
+<b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable
+starts with the letter 'N', then files will be checked to ensure that they begin with a comment.
+The following shows the associated command line to enter:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+set R4_ALLOW_UNQUALIFIED_SOURCE=N
+</TD></TR></TABLE></ul>
+<P>When the <b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable
+starts with the letter 'Y', then any file will be accepted as a REXX source program.
+The following shows the associated command line to enter:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+set R4_ALLOW_UNQUALIFIED_SOURCE=Y
+</TD></TR></TABLE></ul>
+<P>When the <b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable is not set the <b>default</b>
+is to <b>allow</b> source files to be executed, even though they do not begin with a source comment.
+<P>You are <b><i>encouraged</i></b> to define the <b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable to 'N'.
+Otherwise, you might have to debug some perplexing difficulties. For example, if the data file
+XX is empty, <b>r4&#153;</b> will process an empty program. When you look at the source
+of the XX.REX program you will not easily be able to understand why the program is not
+executed. By defining the <b>R4_ALLOW_UNQUALIFIED_SOURCE</b> environment variable to 'N'
+you will not have to endure such aggravation.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4_ANSI">  </A>
+<DD><b><b>R4_ANSI</b> -- ANSI-compatibility option</b>
+<p>
+<DT>The <a href=#ChangeStr>CHANGESTR</a> and <a href=#CountStr>COUNTSTR</a> built-in functions have alternate specifications, ANSI and NetRexx/Roo!&#153;.
+By default <b>r4&#153;</b> supports the <b>ANSI</b> specification of these functions. The alternative
+NetRexx/Roo!&#153; behavior can be established by setting the <b>R4_ANSI</b> environment variable
+to <i>NO</i> (Default: <b>YES</b>).
+<p>
+<hr align=left width=40>
+<A NAME="R4_DEFAULT_PROGRAM_EXT">  </A>
+<DD><b>R4_DEFAULT_PROGRAM_EXT</b>
+<p>
+<DT>the <b>R4_DEFAULT_PROGRAM_EXT</b> environment variable establishes the default extension that is used
+to locate REXX programs. If this environment variable is not defined, the default extensions that are
+used are: <b>.REX;.CMD</b>
+<P>The <b>R4_DEFAULT_PROGRAM_EXT</b> environment variable can include multiple alternative extensions separated by semicolons -- such
+as:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<b>.rex;rexx;cmd</b>
+</TD></TR></TABLE></ul>
+<i>Note:</i> an implicit period is assumed before an extension.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4_EXECTRAC">  </A>
+<DD><b>R4_EXECTRAC</b>
+<p>
+<DT>the <b>R4_EXECTRAC</b> environment variable establishes the trace setting when the main
+procedure is started. The value of the environment variable is processed exactly as though
+the string was the parameter of the <a href="http://www.kilowattsoftware.com/tutorial/rexx/bitrace.htm">
+<b>trace</b></a> built-in function.
+<P>The following causes interactive tracing to be activated, with intermediate results listed.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+set R4_EXECTRAC=?i
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>Redirecting trace output to a file</b>
+<p>
+<DT>Often when you set the R4_EXECTRAC environment variable, you would also like trace output written to a file
+instead of the display. In Microsoft&#174; Windows&#174; XP environments you can <b>redirect trace output</b>
+to a file. This is done as follows:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+r4 progName &gt; outFile 2&gt;&amp;1
+</TD></TR></TABLE></ul>
+<p>
+<P>The above redirects the output of <i>progName</i> to <i>outFile</i>. Trace output will also be present in <i>outFile</i>.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4_TRACE_procedureName">  </A>
+<DD><b>R4_TRACE_procedureName</b>
+<p>
+<DT>the <b>R4_TRACE_procedureName</b> environment variable establishes the trace setting when a specific
+procedure is invoked. The value of the environment variable is processed exactly as though
+the string was the parameter of the <a href="http://www.kilowattsoftware.com/tutorial/rexx/bitrace.htm">
+<b>trace</b></a> built-in function.
+<P>The following causes interactive tracing to be activated, with intermediate results listed, when the
+<b>factorial_ice</b> procedure is invoked.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+set R4_TRACE_factorial_ice=?i
+</TD></TR></TABLE></ul>
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4COMMANDWAIT">  </A>
+<DD><b>R4COMMANDWAIT</b>
+<p>
+<DT>The optional <b>R4COMMANDWAIT</b> environment variable identifies when R4 should wait for
+the completion of commands. This option is necessary when a command will operate as an interactive
+Microsoft&#174; Windows&#174; application. R4 always waits for the completion of internal system commands; such as, MORE or XCOPY.
+<p>
+<P>When the first letter of the <b>R4COMMANDWAIT</b> is 'Y', R4 will wait for the completion of
+commands which are Microsoft&#174; Windows&#174; applications. Otherwise, R4 will use the system command processor
+to process the command.
+<p>
+<P>An example of setting the R4COMMANDWAITenvironment variable value follows:
+<BR>&nbsp;&nbsp;set R4COMMANDWAIT=Yes
+<BR>This indicates that R4 will wait for the completion of
+commands which are Microsoft&#174; Windows&#174; applications.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="LineBreak">  </A>
+<DD><b>R4LINEBREAK</b>
+<p>
+<DT>The optional <b>R4LINEBREAK</b> environment variable identifies characters that terminate
+lines that are written by the LINEOUT builtin function. The R4LINEBREAK environment variable
+also identifies character line terminators for selector pools that are accessed by the
+VALUE builtin function.
+<p>
+<DT>The R4LINEBREAK environment variable has no effect on the characters that terminate lines that
+are read by the LINEIN builtin function. See the <a href="#LineinTerminators">LINEIN terminators</a>
+section below.
+<p>
+<P>The default line termination characters are the Microsoft&#174; Windows&#174; standard; an Ascii carriage return
+(decimal 13 -- symbolically <b>\r</b>) followed by an Ascii line feed (decimal 10 -- symbolically <b>\r</b>).
+<p>
+<P>An example of setting the R4LINEBREAK environment variable value follows:
+<BR>&nbsp;&nbsp;set R4LINEBREAK=\n
+<BR>This indicates that lines are terminated by an Ascii line feed only.
+<p>
+<P>The default setting is:
+<BR>&nbsp;&nbsp;set R4LINEBREAK=\r\n
+<p>
+<P>Lines can be terminated by other sequences as well, for example:
+<BR>&nbsp;&nbsp;set R4LINEBREAK=&lt;br&gt;
+<BR> Which is the standard HTML line break sequence.
+<p>
+<P>When backslashes are encountered in the R4LINEBREAK setting, if the next character is neither
+an 'r' nor an 'n', then the next character is included in the line termination sequence. For
+example,
+<BR>&nbsp;&nbsp;set R4LINEBREAK=\\r\\n
+<BR>Ends each line with the character sequence '\r\n'.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4PATH">  </A>
+<DD><b>R4PATH</b>
+<p>
+<DT>The optional <b>R4PATH</b> environment variable identifies a sequence of one or more Microsoft&#174; Windows&#174;
+directories separated by semicolons. These define the directories that will be searched for
+the REXX program that is performed. The <A HREF="#ProgramSearch">Program Search<A> section above
+describes how REXX programs are located.
+<p>
+<P>If the <b>R4PATH</b> environment variable is not defined, the default path will be the folder (directory)
+that contains the R4.EXE module.
+<p>
+<P><i>Note:</i> this environment variable is also used to locate <b>external procedures</b> that are
+invoked by the REXX program.
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4_PLUS">  </A>
+<DD><b><b>R4_PLUS</b> -- inter-system extensions</b>
+<p>
+<DT><b>r4&#153;</b> can provide compatibility with other REXX environments,
+when the <b>R4_PLUS</b> environment variable is set to <b>YES</b> (Default: <i>NO</i>).
+The following additional capabilities are provided:
+<p>
+<ul><DL >
+<DD><b>+1. Assignment instructions without expressions</b>
+<p>
+<DT>Some REXX language processors allow assignment expressions to lack expressions after the equal sign. In this case,
+the variable is set to the empty string. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  v1 =
+  v2 =
+  v3 = ''
+  parse value with v4 v5 v6
+</pre>
+</TD></TR></TABLE></ul>
+<P>All six variables above are initialized to the empty string.
+<p>
+<DD><b>+2. UPPER instruction</b>
+<p>
+<DT>Some REXX language processors provide the <b>UPPER</b> instruction, which
+converts the value of one or more variables to uppercase. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  parse value 'abc def ghi' with v1 v2 v3
+
+  UPPER v1 v2 v3
+</pre>
+</TD></TR></TABLE></ul>
+<P>The value of variables v1, v2, and v3 are converted to uppercase:
+<P>&nbsp;&nbsp;v1 --&gt; ABC
+<P>&nbsp;&nbsp;v2 --&gt; DEF
+<P>&nbsp;&nbsp;v3 --&gt; GHI
+<p>
+<DD><b>+3. parse EXTERNAL</b>
+<p>
+<DT>Some REXX language processors use the <b>EXTERNAL</b> keyword with the PARSE instruction. This is equivalent
+to the <i>LINEIN</i> keyword. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  say 'what is your name ?'
+
+  parse <b>EXTERNAL</b> name
+
+  say 'Hello' name
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>+4. parse NUMERIC</b>
+<p>
+<DT>Some REXX language processors use the <b>NUMERIC</b> keyword with the PARSE instruction. This provides
+the numeric DIGITS, FUZZ, and FORM settings for parsing. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  parse <b>NUMERIC</b> digits fuzz form
+
+  say 'The current DIGITS setting is:' digits
+  say 'The current FUZZ setting is:' fuzz
+  say 'The current FORM setting is:' form
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>+5. parse LOWER</b>
+<p>
+<DT>Some REXX language processors use the <b>LOWER</b> keyword with the PARSE instruction. This converts the parse
+string to lower case. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  parse <b>LOWER</b> value 'ABRACADABRA' with magic
+
+  say 'magic:' magic => abracadabra
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<DD><b>+6. parse CASELESS</b>
+<p>
+<DT>Some REXX language processors use the CASELESS keyword with the PARSE instruction. This performs
+comparisons independent of character case during parsing. For example,
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  parse caseless value 'abracadabra' with bef 'CA' +2 aft
+  say 'bef:' bef => abra
+  say 'aft:' aft => dabra
+
+  parse caseless value 'ABRACADABRA' with bef 'ca' +2 aft
+  say 'bef:' bef => ABRA
+  say 'aft:' aft => DABRA
+</pre>
+</TD></TR></TABLE></ul>
+</DL></ul>
+<p>
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="R4_TRACE_LOCAL">  </A>
+<DD><b><b>R4_TRACE_LOCAL</b> -- confine tracing to current procedure level</b>
+<p>
+<DT><b>r4&#153;</b> can optionally confine tracing to the current procedure level,
+instead of tracing into internal or external procedures. This can be helpful
+when you are trying to locally debug a specific procedure, independently of
+the subroutines or functions that it invokes.
+This is accomplished by setting the <b>R4_TRACE_LOCAL</b> environment variable
+to <b>YES</b> (Default: <i>NO</i>).
+</DL></ul>
+<p>
+<hr align=left width=40>
+<p>
+<A NAME="EnvironmentSetup">  </A>
+<H2> How to define or revise an environment variable,<br>in Microsoft&#174; Windows&#174; NT/2000/XP </H2>
+<OL >
+<LI>Select 'Settings' of the 'Start' menu.
+<LI>Select the 'System' applet on the 'Control Panel',
+<LI>Click the 'Environment' tab.
+<LI>Locate the variable name in the 'System' or 'User' list if you are revising an existing value.
+<LI>Or, enter the variable name in the 'Variable' input field.
+<LI>Type or revise the value of the variable in the 'Value' input field.
+<LI>Click the 'Set' button.
+<LI>Click the 'OK' button.
+</OL>
+<p>
+<P>If you have <b>never</b> revised an environment variable, you might ask a friend or colleague
+who is familiar with this process to help you make this change.
+<H2> How to define or revise an environment variable,<br>in Microsoft&#174; Windows&#174; 98 or ME </H2>
+<OL >
+<LI>Edit the C:\AUTOEXEC.BAT file
+<p>
+<LI>If you are adding an environment variable, add a line similar to the following:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>set R4PATH=c:\r4;c:\rexx</strong></TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>set R4LINEBREAK=\n</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<LI>If you are revising the PATH or R4PATH environment variable, locate a line similar to the following:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>set PATH=c:\windows;c:\windows\system32</TD>
+</TR>
+</TABLE></ul>
+<P>Add the new directory to the path, separating it from other directories by a semicolon.
+<p>
+<LI>Save your changes to the AUTOEXEC.BAT.
+<p>
+<LI>Then, restart your computer so that the AUTOEXEC.BAT file changes will take effect.
+</OL>
+<p>
+<P>If you have <b>never</b> revised the AUTOEXEC.BAT file, you might ask a friend or colleague
+who is familiar with this process to help you make this change.
+<A NAME="ImplementationLimits">  </A>
+<H1> Implementation limits: </H1>
+<P><b>r4&#153;</b> implements TRL-2 language features using values that are generally limited by available
+Microsoft&#174; Windows&#174; memory. This means that variable names and values can be very large.
+The NUMERIC DIGITS setting can also be large. The following features are implemented with more finite limits.
+<OL >
+<LI>The largest C2D result is 18446744073709551615.
+<p>
+<LI>The largest D2C numeric argument is 18446744073709551615.
+<p>
+<LI>The largest D2X numeric argument is 18446744073709551615.
+<p>
+<LI>The largest X2D numeric argument is 'FFFFFFFFFFFFFFFF'x  => 18446744073709551615.
+<p>
+<LI>File stream accesses are buffered in memory until the <b>r4&#153;</b> program finishes processing.
+<p>
+<P>Default input stream and default output stream accesses are not buffered. The 'start' value is
+not valid for CHARIN and CHAROUT builtin function requests associated with the default input or
+default output stream. Similarly, the 'line' value is not valid for LINEIN and LINEOUT builtin
+function requests associated with these streams.
+</OL>
+<A NAME="PortabilityConsiderations">  </A>
+<H1> Portability considerations: </H1>
+<OL >
+<LI>The Microsoft&#174; Windows&#174; environment uses text characters that are encoded in the Ascii representation. This
+differs significantly from the EBCDIC representation that is used on IBM mainframe computers. The
+following is the character layout of the Ascii representation:
+<p>
+<A NAME="AsciiTable">  </A>
+<table cellspacing= 5 border=1><tr><th>Ascii table</th></tr>
+<tr><td>
+<pre>
+      0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F   
+  00  NUL SOH STX ETX EOT ENQ ACK BEL BS  HT  LF  VT  FF  CR  SO  SI  
+  10  DLE DC1 DC2 DC3 DC4 NAK SYN ETB CAN EM  SUB ESC FS  GS  RS  US  
+  20  spc !   "   #   $   &#37;   &amp;   '   (   )   *   +   ,   -   .   /   
+  30  0   1   2   3   4   5   6   7   8   9   :   ;   <   =   >   ?   
+  40  @   A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   
+  50  P   Q   R   S   T   U   V   W   X   Y   Z   [   \   ]   ^   _   
+  60  `   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o   
+  70  p   q   r   s   t   u   v   w   x   y   z   {   |   }   ~   DEL 
+</pre>
+</td></tr><tr><td>'spc' indicates a space.
+</td></tr><tr><td>Entries in this table are determined by taking the two hexadecimal digits at
+the left hand side of the table, and adding the hexadecimal value at the top of the table.
+</td></tr><tr><td>The letter X is in the row that starts with 50, and column 8. Thus, the Ascii
+value of X is hexadecimal 58.
+</td></tr><tr><td>The letter O is in the row that starts with 40, and column F. Thus, the Ascii
+value of O is hexadecimal 4F.
+</td></tr><tr><td>Character values less than hexadecimal 20 are control characters. HT ('09'x)
+is a horizontal tab, which is commonly referred to as a tab. LF ('0A'x) is a line feed character.
+CR ('0D'x) is a carriage return.
+</td></tr><tr><td>'DEL' ('7F'x) is a rubout control character.
+</td></tr><tr><td>Character values in excess of hexadecimal 7F are extended Ascii characters, these
+are omitted in the above table because of their effect on HTML browsers.
+You can execute the ASCII.REX program to view extended Ascii characters.
+</td></tr></table>
+<P><i>Note:</i> uppercase letters are <b>less than</b> lowercase letters in collating order. This
+can be significant during string comparisons -- i.e. the Compare built-in function,
+and comparison operators (=, &lt;=, etc.). Consequently, 'Bob' will be considered less than
+'bill' when character case is significant.
+<P>The sequence of lower case Ascii characters can be generated by the XRANGE builtin function as
+follows:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>xrange( 'a', 'z' )</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>A text value can be converted to lower case by using the XRANGE and TRANSLATE builtin functions as
+follows:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>lowercaseValue = translate( textValue, xrange( 'a', 'z' ), , xrange( 'A', 'Z' ) )</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<A NAME="TabsAndSpaces">  </A>
+<LI>Tab characters within text values are problematic, as these have an appearance similar to
+spaces. The <b>r4&#153;</b> implementation attempts to treat tabs as equivalent to spaces for
+most circumstances where spaces have special meaning; such as, the <b>WORD...</b> set of builtin functions.
+Tabs are also considered equivalent to spaces within the value that is parsed by the <b>PARSE</b>,
+<b>ARG</b>, and <b>PULL</b> keyword instructions. You can parse for an explicit tab character
+in the <b>PARSE</b>, <b>ARG</b>, and <b>PULL</b> keyword instructions by specifying '09'x in
+the parse template.
+<p>
+<A NAME="SpecialNotSignCharacter">  </A>
+<LI>The standard character that is supported for the <b>not</b> operator is a backslash ('\'). A backslash is
+the only <b>not</b> operator character that is recommended in Ansi REXX. <b>r4&#153;</b> also accepts
+the Ascii code page 37 'AA'x character (&#172;) as an alternate not-sign character. If you are porting
+programs to/from mainframe environments, then you should ensure that the mainframe not-sign character ('5F'x)
+is converted to an Ascii 'AA'x character. You can make this character appear like a not-sign character in
+your programs if you set your editor's font to OEM Fixed.
+<p>
+<LI>A non-standard character that is supported for the <b>not</b> operator is a forward slash ('/'). A backslash is
+the only <b>not</b> operator character that is recommended in Ansi REXX. <b>r4&#153;</b> also accepts
+the forward slash for compatibility with programs written for mainframe environments. The forward slash
+is only treated as a not operator when used in combination with other comparison operators (see list below).
+The forward slash is <b>not accepted</b> as a <b>prefix operator</b>.
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>/=</TD>
+<TD>not equal</TD>
+</TR>
+<TR>
+<TD valign=top>/&lt;</TD>
+<TD>greater than or equal</TD>
+</TR>
+<TR>
+<TD valign=top>/&gt;</TD>
+<TD>less than or equal</TD>
+</TR>
+<TR>
+<TD valign=top>/==</TD>
+<TD>strictly not equal</TD>
+</TR>
+<TR>
+<TD valign=top>/&lt;&lt;</TD>
+<TD>strictly greater than or equal</TD>
+</TR>
+<TR>
+<TD valign=top>/&gt;&gt;</TD>
+<TD>strictly less than or equal</TD>
+</TR>
+</TABLE></ul>
+<p>
+<LI>When the first word of a command is the name of an R4 program, the program is invoked as an external
+procedure. The remainder of the command line is passed as the first and only argument of the
+external procedure. For example:
+<BR>&nbsp;&nbsp;'execio * diskr INDD (LIFO OPEN FINIS'
+<BR>
+<BR>Invokes EXECIO.REX as an external procedure, if EXECIO.REX can be located by a <a href=#R4PATH>procedure search (R4PATH)</a>.
+<p>
+<BR><i>Observe:</i> if the first word of a command is associated with an .EXE or .BAT file that can be located in
+any directory (folder) that is defined in the PATH environment variable, then the EXE or BAT file is invoked
+instead of the external procedure. This avoids a recursion problem that might occur if the REXX external procedure
+tried to invoke an EXE or BAT file with the same name as the procedure. This problem was reported !
+<p>
+<LI>R4 allows an external procedure to begin with the <b>PROCEDURE</b> instruction.
+This enables exposure of the caller's variables to the external procedure. In addition, the <b>EXPOSEALL</b>
+keyword is supported on the PROCEDURE instruction.
+<BR>
+<BR>The example EXECIO.REX program uses the EXPOSEALL keyword, in order to reference or revise
+the caller's stem variables.
+<p>
+<LI>The TRL-2 book does not specify the following capabilities that are found in some REXX
+programming environments:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>MAKEBUF command</TD>
+</TR>
+<TR>
+<TD valign=top>DROPBUF command</TD>
+</TR>
+<TR>
+<TD valign=top>NEWSTACK command</TD>
+</TR>
+<TR>
+<TD valign=top>DELSTACK command</TD>
+</TR>
+<TR>
+<TD valign=top>EXECIO command</TD>
+</TR>
+</TABLE></ul>
+<BR>All of the above commands, except EXECIO, are implemented internally within <b>r4&#153;</b>. The EXECIO command
+is supported in EXECIO.REX, which is an external procedure that executes as a command.
+<p>
+<LI>The positional values associated with the <b>SOURCE</b> option of the <b>PARSE</b> keyword instruction are:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top><b>Win32</b></TD>
+<TD>(always)</TD>
+</TR>
+<TR>
+<TD valign=top><b>COMMAND</b>, <b>FUNCTION</b>, or <b>SUBROUTINE</b></TD>
+</TR>
+<TR>
+<TD valign=top>full file name, with spaces replaced by carets</TD>
+<TD>i.e. <b>C:\R4\HELLO.REX</b></TD>
+</TR>
+<TR>
+<TD valign=top><b>*</b></TD>
+<TD>(always</TD>
+</TR>
+<TR>
+<TD valign=top><b>*</b></TD>
+<TD>(always)</TD>
+</TR>
+<TR>
+<TD valign=top>invocation name</TD>
+<TD>i.e. <b>HELLO</b></TD>
+</TR>
+</TABLE></ul>
+<P>Note: all of the above values are in UPPERCASE, with the exception of the leading 'Win32' value.
+<p>
+<LI>The value associated with the <b>VERSION</b> option of the <b>PARSE</b> keyword instruction is:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>REXX-r4 4.00 dd Mon yyyy</TD>
+</TR>
+<TR>
+<TD valign=top>where: <b>dd</b> is build day, <b>Mon</b> is build month, <b>yyyy</b> is build year</TD>
+</TR>
+</TABLE></ul>
+<p>
+<A NAME="LineinTerminators">  </A>
+<LI>Lines that are read by the <b>LINEIN</b> builtin function are terminated when one of the
+following Ascii character sequences is discovered:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>carriage return THEN line feed</TD>
+<TD>decimal 13, decimal 10</TD>
+</TR>
+<TR>
+<TD valign=top>line feed THEN carriage return</TD>
+<TD>decimal 10, decimal 13</TD>
+</TR>
+<TR>
+<TD valign=top>line feed only</TD>
+<TD>decimal 10</TD>
+</TR>
+<TR>
+<TD valign=top>carriage return only</TD>
+<TD>decimal 13</TD>
+</TR>
+</TABLE></ul>
+<P>This allows your programs to easily process text files that are received from other system
+environments; such as, UNIX, or Linux.
+<p>
+<LI>The CHARIN builtin function obtains all character values, including line terminators, exactly
+as these arrive from the input stream.
+<p>
+<LI>The CHAROUT builtin function writes all character values, including line terminators, exactly
+as these are passed in the <b>string</b> value. Isolated line feed or carriage return characters
+are <b>not</b> converted to a carriage return THEN line feed sequence, as performed by other
+programming languages.
+<p>
+<LI>When the <b>selector</b> option of the <b>VALUE</b> function is specified, it is interpreted as follows:
+<p>
+<UL >
+<LI>If the <b>selector</b> option is 'system', then values are associated with environment variables
+of the R4 program scope. Revisions to environment variables will be seen by commands started by
+R4. These revisions are lost when the R4 program concludes. Thus, R4 programs can not permanently
+alter environment variables.
+<p>
+<P>The <a href="#EnvironmentVariableAccess">environment variable access</a> section below shows how to set and reference environment variable values.
+<p>
+<LI>The 'registry' <b>selector</b> option is used to access and revise system registry values.
+Revisions to registry values are permanently altered.
+<p>
+<P>The <a href="#RegistryValueAccess">registry value access</a> section below shows how to access and revise system registry values.
+<p>
+<LI>Any other <b>selector</b> option is considered to be the name of a file. If the file name
+does not have a backslash, then the file is stored in the same directory as R4.EXE. Values are
+stored when the R4 program terminates. These values are restored when the selector pool
+with the same name is referenced in a subsequent R4 program execution.
+<p>
+<P><i>Observe:</i> if <b>temporary</b> is contained anywhere within the name of the selector pool
+then values are not saved when the R4 program terminates.
+</UL>
+<p>
+<LI>Interactive trace requests can not exceed 255 characters.
+<p>
+<LI>The only supported address associated with the <b>ADDRESS</b> keyword instruction is:
+<BR>&nbsp;&nbsp;<b>'system'</b>
+<BR>which is the Microsoft&#174; Windows&#174; system command interpreter.
+<p>
+<P>Commands sent to the system can include file redirections, and command pipelines. For example:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;'dir *.rex | r4 countlines &gt;&gt; outfile'
+</TD></TR></TABLE></ul>
+<P>As mentioned previously, you should consult Microsoft&#174; Windows&#174; documentation for the use of file redirection
+and command pipelines.
+<p>
+<P>When you perform commands, you should make sure that the <b>&lt;</b>, <b>&gt;</b>, and <b>|</b> characters are enclosed
+within quotes. Otherwise, these will be treated as LESS THAN, GREATER THAN, or OR operator requests.
+<p>
+<LI>External procedures are programmed in REXX only -- EXEs are not invoked.
+<p>
+<LI>The trace marker &gt;A&gt; indicates variable assignment.
+<p>
+<LI>Trace markers &gt;V&gt; and &gt;A&gt; show the associated variable name in square brackets at the end of the trace output line.
+<p>
+<A NAME="SpecialCommandRedirections">  </A>
+<LI>R4 supports the special <b>"(stack"</b> command line directive. The end of a command is compared with the characters
+" (stack", which can include upper case characters. When this special directive is specified, the command's standard
+output lines are queued to the R4 external data queue.
+<p>
+<P>Note: the output of the command is redirected to an implicit temporary file. When you use the "(stack" directive,
+you must avoid using the '&gt;' file redirection operator elsewhere within the command.
+<p>
+<P>The following is an example of the use of the <b>"(stack"</b> command line directive.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;'dir *.rex (stack'
+<BR>&nbsp;say queued()
+<BR>&nbsp;do queued()
+<BR>&nbsp;  parse pull qline
+<BR>&nbsp;  say qline
+<BR>&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<LI>Similarly, R4 supports special <b>"&lt;!queue"</b> and <b>"&gt;!queue"</b> command redirection requests, each of which may include
+upper case characters.
+When the <b>"&lt;!queue"</b> directive is specified, contents of the external data queue are passed to the command's standard
+input stream.
+When the <b>"&gt;!queue"</b> directive is specified, the command's standard
+output lines are queued to the R4 external data queue.
+<p>
+<P>As with the <b>"(stack"</b> directive, implicit temporary files are used for
+<b>"&lt;!queue"</b> and <b>"&gt;!queue"</b> command redirection requests. You
+you must avoid using the '&lt;' elsewhere within the command if the
+<b>"&lt;!queue"</b> directive is specified. And, you
+you must avoid using the '&gt;' elsewhere within the command if the
+<b>"&gt;!queue"</b> directive is specified.
+<p>
+<P>The following is an example of the use of <b>"&lt;!queue"</b> and <b>"&gt;!queue"</b> command redirection requests.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  'newstack'
+
+  /* prepare 10 random numbers between 1 and 99 in the external data queue */
+
+  do 10
+    push right( random( 1, 99 ), 2, '0' )
+    end
+
+  'sort &lt;!queue &gt;!queue' /* sort the numbers ! */
+
+  /* after the above command completes the numbers are now sorted ! */
+
+  /* show the sorted numbers */
+
+  do queued()
+    parse pull qline
+    say qline
+    end
+
+  'delstack'
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<LI>The <b>HALT</b> condition is activated, from the keyboard, by pressing either the <b>Ctrl</b> and the <b>C</b> keys simultaneously,
+or by pressing the <b>Ctrl</b> and the <b>Break</b> keys simultaneously. There are two <b>Ctrl</b> keys, on either
+side of the space bar. The <b>Break</b> key is usually near the top right of the keyboard.
+<p>
+<P>The REXXTRY.REX example shows how the <b>HALT</b> condition can be handled.
+<p>
+<LI>When a <b>'1A'X</b> character is written to the default output stream
+it acts as an explicit <b>end of file</b> character. This is standard
+operational behavior for Microsoft&#174; Windows&#174; system environments. This impacts output that is written to the console,
+to a redirected file, or in command pipeline redirections. Subsequent output written to the default output stream
+is not transferred.
+<p>
+A '1A'X character can be written to output streams that are associated with disk files. Subsequent output will
+appear in the disk files.
+</OL>
+<A NAME="EnvironmentVariableAccess">  </A>
+<H2> Environment variable access </H2>
+<P>The following shows how the <b>VALUE</b> function is used to set and reference environment variable values.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DOENV.REX */
+<BR>&nbsp;call value 'magic', 'abracadabra', 'system' /* set magic environment variable */
+<BR>
+<BR>&nbsp;say value( 'magic', , 'system' ) /* get magic environment variable */
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="RegistryValueAccess">  </A>
+<H2> Registry value access </H2>
+<P>Access to system registry information allows <b>r4&#153;</b> to prepare and reference information
+that is used by other system software. This is a powerful capability. However, since system registry
+information is critical to correct system operation, <b>r4&#153;</b> can only perform some
+registry operations. You should be particularly careful when revising
+registry values. Erroneous revisions can have <strong>serious consequences</strong>. These
+changes cannot be undone.
+<p>
+<P>Due to the sensitivity of system registry information, <b>r4&#153;</b> can only be used to access
+and revise registry <em>values</em>. The product does not provide capabilities for accessing
+registry keys directly, and registry keys and values can not be removed. All registry values that
+are accessed by <b>r4&#153;</b> must be strings. No other registry value format is supported.
+<p>
+<P>As an extra precaution, registry <em>revisions</em> are only permitted when the <b>R4REGISTRYWRITE</b>
+environment variable has value: 'Y'. You can locally alter this value, as shown in the example
+below. No error occurs if this environment variable has not been set.
+<p>
+<P>You are strongly advised to <strong>B-A-C-K-U-P</strong> the system registry before attempting
+to revise it with an R4 program.
+<p>
+<P>If you are unfamiliar with the detailed characteristics of the system registry, you should
+discuss what you plan to do with a business colleague or friend, BEFORE attempting to
+revise registry information.
+<p>
+<P>Registry values are accessed using a three part name, that has the following structure:
+<BR>&nbsp;&nbsp;<b>root\keyPath[valueName]</b>
+<p>
+<P>The <b>keyPath</b> consists of a hierarchy of keys separated by backslashes.
+<p>
+<P>The <b>valueName</b> must be enclosed in square brackets.
+<p>
+<P>The <b>root</b> must be one of the following:
+<BR>&nbsp;&nbsp;'HKEY_CLASSES_ROOT'
+<BR>&nbsp;&nbsp;'HKEY_CURRENT_USER'
+<BR>&nbsp;&nbsp;'HKEY_LOCAL_MACHINE'
+<BR>&nbsp;&nbsp;'HKEY_USERS'
+<BR>&nbsp;&nbsp;'HKEY_CURRENT_CONFIG'
+<BR>&nbsp;&nbsp;'HKEY_DYN_DATA'
+<p>
+<P>The following root aliases are supported:
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;'HKCU'&nbsp;</TD>
+<TD>HKEY_CURRENT_USER</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKLM'&nbsp;</TD>
+<TD>HKEY_LOCAL_MACHINE</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKCR'&nbsp;</TD>
+<TD>HKEY_CLASSES_ROOT</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKU'&nbsp;</TD>
+<TD>HKEY_USERS</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKCC'&nbsp;</TD>
+<TD> HKEY_CURRENT_CONFIG</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;'HKDD'&nbsp;</TD>
+<TD>HKEY_DYN_DATA</TD>
+</TR>
+</TABLE></ul>
+<P>The following shows how the <b>VALUE</b> function is used to access and revise system registry values.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DOREG.REX */
+<BR>
+<BR>&nbsp;root = 'HKEY_CURRENT_USER'
+<BR>&nbsp;keypath = 'Software\Kilowatt Software\DoReg'
+<BR>&nbsp;regvalue = 'Magic'
+<BR>
+<BR>&nbsp;/* enable registry revision */
+<BR>&nbsp;call value 'R4REGISTRYWRITE', 'Y', 'system' /* set R4REGISTRYWRITE=Y */
+<BR>
+<BR>&nbsp;/* revise registry value */
+<BR>&nbsp;call value root'\'keypath'['regvalue']', 'abracadabra', 'registry'
+<BR>
+<BR>&nbsp;/* disable registry revision */
+<BR>&nbsp;call value 'R4REGISTRYWRITE', 'N', 'system' /* set R4REGISTRYWRITE=N */
+<BR>
+<BR>&nbsp;/* registry values can still be retrieved */
+<BR>
+<BR>&nbsp;/* get registry value */
+<BR>&nbsp;say value( root'\'keypath'['regvalue']', , 'registry' )
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="StreamBuiltin">  </A>
+<H1> STREAM builtin function </H1>
+<P>The implementation of the STREAM builtin function is customized to the Microsoft&#174; Windows&#174; system environment.
+<b>r4&#153;</b> supports the following STREAM syntax, that conforms with TRL-2:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>STREAM( name, [operation, [streamcommand option] )</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P><b>name</b> is the name of the item associated with the request, which may be a stream, a file name,
+a directory name, and so forth.
+<p>
+<P><b>operation</b> is either <b><u>C</u>ommand</b>, <b><u>D</u>escription</b>, or <b><u>S</u>tate</b>.
+All are treated as described in TRL-2.
+<p>
+<P><b>streamcommand</b> is the name of the stream associated with the request. These are interpreted
+as described in the table below. The character case of the stream command is insignificant. Thus,
+chdir, CHDIR, and ChDir are equivalent.
+<p>
+<P><b>option</b> is optional text associated with the <b>streamcommand</b>.
+<p>
+<H2> Supported STREAM commands </H2>
+<P>The following table summarizes the supported stream commands. You should study the STREAM
+<a href="#StreamExamples">examples</a>
+below to gain an improved understanding of these requests.
+<ul><TABLE border=1>
+<TR>
+<TH>Stream command</TH>
+<TH>Description</TH>
+<TH>Name</TH>
+<TH>Option</TH>
+</TR>
+<TR>
+<TD valign=top>chdir</TD>
+<TD>Changes active directory</TD>
+<TD>Directory name<sup>1</sup></TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>chdisk</TD>
+<TD>Changes active disk</TD>
+<TD>Disk name<sup>2</sup></TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>close</TD>
+<TD>Closes a specific stream</TD>
+<TD>Stream name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>dirs</TD>
+<TD>Queues directories<sup>3</sup> under the active directory</TD>
+<TD>Directory pattern<sup>4</sup></TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>drive</TD>
+<TD>Gets disk drive information<sup>5</sup></TD>
+<TD>Drive name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>drives</TD>
+<TD>Queues all disk drive information<sup>6</sup></TD>
+<TD>N/A</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>exists</TD>
+<TD>Returns '1' if a file exists, otherwise '0'</TD>
+<TD>File or directory name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>fileinfo</TD>
+<TD>Gets file information<sup>7</sup></TD>
+<TD>File name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>files</TD>
+<TD>Queues file information<sup>8</sup></TD>
+<TD>File pattern<sup>9</sup></TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>getkey</TD>
+<TD>Gets a two byte keystroke combination from the console<sup>10</sup></TD>
+<TD>N/A</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>isdir</TD>
+<TD>Returns '1' if the name is a directory, otherwise '0'</TD>
+<TD>File or directory name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>linebreak</TD>
+<TD>Sets line break characters for specific stream</TD>
+<TD>Stream name</TD>
+<TD>line break characters<sup>11</sup></TD>
+</TR>
+<TR>
+<TD valign=top>longname</TD>
+<TD>Shows long name associated with file or directory</TD>
+<TD>Stream name</TD>
+<TD>N/A<sup>12</sup></TD>
+</TR>
+<TR>
+<TD valign=top>purge</TD>
+<TD>Erases file if not open. Sets read/write positions to 0 if open.<sup>13</sup></TD>
+<TD>Stream name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>recycle</TD>
+<TD>Sends file to recycle bin.<sup>14</sup></TD>
+<TD>Stream name</TD>
+<TD>N/A</TD>
+</TR>
+<TR>
+<TD valign=top>shortname</TD>
+<TD>Shows short name associated with file or directory</TD>
+<TD>Stream name</TD>
+<TD>N/A<sup>15</sup></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P><sup>1</sup> If the CHDIR request succeeds it returns the name of the previous directory
+associated with the current disk. If the CHDIR request FAILS, it returns the empty string.
+<P>If the directory name is absent, the CHDIR request returns the currently active directory
+associated with the current disk.
+<p>
+<P><sup>2</sup> If the CHDSK request succeeds it returns the name of the previously active disk.
+If the CHDSK request FAILS, it returns the empty string.
+<P>If the disk name is absent, the CHDISK request returns the currently active disk.
+<p>
+<P><sup>3</sup> The DIRS request returns the number of directories that were located. Directory
+names are stored in the external data queue, and are accessed by using PARSE PULL for the
+number of directories that were located.
+<p>
+<P><sup>4</sup> If the directory pattern is absent, the DIRS request returns all directories under the active directory.
+<p>
+<P><sup>5</sup> The DRIVE request gets information describing a specific disk drive. The information has the following
+format.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>driveLetter driveType totalSpace freeSpace clusterSize activeDirectory</strong></TD>
+</TR>
+<p>
+<TR>
+<TD valign=top>If disk space information is unavailable, then <i>totalSpace</i>, <i>freeSpace</i>, and <i>clusterSize</i> are all underscores.</TD>
+</TR>
+</TABLE></ul>
+<p>
+<P><sup>6</sup> The DRIVES request returns the number of disk drives that were located. Disk
+drive information is stored in the external data queue, and is accessed by using PARSE PULL for the
+number of disk drives that were located. Each line of drive information returned by a DRIVES
+request has the same format as a DRIVE request.
+<p>
+<P><sup>7</sup> The FILEINFO request gets information describing a specific file. The information has the following
+format.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>fileModificationDateAndTime dirOrSize accessability</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The <b>fileModificationDateAndTime</b> value is formatted as YYYY/MM/DD-HH:MM:SS
+<p>
+<P>The <b>dirOrSize</b> value is 'DIR' if the file is a directory, otherwise it is the number of
+bytes withinin the file.
+<p>
+<P>The <b>accessability</b> value is 'RW' if the file is writeable, and 'RO' if the file is read-only.
+<p>
+<P><sup>8</sup> The FILES request returns the number of files that were located. File names
+are stored in the external data queue. The names can be acquired by using PARSE PULL for the
+number of files that were located.
+<p>
+<P><sup>9</sup> If the file pattern is absent, the FILES request returns all files under the active directory.
+<p>
+<p>
+<P><sup>10</sup> The GETKEY request returns a two byte hexadecimal literal associated with a console keystroke;
+such as, F1, F2, or an arrow key. The values that are returned do not follow a particular pattern. Thus, the
+following quote is appropriate:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+Life is like a box of chocolates - you never know what you're going to get.  [Tom Hanks, as Forrest Gump in "Forrest Gump" (1994)]
+</TD></TR></TABLE></ul>
+<P>The GETKEY example below provides a simple program that you can use experimentally to determine the values that are returned for
+specific console keystrokes.
+<P><i>Hint:</i> The first character is '00'x or 'E0'x when a function key, or a special key is pressed.
+<p>
+<P><sup>11</sup> The LINEBREAK option string is formatted as described in the <a href="#LineBreak">R4LINEBREAK</a> section above.
+<p>
+<P><sup>12</sup> The stream name can be a short MS-DOS 8.3 name of a file or directory. The corresponding long name is returned.
+<p>
+<P><sup>13</sup> The operation of a PURGE request depends on whether the file is currently open or not.
+<p>
+<UL >
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<UL >
+<LI>If the file is <b>not open</b>:
+<P>&nbsp;&nbsp;the file is <b>erased</b> if it exists and "1" is returned.
+<P>&nbsp;&nbsp;if the file doesn't exist "0" is returned.
+<p>
+<LI>If the file is <b>open</b>:
+<P>all current contents are removed, a subsequent write will start at the beginning.
+<P>"1" is always returned if the file is open when the purge request is performed.
+</UL>
+</TD></TR></TABLE></ul>
+</UL>
+<p>
+<P><sup>14</sup> A RECYCLE request implicitly fully-qualifies the file name.
+It is recommended that the file name parameter be fully-qualified.
+You should also consider prompting before sending files to the recycle bin.
+<P>The following values are returned from a recycle request.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>0</TD>
+<TD>The file was sent to the recycle bin.</TD>
+</TR>
+<TR>
+<TD valign=top>1</TD>
+<TD>An error occurred sending the file to the recycle bin. The file might be currently open.</TD>
+</TR>
+</TABLE></ul>
+<p>
+<P><sup>15</sup> The short name of a file or directory is in MS-DOS 8.3 format.
+<p>
+<A NAME="StreamExamples">  </A>
+<H2> STREAM builtin function examples </H2>
+<P>The following are examples of STREAM builtin function usage. You can copy the text within these
+examples and paste it into your REXX programs.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* CHDIR example */
+<BR>&nbsp;subdirectoryName = arg(1)
+<BR>&nbsp;if stream( subdirectoryName, 'C', '<b>ChDir</b>' ) &lt;&gt; '' then
+<BR>&nbsp;&nbsp;&nbsp;'dir *.rex'
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* CHDSK example */
+<BR>&nbsp;targetDisk = arg(1)
+<BR>&nbsp;if stream( targetDisk, 'C', '<b>ChDisk</b>' ) &lt;&gt; '' then
+<BR>&nbsp;&nbsp;&nbsp;'tree'
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DISKTELL.REX */
+<BR>&nbsp;say "Current disk:"  <b>stream</b>( '', 'C', '<b>ChDisk</b>' )
+<BR>&nbsp;say "Current directory:"  <b>stream</b>( '', 'C', '<b>ChDir</b>' )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DIRS.REX */
+<BR>&nbsp;ndirs = <b>stream</b>( arg(1), 'c', '<b>dirs</b>' )
+<BR>&nbsp;
+<BR>&nbsp;do i=1 to ndirs
+<BR>&nbsp;&nbsp;&nbsp;pull directory
+<BR>&nbsp;&nbsp;&nbsp;say directory
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DRIVES.REX */
+<BR>&nbsp;ndrives = <b>stream</b>( "", 'c', '<b>drives</b>' )
+<BR>&nbsp;
+<BR>&nbsp;do i=1 to ndrives
+<BR>&nbsp;&nbsp;&nbsp;pull drive
+<BR>&nbsp;&nbsp;&nbsp;say drive
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* DRIVE.REX */
+<BR>&nbsp;drive = arg(1)
+<BR>&nbsp;if drive = '' then
+<BR>&nbsp;&nbsp;&nbsp;call drives /* invoke external procedure DRIVES.REX (see above) */
+<BR>&nbsp;else
+<BR>&nbsp;&nbsp;&nbsp;say <b>stream</b>( drive, 'c', '<b>drive</b>' )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* EXISTS.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;if <b>stream</b>( file, 'c', '<b>exists</b>' ) then
+<BR>&nbsp;&nbsp;&nbsp;say 'Yea! File' file 'exists.'
+<BR>&nbsp;else
+<BR>&nbsp;&nbsp;&nbsp;say 'File' file 'DOES NOT exist.'
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* FILES.REX */
+<BR>&nbsp;nfiles = <b>stream</b>( arg(1), 'c', '<b>files</b>' )
+<BR>&nbsp;
+<BR>&nbsp;do i=1 to nfiles
+<BR>&nbsp;&nbsp;&nbsp;pull file
+<BR>&nbsp;&nbsp;&nbsp;say left( fileName, max( length( fileName ), 40 ) ) stream( fileName, 'C', 'fileInfo' )
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* FILEINFO.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;say <b>stream</b>( file, 'c', '<b>fileinfo</b>' )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* FILEDATE.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;say word( <b>stream</b>( file, 'c', '<b>fileinfo</b>' ), 1 )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* FILESIZE.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;say word( <b>stream</b>( file, 'c', '<b>fileinfo</b>' ), 2 )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* GETKEY.REX */
+<BR>&nbsp;call charout !, 'Press a console keyboard character: '
+<BR>&nbsp;say c2x( <b>stream</b>( !, 'c', '<b>getkey</b>' ) )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* ISDIR.REX */
+<BR>&nbsp;dir = arg(1)
+<BR>&nbsp;if <b>stream</b>( dir, 'c', '<b>isdir</b>' ) then
+<BR>&nbsp;&nbsp;&nbsp;say dir 'is a directory.'
+<BR>&nbsp;else
+<BR>&nbsp;&nbsp;&nbsp;say dir 'IS NOT a directory.'
+</TD></TR></TABLE></ul>
+<p>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* LINEBREAK.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;call <b>stream</b> file, 'c', <b>'linebreak'</b> \n'
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* LONGNAME.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;longName = <b>stream</b>( file, 'c', <b>'longname'</b> )
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* PURGE.REX -- external procedure
+<BR>&nbsp;    if file is not open it is erased
+<BR>&nbsp;    if file is open the contents are removed.
+<BR>&nbsp; */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;call <b>stream</b> file, 'c', <b>'purge'</b>
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+<pre>
+  /* RECYCLE.REX -- external procedure
+    sends file to the recycle bin
+    
+   A message box is displayed with style value of 292 (4 + 32 + 256):
+
+    show 'Yes' and 'No' buttons                     4
+    the 'question mark' icon is displayed       +  32
+    the 'No' button initially has the focus     + 256
+                                                =====
+                                           total: 292
+   */
+
+  file = arg(1)
+
+  'MsgBox' '"/CRecycle' file '?" /S292 Are you sure you want to recycle' file '?'
+
+  if rc = 6 then do
+
+    cc = <b>stream(</b> file, 'c', <b>'recycle' )</b>
+
+    if cc = 0 then
+      say "'"file"' was sent to the recycle bin."
+    else
+      say "An error occurred recycling file'"file"'. The file may be open."
+    end    
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* SHORTNAME.REX */
+<BR>&nbsp;file = arg(1)
+<BR>&nbsp;shortName = <b>stream</b>( file, 'c', <b>'shortname'</b> )
+</TD></TR></TABLE></ul>
+<p>
+<p>
+<A NAME="PreparingBinaryPrograms">  </A>
+<H1> Preparing binary programs, with CHILL.REX </H1>
+<P>There are various occasions when you will want to convert <span class=point10sem>r4&#153;</span>
+source programs to binary equivalents, so that others can use
+your program without being able to <i>see</i> your logic. Some
+algorithms are copyrighted with provisions that you can
+distribute them to others as long as the source is unreadable.
+The <b>CHILL.REX</b> program allows you to do prepare binary programs
+that can be executed, without associated visible source.
+<H2> Executing CHILL.REX </H2>
+<P>The process of converting a REXX program to a 'chilled' binary file
+is fairly simple. Here are several examples
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  r4 chill myCoolProgram.rex
+
+  r4 chill myCool.rooProgram
+
+  r4 chill myCoolClass.roo
+</pre>
+</TD></TR></TABLE></ul>
+<H3> The .\ice subdirectory contains 'chilled' programs </H3>
+<P>Chilled programs <small>(aka _ice files)</small> are created in the .\ice subdirectory. Chilled
+programs have the same name and extension as the original file, with
+'_ice' added before the extension. For example, if the original program
+is named:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+    myCoolProgram.rex
+</pre>
+</TD></TR></TABLE></ul>
+<P>then, the chilled program will be in the .\ice subdirectory with the following name:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+    myCoolProgram_ice.rex
+</pre>
+</TD></TR></TABLE></ul>
+<H3> The .\iceSource subdirectory contains source of 'chilled' programs </H3>
+<P>When a program is chilled it is imperative to retain the corresponding
+source program. This allows you to debug problems when 'chilled' programs
+are used on other systems. The corresponding source files are saved
+in the .\iceSource subdirectory. The saved source programs have the same
+name and extension as the original file, with a date and time suffix
+added before the extension. For example, if the original program
+is named:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+    myCoolProgram.rex
+</pre>
+</TD></TR></TABLE></ul>
+<P>then, the saved source file program will be in the .\iceSource subdirectory with the following name:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+    myCoolProgram_030326_105756.rex
+</pre>
+</TD></TR></TABLE></ul>
+<P>Saved source files are created with the read-only attribute. This is a precaution to avoid
+accidental renaming or removal.
+<P><i>Warning:</i> you should <b>backup</b> saved source files files on alternate media .. i.e. CD-ROM.
+<H3> Log of 'chilled' programs </H3>
+<P>The CHILL.REX program keeps a log of all requests in file <b>CHILL.LOG</b>.
+The log file is maintained in the active working directory when CHILL.REX is started.
+When you need to find which saved source file corresponds with a specific '_ice'
+file you can locate the associated information in the CHILL.LOG file as follows:
+<OL >
+<LI>Search for the name of the '_ice' file
+<LI>Make sure the file date and time match the '_ice' files date and time
+<LI>The name of the corresponding source file is contained on the same line
+</OL>
+<H3> Other CHILL.REX considerations </H3>
+<UL >
+<LI>The related CHILL.EXE program performs the associated encryption.
+<LI>There is no means of thawing a chilled program.
+<LI>When chilled programs are executed, the SOURCELINE built-in function shows:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<P>&nbsp;&nbsp;'sourceFile_ice.rex #N .. source is unavailable'
+<P>or,
+<P>&nbsp;&nbsp;'sourceFile_ice.rooProgram #N .. source is unavailable'
+<P>or,
+<P>&nbsp;&nbsp;'sourceFile_ice.roo #N .. source is unavailable'
+</TD></TR></TABLE></ul>
+<LI>Similar, output is displayed when errors occur, or during trace output.
+<LI>You can 'trace' the activities of chilled programs, by using the following
+environment variables.
+<P><a href=#R4_EXECTRAC>R4_EXECTRAC</a>
+<P><a href=#R4_TRACE_procedureName>R4_TRACE_procedureName</a>
+</UL>
+<p>
+<A NAME="Remarks">  </A>
+<H2> Remarks: </H2>
+<p>
+<OL >
+<LI><span style='color:#c00000'><b>If you are going to use stream output to replace the contents of an existing file,
+you probably want to <strong>ERASE</strong> the file beforehand. Otherwise, if the new content is
+less extensive than the file's prior contents, then some of the prior contents
+will remain at the end. This phenomenon is quite surprising when you first encounter it.</b></span>
+<p>
+<LI>The MS-DOS&#174; environment supported various <i>escape</i> sequences for changing the screen via
+the ANSI.SYS driver. Among the escape sequences was the ability to alter the foreground color of
+text, and the corresponding background color. When text is written to the display (via CHAROUT,
+LINEOUT, or SAY) <b>r4&#153;</b> emulates the ANSI.SYS escape
+sequences that alter text foreground and background color. A text escape sequence is coded as
+'1B'x (ESC), followed by '[', a series of decimal numbers separated by semicolons, and concludes with a
+lower case 'm'. The following shows the word <b>Hello</b> with a yellow foreground color, and
+a black background color.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;ESC = '1B'x</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;&nbsp;call charout , ESC'[33;40m' || 'Hello'</TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The following tables identify the numeric values associated with foreground and background colors.
+<p>
+<UL >
+<table cellspacing= 5 border=1><tr><th colspan=2>Foreground colors</th></tr>
+<tr><td>30</td><td>Black</td></tr>
+<tr><td>31</td><td>Red</td></tr>
+<tr><td>32</td><td>Green</td></tr>
+<tr><td>33</td><td>Yellow</td></tr>
+<tr><td>34</td><td>Blue</td></tr>
+<tr><td>35</td><td>Magenta (Pink)</td></tr>
+<tr><td>36</td><td>Cyan (Turquoise</td></tr>
+<tr><td>37</td><td>White</td></tr>
+<tr><td>38</td><td>Black</td></tr>
+</table>
+<p>
+<table cellspacing= 5 border=1><tr><th colspan=2>Background colors</th></tr>
+<tr><td>40</td><td>Black</td></tr>
+<tr><td>41</td><td>Red</td></tr>
+<tr><td>42</td><td>Green</td></tr>
+<tr><td>43</td><td>Yellow</td></tr>
+<tr><td>44</td><td>Blue</td></tr>
+<tr><td>45</td><td>Magenta (Pink)</td></tr>
+<tr><td>46</td><td>Cyan (Turquoise</td></tr>
+<tr><td>47</td><td>White</td></tr>
+<tr><td>48</td><td>Black</td></tr>
+</table>
+</UL>
+<p>
+<P>The foreground color can be normal or highlighted. A numeric escape value of <b>1</b> highlights the foreground
+text color. For example, the <b>1</b> after the '[' turns on highlighting below.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;ESC = '1B'x</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;&nbsp;call charout , ESC'[1;33;40m' || 'Hello'</TD>
+</TR>
+</TABLE></ul>
+<P>A numeric escape value of <b>0</b> deactivates highlighting.
+For example, the <b>0</b> after the '[' turns off highlighting below.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;ESC = '1B'x</TD>
+</TR>
+<TR>
+<TD valign=top>&nbsp;&nbsp;call charout , ESC'[0;33;40m' || 'Hello'</TD>
+</TR>
+</TABLE></ul>
+<P>No other ANSI.SYS escape sequences are emulated.
+<p>
+<A NAME="Changestr">  </A>
+<LI>The <b>Changestr</b> builtin function is provided for compatibility with
+other REXX implementations. There are <b>2</b> variants of the <i>Changestr</i> function -- <b>ANSI</b>
+and <i>NetRexx/Roo!&#153;</i>. By default <b>r4&#153;</b> supports the <b>ANSI</b> variant. The <i>NetRexx/Roo!(TM)</i>
+variant can be optionally activated by setting the <b>R4_ANSI</b> environment variable to <b>No</b>.
+<P>The syntax of the function variants is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Changestr</b>( needle, haystack, replacement )</strong> [<b>ANSI</b> variant]</TD>
+</TR>
+</TABLE></ul>
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Changestr</b>( haystack, needle, replacement )</strong> [<i>NetRexx/Roo!(TM)</i> variant]</TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Changestr</i> function replaces all non-overlapping occurrences of <i>needle</i> in
+<i>haystack</i> with <i>replacement</i>. When <i>needle</i> is the empty string, then the result is <i>haystack</i>.
+<p>
+<P>The following examples illustrate the operation of the <i>Changestr</i> function. The parenthesized
+value following the <b>say</b> keyword is the result of the associated <i>Changestr</i> function request.
+In these examples, only the <b>ANSI</b> variant is illustrated
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  say '(dabracaddabra)' changestr( 'abra', 'abracadabra', 'dabra' )
+
+  say '(abracadabra)'   changestr( '', 'abracadabra', 'dabra' )
+
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<A NAME="Countstr">  </A>
+<LI>The <b>Countstr</b> builtin function is provided for compatibility with
+other REXX implementations. There are <b>2</b> variants of the <i>Countstr</i> function -- <b>ANSI</b>
+and <i>NetRexx/Roo!&#153;)</i>. By default <b>r4&#153;</b> supports the <b>ANSI</b> variant. The <i>NetRexx/Roo!&#153;</i>
+variant can be optionally activated by setting the <b>R4_ANSI</b> environment variable to <b>No</b>.
+<P>The syntax of the function variants is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Countstr</b>( needle, haystack )</strong> [<b>ANSI</b> variant]</TD>
+</TR>
+</TABLE></ul>
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Countstr</b>( haystack, needle )</strong> [<i>NetRexx/Roo!&#153;</i> variant]</TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Countstr</i> function counts all non-overlapping occurrences of <i>needle</i> in
+<i>haystack</i>. When <i>needle</i> is the empty string, then the result is <i>0</i>.
+<p>
+<P>The following examples illustrate the operation of the <i>Countstr</i> function. The parenthesized
+value following the <b>say</b> keyword is the result of the associated <i>Countstr</i> function request.
+In these examples, only the <b>ANSI</b> variant is illustrated
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  say '(2)' Countstr( 'abra', 'abracadabra' )
+
+  say '(0)' Countstr( '', 'abracadabra' )
+
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<LI>The <b>Find</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = Find( string, word )</strong></TD>
+</TR>
+</TABLE></ul>
+<P>The <b>Find</b> builtin function is identical in operation to the <b>Wordpos</b> builtin function, with the
+exception that the <i>string</i> and <i>word</i> arguments are in the opposite order.
+<p>
+<LI>The <b>Index</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = Index( haystack, needle [ , start ] )</strong></TD>
+</TR>
+</TABLE></ul>
+<P>The <b>Index</b> builtin function is identical in operation to the <b>Pos</b> builtin function, with the
+exception that the <i>haystack</i> and <i>needle</i> arguments are in the opposite order.
+<p>
+<LI>The <b>Justify</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Justify</b>( string, length [ , pad ] )</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Justify</i> function always returns a string with length: <i>length</i>. There
+is always at least one word in the result, which might be truncated (as in the first example below).
+When more than one word is present in the result, the last word is not truncated. Spaces are added
+between the words as necessary to produce a result that has the requested length. If specified
+<i>pad</i> characters are added instead of spaces.
+<p>
+<P>The following examples illustrate the operation of the <i>Justify</i> function. The parenthesized
+value following the <b>say</b> keyword is the result of the associated <i>Justify</i> function request.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  say '(Hooptedoo)'               justify( 'Hooptedoodle!', 9 )
+
+  say '(The  blue)'               justify( 'The blue sky', 9 )
+
+  say '(The++blue)'               justify( 'The blue sky', 9, '+' )
+
+  say '(The++++)'                 justify( 'The blue sky', 7, '+' )
+
+  say '(The++blue++sky)'          justify( 'The blue sky', 14, '+' )
+
+  say '(The++blue+++sky)'         justify( 'The blue sky', 15, '+' )
+
+  say '(The++azure+++blue+++sky)' justify( 'The azure blue sky', 23, '+' )
+
+  say '(The blue)'                justify( 'The blue sky', 8 )
+
+  say '(++++)'                    justify( '', 4, '+' )
+
+  say '()'                        justify( '', 0 )
+
+  say '()'                        justify( 'The blue sky', 0 )
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<LI>The <b>Linesize</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Linesize</b>(&nbsp;)</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Linesize</i> function is the number of characters per console line -- i.e. 80.
+<p>
+<LI>The <b>Qualify</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Qualify</b>( [ streamName ] )</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Qualify</i> function is the fully qualified name of <i>streamName</i>, in UPPERCASE.
+The empty string is returned if <i>streamName</i> is absent, or an empty string.
+<p>
+<P>The following examples illustrate the operation of the <i>Justify</i> function. The parenthesized
+value following the <b>say</b> keyword is the result of the associated <i>Justify</i> function request.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  -- assume these are executed in the C:\R4 directory (folder)
+
+  say '(C:\R4\R4.EXE)'   qualify( 'r4.exe' )
+
+  say '(C:\R4\R4.EXE)'   qualify( './r4.exe' )
+
+  say '(C:\R4\R4.EXE)'   qualify( '.\r4.exe' )
+
+  say '()'               qualify( '' )
+
+  call qualify nonExistentFileName --&gt; <b>syntax error !!!</b>
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+<LI>The <b>Scrsize</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Scrsize</b>(&nbsp;)</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The result of the <i>Scrsize</i> function is two numbers separated by a space. The first number is
+the number of console lines (i.e. 24), the second number is the number of characters per console line
+(i.e. 80).
+<p>
+<LI>The <b>Userid</b> builtin function is provided for compatibility with
+other REXX implementations. The function syntax is:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;<strong>result = <b>Userid</b>(&nbsp;)</strong></TD>
+</TR>
+</TABLE></ul>
+<P>The <i>result</i> is set to: ComputerName/Userid
+<p>
+<DT>The following is an example of the operation of the <i>Userid</i> function.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+<pre>
+  parse value userid() with ComputerName '/' UserName
+  say 'Hello' UserName'.'
+  say 'Your computer name is:' ComputerName'.'
+</pre>
+</TD></TR></TABLE></ul>
+<p>
+</OL>
+<p>
+<LI>The following commands are performed within <b>r4</b>. The modifications associated with these
+are effective within <b>r4's</b> execution scope. When <b>r4</b> returns the prior state is
+automatically restored.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top><b>x:</b></TD>
+<TD>disk change, where: 'x' is a drive letter</TD>
+</TR>
+<TR>
+<TD valign=top><b>CD</b> directoryPath</TD>
+<TD>change directory</TD>
+</TR>
+<TR>
+<TD valign=top><b>CHDIR</b> directoryPath</TD>
+<TD>change directory</TD>
+</TR>
+<TR>
+<TD valign=top><b>SET</b> environmentVariable'='value</TD>
+<TD>set environment variable value</TD>
+</TR>
+</TABLE></ul>
+<P>The above commands should be properly quoted. Otherwise, backslashes within directory paths
+are treated as REXX <b>not</b> operators, and the '=' sign in a SET command is a relational
+operator.
+<p>
+<LI>The default input stream and default output stream are connected to the standard Microsoft&#174; Windows&#174;
+files that are identified as <b><em>stdin</em></b> and <b><em>stdout</em></b> respectively.
+This allows your REXX programs to operate with redirected files, and participate in command pipelines.
+Consult Microsoft&#174; Windows&#174; documentation for the use of file redirection and command pipelines.
+<p>
+<A NAME="FileRedirection">  </A>
+<P>The following shows how a COPYFILE program can be used with redirected files:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>r4 COPYFILE &lt; infile &gt; outfile</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<A NAME="CommandPipeline">  </A>
+<P>The following shows how the lines of the DIR command can be counted:
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>DIR /b *.rex | r4 COUNTLINES</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>The associated programs follow:
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* COPYFILE.REX -- character version */
+<BR>&nbsp;do while chars() > 0
+<BR>&nbsp;&nbsp;&nbsp;call charout , charin()
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* COPYFILE.REX -- lines version */
+<BR>&nbsp;do while lines() > 0
+<BR>&nbsp;&nbsp;&nbsp;call lineout , linein()
+<BR>&nbsp;&nbsp;&nbsp;end
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* COUNTLINES.REX -- unredirected version */
+<BR>&nbsp;lno = 0
+<BR>&nbsp;do while lines() > 0
+<BR>&nbsp;&nbsp;&nbsp;lin = linein()
+<BR>&nbsp;&nbsp;&nbsp;lno = lno + 1
+<BR>&nbsp;&nbsp;&nbsp;end
+<BR>&nbsp;say lno
+</TD></TR></TABLE></ul>
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* COUNTLINES.REX -- redirected or pipeline version */
+<BR>&nbsp;say lines()
+</TD></TR></TABLE></ul>
+<p>
+<LI><b>'console'</b> is a special stream name. Stream builtin functions that access the <b>'console'</b> stream
+interact with the Microsoft&#174; Windows&#174; command console. A single exclamation point ('!') is an abbreviated
+alias for the <b>'console'</b> stream.
+<p>
+<P>The following is a simple program that interacts with the console user:
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* GREET.REX */
+<BR>&nbsp;call charout !, "Please enter your name: "
+<BR>&nbsp;call lineout !, 'Hello' linein( ! )
+</TD></TR></TABLE></ul>
+<p>
+<P>Notice that the exclamation point does not require quotes.
+<p>
+<LI>The CHARS and LINES functions operate differently, depending on whether input is being typed
+from the keyboard, or received from a file.
+<p>
+<P>When the default input stream is not redirected from a file (or pipeline),
+the CHARS and LINES functions both return '1' when more input is available, and '0' when the end of
+the input stream is encountered.
+<p>
+<P>When the default input stream is redirected from a file (or pipeline),
+the CHARS and LINES functions return the actual number of
+characters or lines remaining in the stream.
+<p>
+<P>For file streams
+the CHARS and LINES functions return the actual number of
+characters or lines remaining in the stream.
+<p>
+<P>For the 'console' stream
+the CHARS and LINES functions both return '1' when more input is available, and '0' when the end of
+the input stream is encountered.
+The only difference is that the order of the first two arguments is reversed.
+<p>
+<LI>The <b>MAKEBUF</b>, <b>DROPBUF</b>, <b>NEWSTACK</b>, and <b>DELSTACK</b> commands are builtin into
+the <b>r4</b> command environment. These builtin commands are provided for compatibility with
+other REXX implementations; such as, IBM's MVS TSO and VM implementations. All of these commands
+have no additional arguments.
+<p>
+<P>If you are a new REXX programmer you can skip the description of these capabilities.
+<p>
+<P>With respect to the <b>MAKEBUF</b>, <b>DROPBUF</b>, <b>NEWSTACK</b>, and <b>DELSTACK</b> commands, the
+external data queue is divided into a sequence of stacks, each of which can contain a sequence
+of buffers. Initially there is a single stack that contains a single buffer.
+<p>
+<P>A <b>NEWSTACK</b> command establishes a new stack division within the external data queue.
+<P>A <b>MAKEBUF</b> command establishes a new buffer position within a stack division. Subsequent
+<b>QUEUE</b> requests will insert lines after a buffer position, but before all other lines
+within that buffer. A <b>QUEUED</b> builtin function request returns the number of lines that
+follow a buffer position.
+<p>
+<P>The following diagram shows how the external data queue is divided into stack divisions
+and buffers.
+<p>
+<center><img src=stackBuff.gif></center>
+<p>
+<P>A <b>DROPBUF</b> request removes a buffering position established by a prior <b>MAKEBUF</b> command.
+<p>
+<P>Similarly, a <b>DELSTACK</b> request removes all lines from the top of the
+external data queue to a stack division point, only if a prior <b>NEWSTACK</b>
+division is established. If a prior <b>NEWSTACK</b> division was not established, then
+a <b>DELSTACK</b> request is ignored -- all lines in the external data queue remain.
+<p>
+<P><b>PUSH</b> requests are unaffected by any of these commands. Pushed lines are always added at
+the last position of the external data queue.
+<p>
+<P>The <b>MAKEBUF</b> command returns a queue position, which is assigned to the RC variable.
+This queue position can optionally be passed
+to the <b>DROPBUF</b> command. The following shows how to use the queue position.
+<p>
+<ul><TABLE border=1 cellspacing=5><TR><TD>
+<pre>
+  push z
+  makebuf
+  queue c
+  makebuf
+  queuePosition = rc
+  queue a
+  queue b
+  dropbuf queuePosition
+  queue x
+  queue y
+  say "Output lines to the marked position should appear in order: a, b, c, x, y"
+  do queued()
+    pull qline
+    say qline
+    end
+  dropbuf
+  say "The final queued line should be: z"
+  do queued()
+    pull qline
+    say qline
+    end
+</pre>
+</TD></TR></TABLE></ul>
+<A NAME="R4XFORM">  </A>
+<p>
+<H2> R4 to EXE transform program (<b>R4XFORM</b>) </H2>
+<P>The <b>R4XFORM</b> program allows you to create executable modules (EXEs) that encapsulate your
+REXX programs. The created modules can then be performed at command prompts, within batch scripts,
+or DOSKEY macros.
+<p>
+<H3> Usage, <b>R4XFORM</b>: </H3>
+<P>The <b>R4XFORM</b> program operates as a standard Microsoft&#174; Windows&#174; application. The following is
+the syntax of an <b>R4XFORM</b> program request, that is entered as a DOS command prompt.
+<p>
+<ul><TABLE border=1>
+<TR>
+<TD valign=top>&nbsp;&nbsp;<strong>R4XFORM [moduleName]</strong></TD>
+</TR>
+</TABLE></ul>
+<p>
+<P>Within this line, <strong>R4XFORM</strong> is a request to execute the <b>R4XFORM</b> program,
+which has a file name R4XFORM.EXE. You should add the directory that contains R4XFORM.EXE to your
+system PATH environment variable. See the <a href=#EnvironmentSetup>environment</a> setup
+section to determine how to revise the PATH environment variable.
+<p>
+<P>The optional <b>moduleName</b> argument is specified when you want to revise a previously created
+<b>R4XFORM</b> executable module. Spaces are not permitted in the <b>moduleName</b> argument.
+<p>
+<H3> <b>R4XFORM</b> input fields </H3>
+<ul><DL >
+<DD><b><u>M</u>odule name</b>
+<DT>This is the name of the executable module that encapsulates the R4 program. This name will
+always appear in upper case. A '.EXE' extension will automatically be added to the end of the
+module name.
+<p>
+<P>Spaces should NOT be entered in the <b>Module name</b> field.
+<p>
+<DD><b>R4 source <u>p</u>rogram</b>
+<DT>This is the name of the REXX program that will be performed when the module is executed.
+This program name will be passed as the <b>programName</b> argument as described in the
+<a href="#Usage">R4 Usage</a> section above.
+<p>
+<P>The 'Search' button on the right side of this input field allows you to use the system file
+explorer to locate the R4 source program.
+<p>
+<P>Spaces should NOT be entered in the <b>R4 source program</b> field. If there are spaces in
+the directory path that you located with the 'Search' button, then you should move the
+leading directory name to the R4PATH input field.
+<p>
+<DD><b>Leading <u>a</u>rguments</b>
+<DT>This is an <em>optional</em> field. The text that is entered in this field is passed as the
+<b>argumentText</b> of the <b>r4</b> command. You can specify additional arguments
+when you invoke the executable module.
+<p>
+<DD><b>Working <u>d</u>irectory</b>
+<DT>The text you enter in this field identifies the initial working directory that will be established
+when you invoke the executable module.
+<p>
+<P>The 'Search' button on the right side of this input field allows you to use the system folder
+search facility to locate an existing directory.
+<p>
+<DD><b><u>R</u>4PATH</b>
+<DT>This is an <em>optional</em> field. The text in this field identifies the <b>R4PATH</b>
+environment variable that is used when you invoke the executable module. Otherwise, the
+prevailing <b>R4PATH</b> environment variable setting will be used.
+See the <a href="#EnvironmentVariables">environment variables</a> section above for a description
+of the <b>R4PATH</b> environment variable.
+<p>
+<DD><b><u>L</u>ine terminators</b>
+<DT>This is an <em>optional</em> field. The text in this field identifies the <b>R4LINEBREAK</b>
+environment variable that is used when you invoke the executable module. Otherwise, the
+prevailing <b>R4LINEBREAK</b> environment variable setting will be used.
+See the <a href="#EnvironmentVariables">environment variables</a> section above for a description
+of the <b>R4LINEBREAK</b> environment variable.
+</DL></ul>
+<p>
+<P>The underlined characters above are accelerator keys. When you hold down the 'Alt' key, and press
+one of the underlined characters the cursor will move to the associated input field.
+<p>
+<P>The 'OK' button is disabled until the module name AND the R4 source program AND the working
+directory field ALL contain text.
+<H3> An <b>R4XFORM</b> example </H3>
+<P>Here is an example of how to convert an R4 program to an executable module.
+<p>
+<P>The following is a simple program that shows a greeting.
+<p>
+<ul><TABLE border=1 cellspacing=5 width=80% style='font-weight:bold'><TR><TD>
+&nbsp;/* GREET.REX */
+<BR>&nbsp;say 'Hello' arg( 1 )
+</TD></TR></TABLE></ul>
+<p>
+<ul><DL >
+<DD><b><u>M</u>odule name</b>
+<DT>GREET
+<DD><b>R4 source <u>p</u>rogram</b>
+<DT>greet.rex
+<DD><b>Leading <u>a</u>rguments</b>
+<DT>Pat (this may be empty)
+<DD><b>Working <u>d</u>irectory</b>
+<DT>c:\r4
+<DD><b><u>R</u>4PATH</b>
+<DT>c:\r4 (normally this is empty)
+<DD><b><u>L</u>ine terminators</b>
+<DT>\r\n (normally this is empty)
+</DL></ul>
+<P>After you click the OK button, look in the same
+directory as the <b>R4XFORM</b> program, and you will observe that a new GREET.EXE file exists.
+<p>
+<P>Start a command prompt window. Switch to the directory that contains the program. Then enter:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;greet
+</TD></TR></TABLE></ul>
+<BR>The following output appears:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;Hello Pat
+</TD></TR></TABLE></ul>
+<P>If instead you enter:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;greet -- Have a nice day !
+</TD></TR></TABLE></ul>
+<BR>The following output appears:
+<ul><TABLE border=1 cellspacing=5 width=80%><TR><TD>
+&nbsp;Hello Pat -- Have a nice day !
+</TD></TR></TABLE></ul>
+<H3> How <b>R4XFORM</b> works </H3>
+<P>In order to use <b>R4XFORM</b> effectively you need to understand how it works.
+Perhaps you believe that <b>R4XFORM</b> compiled the REXX program into an executable module.
+This is not the case. <b>R4XFORM</b> works as follows:
+<OL >
+<LI>There is a module named TEENSY.EXE that is in the same directory as R4XFORM.EXE. The GREET.EXE
+file that was created above is a copy of TEENSY.EXE, with a different file name.
+<p>
+<LI>The copied TEENSY.EXE module invokes another module called BECOME.EXE that is in the same
+directory. All of the arguments that were passed to TEENSY are passed onward to BECOME.
+<p>
+<LI><b>R4XFORM</b> prepares registry information which is processed by BECOME.EXE to determine
+how to perform the GREET program. The registry information is stored with the following keys:
+<P>&nbsp;&nbsp;\\HKEY_LOCAL_MACHINE\Software\Kilowatt Software\Become\GREET
+<P>And,
+<P>&nbsp;&nbsp;\\HKEY_LOCAL_MACHINE\Software\Kilowatt Software\Become\GREET\Environment
+<P>You can use the standard system registry editor to see the information that was created.
+You can start this program by Selecting 'Run' from the 'Start' menu, and entering the command REGEDIT.
+Search downwards through the registry tree for the path shown above. You will locate the
+registry information that was prepared for the GREET program.
+<p>
+<LI>BECOME.EXE does the following:
+<OL >
+<LI>Determines the registry key from the arguments that are passed by GREET.EXE
+<LI>Acquires the registry information
+<LI>Establishes the working directory
+<LI>Prepares environment settings for R4PATH and R4LINEBREAK if these were defined
+<LI>Prepares the command
+<LI>Adds the arguments that were passed onward to GREET.EXE to the command
+<LI>Performs the command
+</OL>
+</OL>
+<P>If you comprehend the above process you will find that you can use the combination
+of TEENSY.EXE and BECOME.EXE to encapsulate other command shells as well.
+These two programs are not directly interrelated with <b>r4&#153;</b> or the <b>R4XFORM</b> program.
+<A NAME="Revu">  </A>
+<H3> Text file viewing program --<b>Revu&#153;</b> </H3>
+<P><b>r4&#153;</b> is accompanied by the <b>Revu&#153;</b> text file viewing accessory. This related
+product is particularly helpful when viewing Rexx source files. It is similarly useful for
+viewing C/C++, Java, JavaScript, Perl, XML and HTML files.
+<a href='revu.htm'>Click here</a> to study the related <b>Revu&#153;</b> program.
+<P><b>Revu&#153;</b> is implicitly used by <b>r4&#153;</b> for source presentation
+during interactive tracing. The current line is continually updated, as the program is debugged. When
+the program being debugged concludes, the associated <b>Revu&#153;</b> window is automatically closed.
+<p>
+<A NAME="ProductUpdates">  </A>
+<H2> Product updates: </H2>
+<P>When <b>r4&#153;</b> is updated, the latest version of <b>R4.EXE</b> and
+the updated User's Guide <b>R4.HTM</b> can be found in the following
+internet location:
+<BR> <a href="http://www.kilowattsoftware.com/latest/">http://www.kilowattsoftware.com/latest/</a>
+<P>REXX programming examples may be found in the same location. These are files that have
+a '.rex' extension.
+<A NAME="Support">  </A>
+<H2> Support: </H2>
+<P>If you have comments, questions, or concerns regarding <b>r4&#153;</b>
+you can send these via e-mail to:
+<center><a href=mailto:r4support@kilowattsoftware.com>E-Mail: r4support@kilowattsoftware.com</a></center>
+<p>
+<center>Enjoy <b>r4&#153;</b>, and start REXXing !</center>
+<hr width=40% align=center>
+<p>
+<div align=center>Kilowatt Software L.L.C. also offers:</div>
+<div align=center>
+<a href="http://www.kilowattsoftware.com/PoofPage.htm">Poof!&#153; -- A collection of Microsoft&#174; Windows&#174; command line utilities</a>
+</div>
+<div align=center>
+<a href="http://www.kilowattsoftware.com/AuroraWarePage.htm">AuroraWare!&#153; -- A collection of helpful Microsoft&#174; Windows&#174; visual accessories</a>
+</div>
+<p>
+<hr width=40% align=center>
+<p>
+<center><img src=r4tmark.gif></center>
+<center>REXX Language Level 4.00</center>
+<center>Build date: 13 Feb 2016</center>
+<center>Copyright &copy; 2001-2016</center>
+<center>All Rights Reserved.</center>
+<center>Web: <A HREF="http://www.kilowattsoftware.com/">http://www.kilowattsoftware.com/</A></center>
+<center><a href="mailto:r4support@kilowattsoftware.com">E-Mail: r4support@kilowattsoftware.com</a></center>
+<BR>
+<IMG SRC="kws32.gif" align=left>
+<IMG SRC="kws32.gif" align=right>
+<p>
+<p><center><i>Last updated on: 13 Feb 2016</center><p>
+</BODY>
+</HTML>
